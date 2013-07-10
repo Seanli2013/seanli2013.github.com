@@ -9,8 +9,7 @@
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="准备工作 安装Ruby（1.9.3） mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见Mac安装Ruby on Rails，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。 你的系统还应该装有git，rvm 开始搭建 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,43 +73,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/10/post-title/">Post Title</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-10T14:01:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/10/test-mou-makedown/">Test Mou Makedown</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/07/10/mac%E4%B8%8B%E6%90%AD%E5%BB%BAoctopress/">Mac下搭建octopress</a></h1>
     
     
       <p class="meta">
@@ -133,326 +96,68 @@
   </header>
 
 
-  <div class="entry-content"><h1>Mou</h1>
+  <div class="entry-content"><h2>准备工作</h2>
 
-<p><img src="http://mouapp.com/Mou_128.png" alt="Mou icon" /></p>
+<h3>安装Ruby（1.9.3）</h3>
 
-<h2>Overview</h2>
+<p>mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见<a href="http://www.hoowolf.net/2012/03/29/installing-ruby-on-rails-on-mac-os-x-lion/">Mac安装Ruby on Rails</a>，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。</p>
 
-<p><strong>Mou</strong>, the missing Markdown editor for <em>web developers</em>.</p>
+<h3>你的系统还应该装有git，rvm</h3>
 
-<h3>Syntax</h3>
+<h2>开始搭建</h2>
 
-<h4>Strong and Emphasize</h4>
+<p>搭建过程参考<a href="http://ishalou.com/blog/2012/10/15/how-to-use-octopress/">使用Octopress + Github管理blog</a>和<a href="http://www.yangzhiping.com/tech/octopress.html">Ruby开源项目介绍(1)：octopress——像黑客一样写博客</a>，这第二篇有些标题党哈。这两篇都可参考。</p>
 
-<p><strong>strong</strong> or <strong>strong</strong> ( Cmd + B )</p>
+<p><strong>注意:</strong>参考这两篇文章前，需要<strong><em>先安装Ruby1.9.3</em></strong>，否则按照他们说的步骤来，你可能遇到很多个步骤无法执行完全成功。</p>
 
-<p><em>emphasize</em> or <em>emphasize</em> ( Cmd + I )</p>
+<h2>安装过程中可能遇到的问题</h2>
 
-<p><strong>Sometimes I want a lot of text to be bold.
-Like, seriously, a <em>LOT</em> of text</strong></p>
+<h3>如何在mac系统中root权限？</h3>
 
-<h4>Blockquotes</h4>
+<p>答案：sudo su，像这样：</p>
 
-<blockquote><p>Right angle brackets &gt; are used for block quotes.</p></blockquote>
-
-<h4>Links and Email</h4>
-
-<p>An email <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#101;&#120;&#x61;&#x6d;&#x70;&#108;&#101;&#64;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;">&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#64;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#109;</a> link.</p>
-
-<p>Simple inline link <a href="http://chenluois.com">http://chenluois.com</a>, another inline link <a href="http://smallerapp.com">Smaller</a>, one more inline link with title <a href="http://resizesafari.com" title="a Safari extension">Resize</a>.</p>
-
-<p>A <a href="http://mouapp.com" title="Markdown editor on Mac OS X">reference style</a> link. Input id, then anywhere in the doc, define the link with corresponding id:</p>
-
-<p>Titles ( or called tool tips ) in the links are optional.</p>
-
-<h4>Images</h4>
-
-<p>An inline image <img src="http://smallerapp.com/favicon.ico" title="Title here" alt="Smaller icon" />, title is optional.</p>
-
-<p>A <img src="http://resizesafari.com/favicon.ico" title="Title" alt="Resize icon" /> reference style image.</p>
-
-<h4>Inline code and Block code</h4>
-
-<p>Inline code are surround by <code>backtick</code> key. To create a block code:</p>
-
-<pre><code>Indent each line by at least 1 tab, or 4 spaces.
-var Mou = exactlyTheAppIwant; 
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ su
+Password:
+su: Sorry
+shawntekiMacBook-Pro:~ shawnli$ sudo su
+Password:
+sh-3.2#
 </code></pre>
 
-<h4>Ordered Lists</h4>
+<h3>bundle update不成功。</h3>
 
-<p>Ordered lists are created using &ldquo;1.&rdquo; + Space:</p>
+<h4>如果遇到的是bundle，command not found</h4>
 
-<ol>
-<li>Ordered list item</li>
-<li>Ordered list item</li>
-<li>Ordered list item</li>
-</ol>
+<p>这时你需要安装bundle</p>
 
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+</code></pre>
 
-<h4>Unordered Lists</h4>
+<p>这时你可能遇到不成功</p>
 
-<p>Unordered list are created using &ldquo;*&rdquo; + Space:</p>
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+WARNING:  RubyGems 1.2+ index not found for:
 
-<ul>
-<li>Unordered list item</li>
-<li>Unordered list item</li>
-<li>Unordered list item</li>
-</ul>
 
+RubyGems will revert to legacy indexes degrading performance.
+ERROR:  could not find gem bundler locally or in a repository
+</code></pre>
 
-<p>Or using &ldquo;&ndash;&rdquo; + Space:</p>
+<p>很可能是网络的问题，你可以尝试使用代理或者从公网换成教育网什么的……成功后显示</p>
 
-<ul>
-<li>Unordered list item</li>
-<li>Unordered list item</li>
-<li>Unordered list item</li>
-</ul>
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+Successfully installed bundler-1.3.5
+1 gem installed
+Installing ri documentation for bundler-1.3.5...
+Installing RDoc documentation for bundler-1.3.5...
+</code></pre>
 
+<p>使用下面命令可以查看bundle安装情况</p>
 
-<h4>Hard Linebreak</h4>
+<pre><code>gem list --local
+</code></pre>
 
-<p>End a line with two or more spaces will create a hard linebreak, called <code>&lt;br /&gt;</code> in HTML. ( Control + Return )<br/>
-Above line ended with 2 spaces.</p>
-
-<h4>Horizontal Rules</h4>
-
-<p>Three or more asterisks or dashes:</p>
-
-<hr />
-
-<hr />
-
-<hr />
-
-<h4>Headers</h4>
-
-<p>Setext-style:</p>
-
-<h1>This is H1</h1>
-
-<h2>This is H2</h2>
-
-<p>atx-style:</p>
-
-<h1>This is H1</h1>
-
-<h2>This is H2</h2>
-
-<h3>This is H3</h3>
-
-<h4>This is H4</h4>
-
-<h5>This is H5</h5>
-
-<h6>This is H6</h6>
-
-<h3>Extra Syntax</h3>
-
-<h4>Footnotes</h4>
-
-<p>Footnotes work mostly like reference-style links. A footnote is made of two things: a marker in the text that will become a superscript number; a footnote definition that will be placed in a list of footnotes at the end of the document. A footnote looks like this:</p>
-
-<p>That&rsquo;s some text with a footnote.<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
-
-<h4>Strikethrough</h4>
-
-<p>Wrap with 2 tilde characters:</p>
-
-<p><del>Strikethrough</del></p>
-
-<h4>Fenced Code Blocks</h4>
-
-<p>Start with a line containing 3 or more backticks, and ends with the first line with the same number of backticks:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Fenced code blocks are like Stardard Markdown’s regular code
-</span><span class='line'>blocks, except that they’re not indented and instead rely on
-</span><span class='line'>a start and end fence lines to delimit the code block.</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Tables</h4>
-
-<p>A simple table looks like this:</p>
-
-<table>
-<thead>
-<tr>
-<th>First Header </th>
-<th> Second Header </th>
-<th> Third Header</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Content Cell </td>
-<td> Content Cell  </td>
-<td> Content Cell</td>
-</tr>
-<tr>
-<td>Content Cell </td>
-<td> Content Cell  </td>
-<td> Content Cell</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>If you wish, you can add a leading and tailing pipe to each line of the table:</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th> First Header </th>
-<th> Second Header </th>
-<th> Third Header </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> Content Cell </td>
-<td> Content Cell  </td>
-<td> Content Cell |</td>
-</tr>
-<tr>
-<td></td>
-<td> Content Cell </td>
-<td> Content Cell  </td>
-<td> Content Cell |</td>
-</tr>
-</tbody>
-</table>
-
-
-<p>Specify alignement for each column by adding colons to separator lines:</p>
-
-<table>
-<thead>
-<tr>
-<th align="left">First Header </th>
-<th align="center"> Second Header </th>
-<th align="right"> Third Header</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left">Left         </td>
-<td align="center"> Center        </td>
-<td align="right"> Right</td>
-</tr>
-<tr>
-<td align="left">Left         </td>
-<td align="center"> Center        </td>
-<td align="right"> Right</td>
-</tr>
-</tbody>
-</table>
-
-
-<h3>Shortcuts</h3>
-
-<h4>View</h4>
-
-<ul>
-<li>Toggle live preview: Shift + Cmd + I</li>
-<li>Toggle Words Counter: Shift + Cmd + W</li>
-<li>Toggle Transparent: Shift + Cmd + T</li>
-<li>Toggle Floating: Shift + Cmd + F</li>
-<li>Left/Right = 1/1: Cmd + 0</li>
-<li>Left/Right = 3/1: Cmd + +</li>
-<li>Left/Right = 1/3: Cmd + &ndash;</li>
-<li>Toggle Writing orientation: Cmd + L</li>
-<li>Toggle fullscreen: Control + Cmd + F</li>
-</ul>
-
-
-<h4>Actions</h4>
-
-<ul>
-<li>Copy HTML: Option + Cmd + C</li>
-<li>Strong: Select text, Cmd + B</li>
-<li>Emphasize: Select text, Cmd + I</li>
-<li>Inline Code: Select text, Cmd + K</li>
-<li>Strikethrough: Select text, Cmd + U</li>
-<li>Link: Select text, Control + Shift + L</li>
-<li>Image: Select text, Control + Shift + I</li>
-<li>Select Word: Control + Option + W</li>
-<li>Select Line: Shift + Cmd + L</li>
-<li>Select All: Cmd + A</li>
-<li>Deselect All: Cmd + D</li>
-<li>Convert to Uppercase: Select text, Control + U</li>
-<li>Convert to Lowercase: Select text, Control + Shift + U</li>
-<li>Convert to Titlecase: Select text, Control + Option + U</li>
-<li>Convert to List: Select lines, Control + L</li>
-<li>Convert to Blockquote: Select lines, Control + Q</li>
-<li>Convert to H1: Cmd + 1</li>
-<li>Convert to H2: Cmd + 2</li>
-<li>Convert to H3: Cmd + 3</li>
-<li>Convert to H4: Cmd + 4</li>
-<li>Convert to H5: Cmd + 5</li>
-<li>Convert to H6: Cmd + 6</li>
-<li>Convert Spaces to Tabs: Control + [</li>
-<li>Convert Tabs to Spaces: Control + ]</li>
-<li>Insert Current Date: Control + Shift + 1</li>
-<li>Insert Current Time: Control + Shift + 2</li>
-<li>Insert entity &lt;: Control + Shift + ,</li>
-<li>Insert entity >: Control + Shift + .</li>
-<li>Insert entity &amp;: Control + Shift + 7</li>
-<li>Insert entity Space: Control + Shift + Space</li>
-<li>Insert Scriptogr.am Header: Control + Shift + G</li>
-<li>Shift Line Left: Select lines, Cmd + [</li>
-<li>Shift Line Right: Select lines, Cmd + ]</li>
-<li>New Line: Cmd + Return</li>
-<li>Comment: Cmd + /</li>
-<li>Hard Linebreak: Control + Return</li>
-</ul>
-
-
-<h4>Edit</h4>
-
-<ul>
-<li>Auto complete current word: Esc</li>
-<li>Find: Cmd + F</li>
-<li>Close find bar: Esc</li>
-</ul>
-
-
-<h4>Post</h4>
-
-<ul>
-<li>Post on Scriptogr.am: Control + Shift + S</li>
-<li>Post on Tumblr: Control + Shift + T</li>
-</ul>
-
-
-<h4>Export</h4>
-
-<ul>
-<li>Export HTML: Option + Cmd + E</li>
-<li>Export PDF:  Option + Cmd + P</li>
-</ul>
-
-
-<h3>And more?</h3>
-
-<p>Don&rsquo;t forget to check Preferences, lots of useful options are there.</p>
-
-<p>Follow <a href="http://twitter.com/chenluois">@chenluois</a> on Twitter for the latest news.</p>
-
-<p>For feedback, use the menu <code>Help</code> &ndash; <code>Send Feedback</code></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>And that&rsquo;s the footnote.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
+<p>如果bundle update报找不到Gemfile，只要你切换到gemfile那个目录再运行bundle update即可。</p>
 </div>
   
   
@@ -473,11 +178,7 @@ Above line ended with 2 spaces.</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/07/10/post-title/">Post Title</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/10/test-mou-makedown/">Test Mou Makedown</a>
+        <a href="/blog/2013/07/10/mac%E4%B8%8B%E6%90%AD%E5%BB%BAoctopress/">Mac下搭建octopress</a>
       </li>
     
   </ul>
