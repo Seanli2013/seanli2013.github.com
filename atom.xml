@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-10T20:55:46+08:00</updated>
+  <updated>2013-07-10T22:03:11+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress发表blog文章和管理blog]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/10/octopress%E5%8F%91%E8%A1%A8blog%E6%96%87%E7%AB%A0%E5%92%8C%E7%AE%A1%E7%90%86blog/"/>
+    <updated>2013-07-10T00:00:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/10/octopress发表blog文章和管理blog</id>
+    <content type="html"><![CDATA[<p>这里先只记下些简单的，以后再逐步摸索复杂的</p>
+
+<h3>发表文章的过程</h3>
+
+<ol>
+<li>本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/”目录下生成一个markdown文件</li>
+<li>编辑这个markdown文件，你可以改名字，也可以改文件的内容</li>
+<li>使用命令rake generate，这时在本地把你添加的新文章做了生成</li>
+<li>使用命令rake preview，这时在浏览器中输入localhost:4000来在本地查看效果</li>
+<li>效果ok，使用命令rake deploy，把本地的部署到github服务端</li>
+<li>过一会儿之后，你的服务端的blog就更新成最新的啦</li>
+</ol>
+
+
+<h3>修改页面</h3>
+
+<p>搭建好的octopress，默认只有blog和achieve两个页面，要增加页面需要两步：</p>
+
+<ol>
+<li>本地建立个新文件夹。位置没关系，命令使用rake new_page[new-page-title]，这个文件夹内应该会包含一个index.markdown的文件，如果没有这个文件，请新建一个</li>
+<li><p>在blog主页的导航栏上还需要新建个页面名称，否则在blog上是看不到你新建的页面的，这需要编辑</p>
+
+<p> <code>
+ source/_includes/custom/navigation.html
+</code></p></li>
+</ol>
+
+
+<p>编辑后的结果类似：</p>
+
+<pre><code>&lt;ul class="main-navigation"&gt;
+&lt;li&gt;&lt;a href="http://Seanli2013.github.io/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://Seanli2013.github.io/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://Seanli2013.github.io/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://Seanli2013.github.io/test"&gt;Test Field&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;   
+</code></pre>
+
+<p>实际上就是把blog主页上导航的部分指向你新建的页面所在的文件夹名称。
+部署的方式与发表文章过程一致。
+修改页面的方式也可参考<a href="http://icodeit.org/2013/01/add-new-page-to-octopress/">为octopress添加新的页面(page)</a>，在这片文章中对一个典型的octopress博客的source目录布局进行了描述。</p>
+
+<h3>编辑的文章的工具</h3>
+
+<p>我在用<a href="http://mouapp.com">Mou</a>，挺好使的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac下搭建octopress]]></title>
