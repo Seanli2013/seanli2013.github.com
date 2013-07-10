@@ -13,6 +13,14 @@
         <lastmod>2013-07-10T19:17:49+08:00</lastmod>
     </url>
     <url>
+        <loc>http://Seanli2013.github.io/about-me/</loc>
+        <lastmod>2013-07-10T19:23:04+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://Seanli2013.github.io/about-me/page.html</loc>
+        <lastmod>2013-07-10T19:23:12+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://Seanli2013.github.io/blog/archives/</loc>
         <lastmod>2013-07-10T17:17:50+08:00</lastmod>
     </url>
@@ -23,5 +31,9 @@
     <url>
         <loc>http://Seanli2013.github.io/robots.txt</loc>
         <lastmod>2013-07-10T13:23:01+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://Seanli2013.github.io/test/</loc>
+        <lastmod>2013-07-10T19:38:06+08:00</lastmod>
     </url>
 </urlset>
