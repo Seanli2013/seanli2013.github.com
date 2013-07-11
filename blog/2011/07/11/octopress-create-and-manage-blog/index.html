@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>大钟威武</title>
+  <title>octopress发表blog文章和管理blog - 大钟威武</title>
   <meta name="author" content="Xiang LI">
 
   
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Seanli2013.github.io">
+  <link rel="canonical" href="http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="大钟威武" type="application/atom+xml">
@@ -78,15 +78,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/07/11/octopress-create-and-manage-blog/">Octopress发表blog文章和管理blog</a></h1>
+      <h1 class="entry-title">Octopress发表blog文章和管理blog</h1>
     
     
       <p class="meta">
@@ -109,7 +106,7 @@
   </header>
 
 
-  <div class="entry-content"><p>这里先只记下些简单的，其他高级应用可参考这位朋友的<a href="http://www.yanjiuyanjiu.com/blog/20130402/">配置</a>，讲得很好很清晰。</p>
+<div class="entry-content"><p>这里先只记下些简单的，其他高级应用可参考这位朋友的<a href="http://www.yanjiuyanjiu.com/blog/20130402/">配置</a>，讲得很好很清晰。</p>
 
 <h3>发表文章的过程</h3>
 
@@ -137,27 +134,34 @@
 </ol>
 
 
-<p>编辑后的结果类似：</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/07/11/octopress-create-and-manage-blog/">Read on &rarr;</a>
-    </footer>
-  
+<p>编辑后的结果类似：<!--more--></p>
+
+<pre><code>&lt;ul class="main-navigation"&gt;
+&lt;li&gt;&lt;a href="/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/test"&gt;Test Field&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;   
+</code></pre>
+
+<p>实际上就是把blog主页上导航的部分指向你新建的页面所在的文件夹名称。
+部署的方式与发表文章过程一致。
+修改页面的方式也可参考<a href="http://icodeit.org/2013/01/add-new-page-to-octopress/">为octopress添加新的页面(page)</a>，在这片文章中对一个典型的octopress博客的source目录布局进行了描述。</p>
+
+<h3>编辑的文章的工具</h3>
+
+<p>我在用<a href="http://mouapp.com">Mou</a>，markdown语言，挺好使的。</p>
+</div>
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/03/mac-dajian-octopress/">Mac下搭建octopress</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Xiang LI</span></span>
+
+      
 
 
 
@@ -169,46 +173,38 @@
   
 
 
-<time datetime="2011-07-03T05:59:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2011</time>
-        
-      </p>
+<time datetime="2011-07-11T05:59:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2011</time>
+      
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog/" >Tweet</a>
+  
+  
+  
+</div>
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/07/03/mac-dajian-octopress/" title="Previous Post: mac下搭建octopress">&laquo; mac下搭建octopress</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-  <div class="entry-content"><h2>准备工作</h2>
-
-<h3>安装Ruby（1.9.3）</h3>
-
-<p>mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见<a href="http://www.hoowolf.net/2012/03/29/installing-ruby-on-rails-on-mac-os-x-lion/">Mac安装Ruby on Rails</a>，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。</p>
-
-<h3>你的系统还应该装有git，rvm</h3>
-
-<h2>开始搭建</h2>
-
-<p>搭建过程参考<a href="http://ishalou.com/blog/2012/10/15/how-to-use-octopress/">使用Octopress + Github管理blog</a>和<a href="http://www.yangzhiping.com/tech/octopress.html">Ruby开源项目介绍(1)：octopress——像黑客一样写博客</a>，这第二篇有些标题党哈。这两篇都可参考。</p>
-
-<p><strong>注意:</strong>参考这两篇文章前，需要<strong><em>先安装Ruby1.9.3</em></strong>，否则按照他们说的步骤来，你可能遇到很多个步骤无法执行完全成功。</p>
-
-<h2>安装过程中可能遇到的问题</h2>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/07/03/mac-dajian-octopress/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -233,6 +229,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -247,7 +244,10 @@
       var disqus_shortname = 'bigbell';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog/';
+        var disqus_url = 'http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

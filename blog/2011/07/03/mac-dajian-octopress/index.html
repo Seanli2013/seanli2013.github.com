@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>大钟威武</title>
+  <title>mac下搭建octopress - 大钟威武</title>
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="这里先只记下些简单的，其他高级应用可参考这位朋友的配置，讲得很好很清晰。 发表文章的过程 本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/”目录下生成一个markdown文件
-编辑这个markdown文件， &hellip;">
+  <meta name="description" content="准备工作 安装Ruby（1.9.3） mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见Mac安装Ruby on Rails，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。 你的系统还应该装有git，rvm 开始搭建 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Seanli2013.github.io">
+  <link rel="canonical" href="http://Seanli2013.github.io/blog/2011/07/03/mac-dajian-octopress">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="大钟威武" type="application/atom+xml">
@@ -78,82 +77,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/07/11/octopress-create-and-manage-blog/">Octopress发表blog文章和管理blog</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-11T05:59:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>这里先只记下些简单的，其他高级应用可参考这位朋友的<a href="http://www.yanjiuyanjiu.com/blog/20130402/">配置</a>，讲得很好很清晰。</p>
-
-<h3>发表文章的过程</h3>
-
-<ol>
-<li>本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/”目录下生成一个markdown文件</li>
-<li>编辑这个markdown文件，你可以改名字，也可以改文件的内容</li>
-<li>使用命令rake generate，这时在本地把你添加的新文章做了生成</li>
-<li>使用命令rake preview，这时在浏览器中输入localhost:4000来在本地查看效果</li>
-<li>效果ok，使用命令rake deploy，把本地的部署到github服务端</li>
-<li>过一会儿之后，你的服务端的blog就更新成最新的啦</li>
-</ol>
-
-
-<h3>修改页面</h3>
-
-<p>搭建好的octopress，默认只有blog和achieve两个页面，要增加页面需要两步：</p>
-
-<ol>
-<li>本地建立个新文件夹。位置没关系，命令使用rake new_page[new-page-title]，这个文件夹内应该会包含一个index.markdown的文件，如果没有这个文件，请新建一个</li>
-<li><p>在blog主页的导航栏上还需要新建个页面名称，否则在blog上是看不到你新建的页面的，这需要编辑</p>
-
-<p> <code>
- source/_includes/custom/navigation.html
-</code></p></li>
-</ol>
-
-
-<p>编辑后的结果类似：</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/07/11/octopress-create-and-manage-blog/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/03/mac-dajian-octopress/">Mac下搭建octopress</a></h1>
+      <h1 class="entry-title">Mac下搭建octopress</h1>
     
     
       <p class="meta">
@@ -176,7 +105,7 @@
   </header>
 
 
-  <div class="entry-content"><h2>准备工作</h2>
+<div class="entry-content"><h2>准备工作</h2>
 
 <h3>安装Ruby（1.9.3）</h3>
 
@@ -192,23 +121,109 @@
 
 <h2>安装过程中可能遇到的问题</h2>
 
+<!--more-->
+
+
+<h3>1. 如何在mac系统中root权限？</h3>
+
+<p>用sudo su，像这样：</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ su
+Password:
+su: Sorry
+shawntekiMacBook-Pro:~ shawnli$ sudo su
+Password:
+sh-3.2#
+</code></pre>
+
+<h3>2. bundle update不成功。</h3>
+
+<h4>如果遇到的是bundle，command not found</h4>
+
+<p>这时你需要安装bundle</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+</code></pre>
+
+<p>这时你可能遇到不成功</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+WARNING:  RubyGems 1.2+ index not found for:
+
+
+RubyGems will revert to legacy indexes degrading performance.
+ERROR:  could not find gem bundler locally or in a repository
+</code></pre>
+
+<p>很可能是网络的问题，你可以尝试使用代理或者从公网换成教育网什么的……成功后显示</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+Successfully installed bundler-1.3.5
+1 gem installed
+Installing ri documentation for bundler-1.3.5...
+Installing RDoc documentation for bundler-1.3.5...
+</code></pre>
+
+<p>使用下面命令可以查看bundle安装情况</p>
+
+<pre><code>gem list --local
+</code></pre>
+
+<p>如果bundle update报找不到Gemfile，只要你切换到gemfile那个目录再运行bundle update即可。</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/07/03/mac-dajian-octopress/">Read on &rarr;</a>
-    </footer>
+
+<span class="byline author vcard">Posted by <span class="fn">Xiang LI</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2011-07-03T05:59:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2011</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2011/07/03/mac-dajian-octopress/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2011/07/03/mac-dajian-octopress/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/07/11/octopress-create-and-manage-blog/" title="Next Post: octopress发表blog文章和管理blog">octopress发表blog文章和管理blog &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -233,6 +248,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -247,7 +263,10 @@
       var disqus_shortname = 'bigbell';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://Seanli2013.github.io/blog/2011/07/03/mac-dajian-octopress/';
+        var disqus_url = 'http://Seanli2013.github.io/blog/2011/07/03/mac-dajian-octopress/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
