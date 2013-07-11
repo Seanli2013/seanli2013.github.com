@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-11T18:18:28+08:00</updated>
+  <updated>2013-07-11T18:35:16+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Test Post]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/11/test-post/"/>
+    <updated>2013-07-11T00:00:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/11/test-post</id>
+    <content type="html"><![CDATA[<p>This is a test</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>How r u?</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Hei</strong></p>
+
+<p>END</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress发表blog文章和管理blog]]></title>
