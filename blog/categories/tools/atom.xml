@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tools | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-11T21:27:19+08:00</updated>
+  <updated>2013-07-11T22:28:05+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -49,10 +49,10 @@
 <p>编辑后的结果类似：<!--more--></p>
 
 <pre><code>&lt;ul class="main-navigation"&gt;
-&lt;li&gt;&lt;a href="/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/test"&gt;Test Field&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="{{ root_url }}/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="{{ root_url }}/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="{{ root_url }}/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="{{ root_url }}/test"&gt;Test Field&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;   
 </code></pre>
 
