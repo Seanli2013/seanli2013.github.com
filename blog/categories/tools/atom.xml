@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[大钟威武]]></title>
-  <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Tools | 大钟威武]]></title>
+  <link href="http://Seanli2013.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
   <updated>2013-07-11T21:27:19+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
@@ -49,10 +49,10 @@
 <p>编辑后的结果类似：<!--more--></p>
 
 <pre><code>&lt;ul class="main-navigation"&gt;
-&lt;li&gt;&lt;a href="http://Seanli2013.github.io/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://Seanli2013.github.io/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://Seanli2013.github.io/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://Seanli2013.github.io/test"&gt;Test Field&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/test"&gt;Test Field&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;   
 </code></pre>
 
