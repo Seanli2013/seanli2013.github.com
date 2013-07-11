@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-11T10:58:15+08:00</updated>
+  <updated>2013-07-11T12:34:26+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -67,10 +67,10 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mac下搭建octopress]]></title>
-    <link href="http://Seanli2013.github.io/blog/2013/07/10/mac%E4%B8%8B%E6%90%AD%E5%BB%BAoctopress/"/>
+    <title type="html"><![CDATA[Mac Dajian Octopress]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/10/mac-dajian-octopress/"/>
     <updated>2013-07-10T00:00:00+08:00</updated>
-    <id>http://Seanli2013.github.io/blog/2013/07/10/mac下搭建octopress</id>
+    <id>http://Seanli2013.github.io/blog/2013/07/10/mac-dajian-octopress</id>
     <content type="html"><![CDATA[<h2>准备工作</h2>
 
 <h3>安装Ruby（1.9.3）</h3>
