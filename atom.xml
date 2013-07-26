@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-26T20:38:37+08:00</updated>
+  <updated>2013-07-26T21:03:16+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -78,7 +78,10 @@
 
 <h3>什么情况下不使用</h3>
 
-<p>没有非常明确的说法，有人说当这个单例类非常频繁会扩展时，单例模式不适用<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
+<p>有人说当这个单例类非常频繁会扩展时，单例模式不适用<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
+
+<p>还有违反了单一职责的设计原则，使代码之间耦合度变强，无法进行有效的单元测试<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。
+所以使用的时候要避免这些情况，尽量让单例不存在过于复杂的依赖性和继承，保证其松耦合等<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>。</p>
 
 <h2>单例模式实现</h2>
 
@@ -93,6 +96,10 @@
 <ol>
 <li id="fn:1">
 <p><a href="http://www.nowamagic.net/librarys/veda/detail/1776">使用单例模式需要注意的几个问题</a>——这篇文章我看得一头雾水，应该怎么理解？<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p><a href="http://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons">What is so bad about Singletons?</a>，这个问题的被采纳答案<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p><a href="http://gracelancy.com/?p=386">Singletons in Cocoa, are they evil?</a>推荐大家看这个，这个里面援引了stackflow中有人提到的单例的4个缺点。<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
 </ol>
 </div>
 
