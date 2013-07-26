@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ios入门 | 大钟威武]]></title>
+  <title><![CDATA[Category: iOS入门 | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/iosru-men/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-25T20:37:08+08:00</updated>
+  <updated>2013-07-26T13:52:36+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -14,72 +14,45 @@
 
   
   <entry>
-    <title type="html"><![CDATA[学习使用code实现iOS界面]]></title>
-    <link href="http://Seanli2013.github.io/blog/2013/07/25/ios-gui-implementation-discuss/"/>
-    <updated>2013-07-25T19:08:00+08:00</updated>
-    <id>http://Seanli2013.github.io/blog/2013/07/25/ios-gui-implementation-discuss</id>
-    <content type="html"><![CDATA[<h2>为什么要学习使用code实现iOS界面？</h2>
+    <title type="html"><![CDATA[学习iOS的单例模式实现]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/25/singleton/"/>
+    <updated>2013-07-25T20:42:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/25/singleton</id>
+    <content type="html"><![CDATA[<h2>为什么学习iOS的单例模式实现</h2>
 
-<h3>iOS界面三种实现方式</h3>
+<p>从设计模式开始说起。<a href="http://baike.baidu.com/view/66964.htm">设计模式（Design pattern）</a>是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。</p>
 
-<p>code、IB、Storyboard这三种方式都可以实现iOS界面，哪种实现方式合适呢？众说纷纭，合理的答案是依情况而定——嘿，废话。作为iOS的初学者，该如何选择呢？</p>
+<p>单例模式是设计模式中的一种，并且比较简单，在iOS开发中会常用到，所以新手可以先学习使用单例模式。</p>
 
-<h4>发展趋势</h4>
+<p>新手想了解更多设计模式，可以先了解一下<a href="http://blog.csdn.net/zhengzhb/article/details/7187278">类之间的关系</a>，然后看看<a href="http://blog.csdn.net/zhengzhb/article/details/7278174">设计模式一般遵循的6个原则</a>，之后可以了解下<a href="http://blog.csdn.net/zhengzhb/article/details/7331369">23个设计模式</a>。这里23个设计模式，作者是针对java讲的，但对ios程序设计也一样非常有意义。设计模式本身就是最佳实践的一些总结，新手不必一口气把每个设计模式的奥义都搞清楚，只要了解有这种设计模式，在实践中逐步研究和理解，会更有效率。</p>
 
-<p>最早时候，大家都用code，后来出现了IB（interface builder），再后来出现了Storyboard。现在的初学者们，上来接触的就是Storyboard，因为苹果现在的官网教材也好、stanford有名的CS193P课程（2013年叫做Coding Together: Developing Apps for iPhone and iPad, 可以在iTunesU中免费下载）都在推Storyboard。</p>
+<p>对于iOS常用的设计模式，<strong>推荐阅读</strong><a href="http://beyondvincent.com">破船之家</a>写的<a href="http://beyondvincent.com/2013/05/05/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%AF%9F%E8%80%85/">三篇iOS设计模式</a>文章，此外，可以参考<a href="http://marshal.easymorse.com/archives/3296">iOS的一些基本设计模式</a>。</p>
 
-<h4>优缺点<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></h4>
+<h2>什么是单例模式</h2>
 
-<p>简单对比一下，更多优缺点比较，请搜搜看<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
+<p>单例模式，英文名叫Singleton。规定这个类只能同时存在一个实例，这个实例可以全局调用。</p>
 
-<table>
-<thead>
-<tr>
-<th></th>
-<th> 方法 </th>
-<th> 优点 </th>
-<th> 缺点 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>code </td>
-<td> 可以对界面掌控得非常精确；代码容易管理和追踪，很干净，控件属性等有修改可以非常容易看到  </td>
-<td> 代码量大，略显麻烦；接手项目的新人不容易看清楚模块之间的关系 </td>
-</tr>
-<tr>
-<td></td>
-<td>ib </td>
-<td> 较容易地把界面设计出来  </td>
-<td> 界面在ib中体现一部分，在code中体现一部分，阅读和维护起来有难度 </td>
-</tr>
-<tr>
-<td></td>
-<td>Storyboard </td>
-<td> 较为清晰的体现各模块之间的关系；较容易把界面设计出来 </td>
-<td> 也会借助code来实现一些界面；多人协作开发时，不好管理 </td>
-</tr>
-</tbody>
-</table>
+<h3>什么情况下使用</h3>
 
+<p>有个事你只想让一个人去做，这个人把这个事儿做怎么样，你又希望大家都知道，这种时候可以使用单例模式。这个模式可以用来做一些比较“专注”的任务，同时方便的把资源共享出来。</p>
 
-<p>可见，使用code实现界面是最基础的方式，ib和storyboard是希望减少工作量。学习使用code开发界面有助于新手理解其中的原理。</p>
+<h3>什么情况下不使用</h3>
 
-<h4>新手要熟练使用code，也会Storyboard</h4>
+<p>没有非常明确的说法，有人说当这个单例类非常频繁会扩展时，单例模式不适用<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
 
-<p>真正干活的时候，大家可能会哪个用得熟就用哪个了。对于我们新手，有精力的话，三种方式都要精通。如果没有那么多精力，至少要熟练使用code实现，同时也要会使用Storyboard。因为Storyboard在快速实现demo时，或小项目你自己开发时，效率是非常高的，可以节约你大量时间。并且从发展角度看，Storyboard会做得越来越完善。</p>
+<h2>单例模式实现</h2>
 
-<h2>如何用code设置控件</h2>
+<p>在<a href="http://beyondvincent.com">破船之家</a>的<a href="http://beyondvincent.com/2013/05/09/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">iOS设计模式(02):单例模式</a>文章中写得很清楚，分为使用ARC情况和非ARC情况。我尝试了其中ARC+GCD的方法，it works fine。</p>
 
-<p>推荐这篇文章：<a href="http://www.cocoachina.com/bbs/read.php?tid=131516">IOS开发之纯代码界面&mdash;基本控件使用篇</a>，学习的时候，从第一课开始，一节一节仔细阅读。全是干货，非常容易的你就学会了。</p>
+<h3>测试代码</h3>
+
+<p>在下面测试代码中，实现了2个viewController都从单例类实例中拿数据，第1个viewController的按钮更改了单例类实例的内容，在第2个viewController中可以看到更改。
+<a href="http://seanli2013.github.io/codes/testSingleton.zip">代码下载</a></p>
 <div class="footnotes">
 <hr/>
 <ol>
 <li id="fn:1">
-<p><a href="http://blog.devtang.com/blog/2012/12/15/do-not-use-storyboard/">Storyboard看上去很美</a>.在这篇文章中，作者根据切身实践对优缺点进行了评述，值得借鉴<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>可以参考搜索结果:<a href="http://www.zhihu.com/question/20256649">iOS开发过程中，你更喜欢用Storyboard/xib做界面，还是直接用代码来写界面？</a>; <a href="http://www.zhihu.com/question/19670944">iPhone开发中，代码写界面和IB设计界面哪个更方便？</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<p><a href="http://www.nowamagic.net/librarys/veda/detail/1776">使用单例模式需要注意的几个问题</a>——这篇文章我看得一头雾水，应该怎么理解？<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
 </ol>
 </div>
 

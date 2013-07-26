@@ -1,0 +1,180 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>学习iOS的单例模式实现 - 大钟威武</title>
+	<meta name="author" content="Xiang LI">
+
+	
+	<meta name="description" content="学习iOS的单例模式实现 为什么学习iOS的单例模式实现 从设计模式开始说起。设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="大钟威武" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://Seanli2013.github.io/blog/2013/07/25/singleton/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">大钟威武</a></h1>
+  
+    <h2>大钟的博客</h2>
+  
+</hgroup>
+
+<p class="subtitle">大钟的博客</p>
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+  <li><a href="/test">Test Field</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">学习iOS的单例模式实现</h1>
+	<div class="entry-content" itemprop="articleBody"><h2>为什么学习iOS的单例模式实现</h2>
+
+<p>从设计模式开始说起。<a href="http://baike.baidu.com/view/66964.htm">设计模式（Design pattern）</a>是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。</p>
+
+<p>单例模式是设计模式中的一种，并且比较简单，在iOS开发中会常用到，所以新手可以先学习使用单例模式。</p>
+
+<p>新手想了解更多设计模式，可以先了解一下<a href="http://blog.csdn.net/zhengzhb/article/details/7187278">类之间的关系</a>，然后看看<a href="http://blog.csdn.net/zhengzhb/article/details/7278174">设计模式一般遵循的6个原则</a>，之后可以了解下<a href="http://blog.csdn.net/zhengzhb/article/details/7331369">23个设计模式</a>。这里23个设计模式，作者是针对java讲的，但对ios程序设计也一样非常有意义。设计模式本身就是最佳实践的一些总结，新手不必一口气把每个设计模式的奥义都搞清楚，只要了解有这种设计模式，在实践中逐步研究和理解，会更有效率。</p>
+
+<p>对于iOS常用的设计模式，<strong>推荐阅读</strong><a href="http://beyondvincent.com">破船之家</a>写的<a href="http://beyondvincent.com/2013/05/05/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%AF%9F%E8%80%85/">三篇iOS设计模式</a>文章，此外，可以参考<a href="http://marshal.easymorse.com/archives/3296">iOS的一些基本设计模式</a>。</p>
+
+<h2>什么是单例模式</h2>
+
+<p>单例模式，英文名叫Singleton。规定这个类只能同时存在一个实例，这个实例可以全局调用。</p>
+
+<h3>什么情况下使用</h3>
+
+<p>有个事你只想让一个人去做，这个人把这个事儿做怎么样，你又希望大家都知道，这种时候可以使用单例模式。这个模式可以用来做一些比较“专注”的任务，同时方便的把资源共享出来。</p>
+
+<h3>什么情况下不使用</h3>
+
+<p>没有非常明确的说法，有人说当这个单例类非常频繁会扩展时，单例模式不适用<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
+
+<h2>单例模式实现</h2>
+
+<p>在<a href="http://beyondvincent.com">破船之家</a>的<a href="http://beyondvincent.com/2013/05/09/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">iOS设计模式(02):单例模式</a>文章中写得很清楚，分为使用ARC情况和非ARC情况。我尝试了其中ARC+GCD的方法，it works fine。</p>
+
+<h3>测试代码</h3>
+
+<p>在下面测试代码中，实现了2个viewController都从单例类实例中拿数据，第1个viewController的按钮更改了单例类实例的内容，在第2个viewController中可以看到更改。
+<a href="http://seanli2013.github.io/codes/testSingleton.zip">代码下载</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><a href="http://www.nowamagic.net/librarys/veda/detail/1776">使用单例模式需要注意的几个问题</a>——这篇文章我看得一头雾水，应该怎么理解？<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Xiang LI -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-42372886-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

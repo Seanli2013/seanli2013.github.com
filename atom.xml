@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-25T20:37:08+08:00</updated>
+  <updated>2013-07-26T13:52:35+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[学习iOS的单例模式实现]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/25/singleton/"/>
+    <updated>2013-07-25T20:42:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/25/singleton</id>
+    <content type="html"><![CDATA[<h2>为什么学习iOS的单例模式实现</h2>
+
+<p>从设计模式开始说起。<a href="http://baike.baidu.com/view/66964.htm">设计模式（Design pattern）</a>是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。</p>
+
+<p>单例模式是设计模式中的一种，并且比较简单，在iOS开发中会常用到，所以新手可以先学习使用单例模式。</p>
+
+<p>新手想了解更多设计模式，可以先了解一下<a href="http://blog.csdn.net/zhengzhb/article/details/7187278">类之间的关系</a>，然后看看<a href="http://blog.csdn.net/zhengzhb/article/details/7278174">设计模式一般遵循的6个原则</a>，之后可以了解下<a href="http://blog.csdn.net/zhengzhb/article/details/7331369">23个设计模式</a>。这里23个设计模式，作者是针对java讲的，但对ios程序设计也一样非常有意义。设计模式本身就是最佳实践的一些总结，新手不必一口气把每个设计模式的奥义都搞清楚，只要了解有这种设计模式，在实践中逐步研究和理解，会更有效率。</p>
+
+<p>对于iOS常用的设计模式，<strong>推荐阅读</strong><a href="http://beyondvincent.com">破船之家</a>写的<a href="http://beyondvincent.com/2013/05/05/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%AF%9F%E8%80%85/">三篇iOS设计模式</a>文章，此外，可以参考<a href="http://marshal.easymorse.com/archives/3296">iOS的一些基本设计模式</a>。</p>
+
+<h2>什么是单例模式</h2>
+
+<p>单例模式，英文名叫Singleton。规定这个类只能同时存在一个实例，这个实例可以全局调用。</p>
+
+<h3>什么情况下使用</h3>
+
+<p>有个事你只想让一个人去做，这个人把这个事儿做怎么样，你又希望大家都知道，这种时候可以使用单例模式。这个模式可以用来做一些比较“专注”的任务，同时方便的把资源共享出来。</p>
+
+<h3>什么情况下不使用</h3>
+
+<p>没有非常明确的说法，有人说当这个单例类非常频繁会扩展时，单例模式不适用<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
+
+<h2>单例模式实现</h2>
+
+<p>在<a href="http://beyondvincent.com">破船之家</a>的<a href="http://beyondvincent.com/2013/05/09/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">iOS设计模式(02):单例模式</a>文章中写得很清楚，分为使用ARC情况和非ARC情况。我尝试了其中ARC+GCD的方法，it works fine。</p>
+
+<h3>测试代码</h3>
+
+<p>在下面测试代码中，实现了2个viewController都从单例类实例中拿数据，第1个viewController的按钮更改了单例类实例的内容，在第2个viewController中可以看到更改。
+<a href="http://seanli2013.github.io/codes/testSingleton.zip">代码下载</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><a href="http://www.nowamagic.net/librarys/veda/detail/1776">使用单例模式需要注意的几个问题</a>——这篇文章我看得一头雾水，应该怎么理解？<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[学习使用code实现iOS界面]]></title>
@@ -167,13 +213,19 @@
 
 <p>用sudo su，像这样：</p>
 
-<pre><code>shawntekiMacBook-Pro:~ shawnli$ su
-Password:
-su: Sorry
-shawntekiMacBook-Pro:~ shawnli$ sudo su
-Password:
-sh-3.2#
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>shawntekiMacBook-Pro:~ shawnli$ su
+</span><span class='line'>Password:
+</span><span class='line'>su: Sorry
+</span><span class='line'>shawntekiMacBook-Pro:~ shawnli$ sudo su
+</span><span class='line'>Password:
+</span><span class='line'>sh-3.2#</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>2. bundle update不成功。</h3>
 
