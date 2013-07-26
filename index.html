@@ -7,7 +7,7 @@
 	<meta name="author" content="Xiang LI">
 
 	
-	<meta name="description" content="Jul 25th, 2013 iOS入门 学习iOS的单例模式实现 为什么学习iOS的单例模式实现 从设计模式开始说起。设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性 &hellip;">
+	<meta name="description" content="Jul 26th, 2013 iOS入门 学习iOS的delegation的实现 什么是delegation delegation[ˌdelɪ&#8217;ɡeɪʃn]，中文叫委托，是两个类之间传递信息的一种方式。也是一种设计模式。 其作用和实现过程可以这么理解： A类：A正在工作中发现， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +85,72 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-26T14:11:00+08:00" data-updated="true" itemprop="datePublished">Jul 26<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/iosru-men/'>iOS入门</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/07/26/ios-delegation-and-protocol/" itemprop="url">学习iOS的delegation的实现</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h2>什么是delegation</h2>
+
+<p>delegation<em>[ˌdelɪ&#8217;ɡeɪʃn]</em>，中文叫委托，是两个类之间传递信息的一种方式。也是一种设计模式。</p>
+
+<p>其作用和实现过程可以这么理解：</p>
+
+<p>A类：A正在工作中发现，有的工作自己做不方便，需要委托别人帮忙做。A要制定个协议，委托的人要遵守这个协议，按照协议中的方法把工作给做了。A的属性有遵守这个协议的delegate，A知道这个delegate会帮助完成协议中的工作。</p>
+
+<p>B类：B会受A委托，B类需要接受这个协议，把协议中的必须执行的方法给执行了。B有个属性是A的对象，在B类中把A的对象的delegate设置成B。</p>
+
+<p>这里提到的协议，即protocol，不熟的孩纸可以仔细阅读<a href="http://www.cocoachina.com/newbie/basic/2010/0917/2106.html">协议（Protocol）的用法和代码例子</a></p>
+
+<h2>什么时候使用delegation</h2>
+
+<p>类之间传递信息可以有多种机制，除了delegation还有notification、observer等方式。一般两个类之间有点儿关系（比如view和subview，view和controller之间，使用delegate）的时候，经常使用delegation；两个模块之间没有啥关系，可能使用notification会更好。有兴趣的孩纸推荐阅读一下<a href="http://blog.shinetech.com/2011/06/14/delegation-notification-and-observation/">When to use Delegation, Notification, or Observation in iOS</a>。</p>
+
+<p>在我们使用控件如textField、textView等时，都会碰到他们的delegation，这是非常好的delegation的例子，要好好去理解delegation的功效。</p>
+
+<h2>delegation实践</h2>
+
+<h3>模拟场景</h3>
+
+<p>张老师在外地开会，她会发短信告诉学生代表什么时候让学生们放假，学生代表承诺老师会准确传达。张老师发了短信给学生代表，说7月26日周五大家放假。</p>
+
+<h3>设计</h3>
+
+<p>张老师是委托人，学生代表是受委托人，她和学生代表定的协议中的方法：由学生代表告诉学生们什么时候放假。
+张老师发短信给学生代表这个时候会触发他们之间协议的方法。</p>
+
+<h3>测试代码</h3>
+
+<p>测试代码中有老师和学生代表两个类，输出的结果见NSLog。<a href="http://seanli2013.github.io/codes/textDelegationAndProtocol.zip">代码下载</a></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
