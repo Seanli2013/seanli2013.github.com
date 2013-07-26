@@ -7,7 +7,8 @@
 	<meta name="author" content="Xiang LI">
 
 	
-	<meta name="description" content="Octopress发表blog文章和管理blog 这里先只记下些简单的，其他一些应用可参考这位朋友的配置。 发表文章的过程 本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/” &hellip;">
+	<meta name="description" content="Octopress发表blog文章和管理blog 发表文章的过程 本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/”目录下生成一个markdown文件
+编辑这个markdown文件，你可以改名字， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,9 +90,7 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<h1 class="title" itemprop="name">Octopress发表blog文章和管理blog</h1>
-	<div class="entry-content" itemprop="articleBody"><p>这里先只记下些简单的，其他一些应用可参考这位朋友的<a href="http://www.yanjiuyanjiu.com/blog/20130402/">配置</a>。</p>
-
-<h3>发表文章的过程</h3>
+	<div class="entry-content" itemprop="articleBody"><h3>发表文章的过程</h3>
 
 <ol>
 <li>本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/”目录下生成一个markdown文件</li>
@@ -103,7 +102,11 @@
 </ol>
 
 
-<h3>修改页面</h3>
+<h3>管理和配置界面</h3>
+
+<p>管理和配置界面，就是修改你本地的若干配置文件，之后rake generate成功后，再deploy，就完成了修改。</p>
+
+<h4>拿增加页面为例</h4>
 
 <p>搭建好的octopress，默认只有blog和achieve两个页面，要增加页面需要两步：</p>
 
@@ -119,17 +122,30 @@
 
 <p>编辑后的结果类似：<!--more--></p>
 
-<pre><code>&lt;ul class="main-navigation"&gt;
-&lt;li&gt;&lt;a href="/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/test"&gt;Test Field&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;   
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;ul class="main-navigation"&gt;
+</span><span class='line'>  &lt;li&gt;&lt;a href="/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>      &lt;li&gt;&lt;a href="/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>      &lt;li&gt;&lt;a href="/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>      &lt;li&gt;&lt;a href="/test"&gt;Test Field&lt;/a&gt;&lt;/li&gt;
+</span><span class='line'>&lt;/ul&gt;   </span></code></pre></td></tr></table></div></figure>
+
 
 <p>实际上就是把blog主页上导航的部分指向你新建的页面所在的文件夹名称。
-部署的方式与发表文章过程一致。
-修改页面的方式也可参考<a href="http://icodeit.org/2013/01/add-new-page-to-octopress/">为octopress添加新的页面(page)</a>，在这片文章中对一个典型的octopress博客的source目录布局进行了描述。</p>
+部署的方式与发表文章过程一致。</p>
+
+<p>修改页面的方式也可参考<a href="http://icodeit.org/2013/01/add-new-page-to-octopress/">为octopress添加新的页面(page)</a>，在这片文章中对一个典型的octopress博客的source目录布局进行了描述。</p>
+
+<p>再提一下评论，评论多数人说多说好用，多说的设置参考<a href="http://ihavanna.org/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">为 Octopress 添加多说评论系统</a>。</p>
+
+<p>更多的配置管理，可自行进行搜索，网上信息很多。比如这位朋友写的<a href="http://www.yanjiuyanjiu.com/blog/20130402/">配置</a>。</p>
+
+<p>另外别忘了octopress的<a href="http://octopress.org">官网</a>，信息量更大呢。</p>
 
 <h3>编辑的文章的工具</h3>
 

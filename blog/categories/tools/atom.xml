@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tools | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-26T21:24:25+08:00</updated>
+  <updated>2013-07-26T22:03:56+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -14,13 +14,20 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Mac下的RSS阅读器]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/26/rss-read-on-mac/"/>
+    <updated>2013-07-26T21:40:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/26/rss-read-on-mac</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[octopress发表blog文章和管理blog]]></title>
     <link href="http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog/"/>
     <updated>2011-07-11T05:59:00+08:00</updated>
     <id>http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog</id>
-    <content type="html"><![CDATA[<p>这里先只记下些简单的，其他一些应用可参考这位朋友的<a href="http://www.yanjiuyanjiu.com/blog/20130402/">配置</a>。</p>
-
-<h3>发表文章的过程</h3>
+    <content type="html"><![CDATA[<h3>发表文章的过程</h3>
 
 <ol>
 <li>本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/”目录下生成一个markdown文件</li>
@@ -32,7 +39,11 @@
 </ol>
 
 
-<h3>修改页面</h3>
+<h3>管理和配置界面</h3>
+
+<p>管理和配置界面，就是修改你本地的若干配置文件，之后rake generate成功后，再deploy，就完成了修改。</p>
+
+<h4>拿增加页面为例</h4>
 
 <p>搭建好的octopress，默认只有blog和achieve两个页面，要增加页面需要两步：</p>
 
@@ -48,6 +59,8 @@
 
 <p>编辑后的结果类似：<!--more--></p>
 
+<p>```</p>
+
 <pre><code>&lt;ul class="main-navigation"&gt;
 &lt;li&gt;&lt;a href="/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
@@ -56,9 +69,18 @@
 &lt;/ul&gt;   
 </code></pre>
 
+<p>```</p>
+
 <p>实际上就是把blog主页上导航的部分指向你新建的页面所在的文件夹名称。
-部署的方式与发表文章过程一致。
-修改页面的方式也可参考<a href="http://icodeit.org/2013/01/add-new-page-to-octopress/">为octopress添加新的页面(page)</a>，在这片文章中对一个典型的octopress博客的source目录布局进行了描述。</p>
+部署的方式与发表文章过程一致。</p>
+
+<p>修改页面的方式也可参考<a href="http://icodeit.org/2013/01/add-new-page-to-octopress/">为octopress添加新的页面(page)</a>，在这片文章中对一个典型的octopress博客的source目录布局进行了描述。</p>
+
+<p>再提一下评论，评论多数人说多说好用，多说的设置参考<a href="http://ihavanna.org/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">为 Octopress 添加多说评论系统</a>。</p>
+
+<p>更多的配置管理，可自行进行搜索，网上信息很多。比如这位朋友写的<a href="http://www.yanjiuyanjiu.com/blog/20130402/">配置</a>。</p>
+
+<p>另外别忘了octopress的<a href="http://octopress.org">官网</a>，信息量更大呢。</p>
 
 <h3>编辑的文章的工具</h3>
 
