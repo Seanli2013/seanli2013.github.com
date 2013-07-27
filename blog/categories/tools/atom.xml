@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tools | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-27T10:18:42+08:00</updated>
+  <updated>2013-07-27T19:50:45+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mac下的RSS阅读器]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/26/rss-read-on-mac/"/>
+    <updated>2013-07-26T21:40:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/26/rss-read-on-mac</id>
+    <content type="html"><![CDATA[<p>学一门新技术，需要有多个条件放在一起，才能学好。都需要哪些条件，仁者见仁，淫者见淫……但至少有一条，就是你需要跟前辈们学。</p>
+
+<p>很多前辈有技术博客，及时地阅读他们的著作是个不错的提升自己的方式。此外，很多网站资源也不错，订阅来看很方便。google reader不在了，在mac下，使用什么不花钱的工具阅读RSS呢？</p>
+
+<p>尝试一番后我最后选择了使用免费版的<a href="https://itunes.apple.com/cn/app/fresh-feed-rss-news-notifier/id420896063?l=en&amp;mt=12&amp;ls=1">fresh feed</a>。
+先后尝试过：</p>
+
+<ol>
+<li>此外尝试了mac下的应用RSS Bot，这个也还成，不过预览的时候，不够方便，只能看到标题，之后就得点击链接在网页里看。</li>
+<li>还尝试了Instant RSS Notifier（free版），这个免费版太烂了。</li>
+<li>mail里原来是支持RSS阅读的，和看邮件一样看RSS，多好啊，可现在也不支持了。RSS就这么不受待见么？</li>
+</ol>
+
+
+<p>综合来看还是fresh feed好用些。</p>
+
+<p>在尝试过程中，安装了获取RSS feed的Safari插件<a href="http://www.red-sweater.com/blog/2681/subscribe-to-feed-1-0b4">subscribe-to-feed-1-0b4</a>，安装插件后，会出现RSS图标<img src="http://seanli2013.github.io/images/rss.png" alt="RSS" />，点击图标后，会在地址栏得到当前safari页面的feed。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[octopress发表blog文章和管理blog]]></title>
