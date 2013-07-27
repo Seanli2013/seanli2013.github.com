@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tools | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-26T22:03:56+08:00</updated>
+  <updated>2013-07-27T10:18:42+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,15 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Mac下的RSS阅读器]]></title>
-    <link href="http://Seanli2013.github.io/blog/2013/07/26/rss-read-on-mac/"/>
-    <updated>2013-07-26T21:40:00+08:00</updated>
-    <id>http://Seanli2013.github.io/blog/2013/07/26/rss-read-on-mac</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[octopress发表blog文章和管理blog]]></title>
@@ -80,7 +71,7 @@
 
 <p>更多的配置管理，可自行进行搜索，网上信息很多。比如这位朋友写的<a href="http://www.yanjiuyanjiu.com/blog/20130402/">配置</a>。</p>
 
-<p>另外别忘了octopress的<a href="http://octopress.org">官网</a>，信息量更大呢。</p>
+<p><strong>最推荐的应该是先阅读这个octopress的<a href="http://octopress.org">官网</a></strong>，信息量非常大。例如<a href="http://octopress.org/docs/blogging/">Blogging Basics</a>详细儿清晰地介绍了发表文章的过程。</p>
 
 <h3>编辑的文章的工具</h3>
 
