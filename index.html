@@ -9,7 +9,7 @@
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="学一门新技术，需要有多个条件放在一起，才能学好。都需要哪些条件，仁者见仁，淫者见淫……但至少有一条，就是你需要跟前辈们学。 很多前辈有技术博客，及时地阅读他们的著作是个不错的提升自己的方式。此外，很多网站资源也不错，订阅来看很方便。google reader不在了，在mac下， &hellip;">
+  <meta name="description" content="编码规范很重要，毕竟你的代码除了你，还有很多人可能需要阅读。遵守一个编码规范，可以使你的代码易于理解和维护。 使用编码规范是个基础技能，采用谁家的编码规范比较好呢？看你给谁工作了。对OC，苹果、google都有自己的一套编码规范，估计其他公司也都有自己成行的编码规范。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -44,6 +44,7 @@
   </script>
 
 
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
 </head>
 
 <body   >
@@ -77,6 +78,143 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/29/coding-guidelines-for-cocoa/">学习Apple的编码规范</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-29T14:19:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+        
+      
+
+          | <a href="/blog/2013/07/29/coding-guidelines-for-cocoa/#comments">Comments</a>
+         
+
+	</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>编码规范很重要，毕竟你的代码除了你，还有很多人可能需要阅读。遵守一个编码规范，可以使你的代码易于理解和维护。</p>
+
+<p>使用编码规范是个基础技能，采用谁家的编码规范比较好呢？看你给谁工作了。对OC，苹果、google都有自己的一套编码规范，估计其他公司也都有自己成行的编码规范。</p>
+
+<p>google家写过一个被广泛接受的C++编码规范，他家的oc编码规范是结合了苹果家的oc规范和他自家的c++规范。所以对于iOS新手，我觉得先了解一下苹果家的编码规范比较好。</p>
+
+<p>苹果家的编码规范<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html#//apple_ref/doc/uid/10000146-SW1">Coding Guidelines for Cocoa</a>。</p>
+
+<p>简单翻译了下：</p>
+
+<h2>代码名称基础</h2>
+
+<h3>基本原则</h3>
+
+<h4>清晰</h4>
+
+<ol>
+<li>又清晰又简洁是最好的了，但简洁不如清晰重要</li>
+<li>总的讲不要使用单词的简写，除了非常非常常用的简写以外（<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/APIAbbreviations.html#//apple_ref/doc/uid/20001285-BCIHCGAE">Acceptable Abbreviations and Acronyms</a>），尽量使用单词全称，长点儿不要紧</li>
+<li>API的名称不要有歧义，一看你的API就知道是以什么方式做了什么事情，不要让人有疑问</li>
+</ol>
+
+
+<h4>一致性</h4>
+
+<p>做某个事情代码通常都叫这个名字，比如tag、setStringValue，那么你也这么叫。你在不确定怎么起名字的时候，可以参考一些常用的名字：<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingMethods.html#//apple_ref/doc/uid/20001282-1001865">Method Arguments</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>...action:(SEL)aSelector
+</span><span class='line'>...alignment:(int)mode
+</span><span class='line'>...atIndex:(int)index
+</span><span class='line'>...content:(NSRect)aRect
+</span><span class='line'>...doubleValue:(double)aDouble
+</span><span class='line'>...floatValue:(float)aFloat
+</span><span class='line'>...font:(NSFont *)fontObj
+</span><span class='line'>...frame:(NSRect)frameRect
+</span><span class='line'>...intValue:(int)anInt
+</span><span class='line'>...keyEquivalent:(NSString *)charCode
+</span><span class='line'>...length:(int)numBytes
+</span><span class='line'>...point:(NSPoint)aPoint
+</span><span class='line'>...stringValue:(NSString *)aString
+</span><span class='line'>...tag:(int)anInt
+</span><span class='line'>...target:(id)anObject
+</span><span class='line'>...title:(NSString *)aString</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>前缀</h3>
+
+<p>前缀一般是2到3个大写之母，可以用来给类、协议、函数、常量、typedef结构起名字时用。但不要给方法用，方法存在的命名空间是类定义的。也不要给结构体的字段使用（the fields of a structure）//没明白是啥意思？</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Prefix </th>
+<th align="left"> Cocoa Framework</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">NS  </td>
+<td align="left">   Application Kit</td>
+</tr>
+<tr>
+<td align="left">   NS </td>
+<td align="left"> Foundation</td>
+</tr>
+<tr>
+<td align="left">   AB </td>
+<td align="left"> Address Book</td>
+</tr>
+<tr>
+<td align="left">IB </td>
+<td align="left"> Interface Builder</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/29/coding-guidelines-for-cocoa/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -544,6 +682,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/29/coding-guidelines-for-cocoa/">学习Apple的编码规范</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/26/rss-read-on-mac/">Mac下的RSS阅读器</a>
       </li>
     
@@ -557,10 +699,6 @@
     
       <li class="post">
         <a href="/blog/2013/07/25/ios-gui-implementation-discuss/">学习使用code实现iOS界面</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/07/11/octopress-create-and-manage-blog/">Octopress发表blog文章和管理blog</a>
       </li>
     
   </ul>

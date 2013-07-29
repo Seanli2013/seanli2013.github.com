@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-07-27T20:46:49+08:00</updated>
+  <updated>2013-07-29T16:23:43+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,222 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[学习Apple的编码规范]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/29/coding-guidelines-for-cocoa/"/>
+    <updated>2013-07-29T14:19:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/29/coding-guidelines-for-cocoa</id>
+    <content type="html"><![CDATA[<p>编码规范很重要，毕竟你的代码除了你，还有很多人可能需要阅读。遵守一个编码规范，可以使你的代码易于理解和维护。</p>
+
+<p>使用编码规范是个基础技能，采用谁家的编码规范比较好呢？看你给谁工作了。对OC，苹果、google都有自己的一套编码规范，估计其他公司也都有自己成行的编码规范。</p>
+
+<p>google家写过一个被广泛接受的C++编码规范，他家的oc编码规范是结合了苹果家的oc规范和他自家的c++规范。所以对于iOS新手，我觉得先了解一下苹果家的编码规范比较好。</p>
+
+<p>苹果家的编码规范<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html#//apple_ref/doc/uid/10000146-SW1">Coding Guidelines for Cocoa</a>。</p>
+
+<p>简单翻译了下：</p>
+
+<h2>代码名称基础</h2>
+
+<h3>基本原则</h3>
+
+<h4>清晰</h4>
+
+<ol>
+<li>又清晰又简洁是最好的了，但简洁不如清晰重要</li>
+<li>总的讲不要使用单词的简写，除了非常非常常用的简写以外（<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/APIAbbreviations.html#//apple_ref/doc/uid/20001285-BCIHCGAE">Acceptable Abbreviations and Acronyms</a>），尽量使用单词全称，长点儿不要紧</li>
+<li>API的名称不要有歧义，一看你的API就知道是以什么方式做了什么事情，不要让人有疑问</li>
+</ol>
+
+
+<h4>一致性</h4>
+
+<p>做某个事情代码通常都叫这个名字，比如tag、setStringValue，那么你也这么叫。你在不确定怎么起名字的时候，可以参考一些常用的名字：<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingMethods.html#//apple_ref/doc/uid/20001282-1001865">Method Arguments</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>...action:(SEL)aSelector
+</span><span class='line'>...alignment:(int)mode
+</span><span class='line'>...atIndex:(int)index
+</span><span class='line'>...content:(NSRect)aRect
+</span><span class='line'>...doubleValue:(double)aDouble
+</span><span class='line'>...floatValue:(float)aFloat
+</span><span class='line'>...font:(NSFont *)fontObj
+</span><span class='line'>...frame:(NSRect)frameRect
+</span><span class='line'>...intValue:(int)anInt
+</span><span class='line'>...keyEquivalent:(NSString *)charCode
+</span><span class='line'>...length:(int)numBytes
+</span><span class='line'>...point:(NSPoint)aPoint
+</span><span class='line'>...stringValue:(NSString *)aString
+</span><span class='line'>...tag:(int)anInt
+</span><span class='line'>...target:(id)anObject
+</span><span class='line'>...title:(NSString *)aString</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>前缀</h3>
+
+<p>前缀一般是2到3个大写之母，可以用来给类、协议、函数、常量、typedef结构起名字时用。但不要给方法用，方法存在的命名空间是类定义的。也不要给结构体的字段使用（the fields of a structure）//没明白是啥意思？</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Prefix </th>
+<th align="left"> Cocoa Framework</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">NS  </td>
+<td align="left">   Application Kit</td>
+</tr>
+<tr>
+<td align="left">   NS </td>
+<td align="left"> Foundation</td>
+</tr>
+<tr>
+<td align="left">   AB </td>
+<td align="left"> Address Book</td>
+</tr>
+<tr>
+<td align="left">IB </td>
+<td align="left"> Interface Builder</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- more -->
+
+
+<h3>字体排版规范</h3>
+
+<p>1  多个词在一起时，不要使用标点符号（包括下划线、斜杠等），一般词首字母大写即可。</p>
+
+<ul>
+<li><p>具体到方法名，第一个词首字母小些，后面的词首字母大写，不要用前缀；
+  <code>
+  fileExistsAtPath:isDirectory:
+ </code></p></li>
+<li><p>函数名、常量名使用相关联的类的同样的前缀，后面跟着的词首字母大写。
+  <code>
+  NSRunAlertPanel
+  NSCellDisabled
+ </code></p></li>
+</ul>
+
+
+<p>2  避免使用下划线来命名私有方法名（要是命名一个实例变量名是可以的），这算是Apple的保留写法，如果使用了可能会和已存在的函数重名。</p>
+
+<h3>类和协议名</h3>
+
+<p>类名中应该包含一个名词来说明这个类（或者类的对象）是做什么的。并且这个雷鸣应该有个合适的前缀。例如NSString、NSDate、NSButton、UIApplication等等。</p>
+
+<p>协议应该按照他们的行为命名</p>
+
+<p>1  多数协议是一组方法的集合，并不是专门为了某个类服务的。这类协议的命名要区别于类的命名样子，一般都是加个ing</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">NSLocking </th>
+<th align="left"> Good</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">NSLock </td>
+<td align="left"> Poor (seems like a name for a class)</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>2  还有一些协议是把一些没啥关系的方法放在一起，这种协议一般是协助一个类。这种情况下，这种协议可以和类名一样。例子就是NSObject。</p>
+
+<h3>头文件</h3>
+
+<p>1  定义一个独立的类或协议，这时类名和h文件名一样</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Header file </th>
+<th align="left"> Declares</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">NSLocale.h </td>
+<td align="left"> The NSLocale class.</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>2  定义关联的一些类或协议，一般使用最初最基本的那个类的名字</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Header file </th>
+<th align="left"> Declares</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">NSString.h </td>
+<td align="left"> NSString and NSMutableString classes.</td>
+</tr>
+<tr>
+<td align="left">NSLock.h </td>
+<td align="left"> NSLocking protocol and NSLock, NSConditionLock, and NSRecursiveLock classes.</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>3  包含Framework的头文件，使用framework的名字+.h，包含这个framework的公共头文件。</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Header file </th>
+<th align="left"> Framework</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Foundation.h </td>
+<td align="left"> Foundation.framework.</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>4  给另外一个framwork中的类增加API时，应该延用原始类的名字。例如NSBundleAdditions.h header file of the Application Kit</p>
+
+<p>5  相关联的函数和数据类型在一起时，使用一个最贴切的名字做头文件。例如NSGraphics.h (Application Kit)，包含了相关的函数、常量、结构体、数据类型等。</p>
+
+<p>以上是基础的明明规则，在苹果家的代码规范中，接下来分别介绍了方法命名、函数命名、属性和数据类型命名。新手都应该好好阅读下。</p>
+
+<p>最后还专门为framework开发者提供了一些Tips和Techniques。有兴趣的童鞋也可好好阅读下。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac下的RSS阅读器]]></title>
