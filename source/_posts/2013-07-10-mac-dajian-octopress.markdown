@@ -22,12 +22,14 @@ mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见[Mac
 
 用sudo su，像这样：
 
+```
 	shawntekiMacBook-Pro:~ shawnli$ su
 	Password:
 	su: Sorry
 	shawntekiMacBook-Pro:~ shawnli$ sudo su
 	Password:
 	sh-3.2#
+```
 	
 ###2. bundle update不成功。
 ####如果遇到的是bundle，command not found
