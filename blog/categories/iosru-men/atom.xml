@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS入门 | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/iosru-men/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-08-04T20:01:08+08:00</updated>
+  <updated>2013-08-04T20:02:01+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,142 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[学习iOS的手势gestures]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/08/04/ios-gestures/"/>
+    <updated>2013-08-04T17:36:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/08/04/ios-gestures</id>
+    <content type="html"><![CDATA[<h3>iOS手势简介</h3>
+
+<p>iOS的手势，就是程序识别到你在屏幕上做的一些手势动作，做出反应。常见的手势有</p>
+
+<ul>
+<li>UITapGestureRecognizer</li>
+<li>UISwipeGestureRecognizer</li>
+<li>UIRotationGestureRecognizer</li>
+<li>UIPanGestureRecognizer</li>
+<li>UIPinchGestureRecognizer</li>
+<li>UILongPressGestureRecognizer</li>
+</ul>
+
+
+<p>其中tap还有单击、双击，Swipe还有向上、下、左、右等区分。</p>
+
+<p>识别这些手势，对每种手势做个反应，没啥难度。下面总结了5个步骤，和几个特殊的地方。</p>
+
+<h3>使用过程分5步</h3>
+
+<p>step1: 声明和初始化一个手势识别器</p>
+
+<p>```</p>
+
+<pre><code>UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
+UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
+UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+</code></pre>
+
+<p>```</p>
+
+<p>step2：对手势识别器进行属性设定</p>
+
+<p>```</p>
+
+<pre><code>[doubleTap setNumberOfTapsRequired:2];
+[twoFingerTap setNumberOfTouchesRequired:2];
+[swipeLeft setNumberOfTouchesRequired:1];
+[swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+[swipeRight setNumberOfTouchesRequired:1];
+[swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+</code></pre>
+
+<p>```</p>
+
+<p>step3：把手势识别器加到view中去</p>
+
+<p>```</p>
+
+<pre><code>[self.view addGestureRecognizer:singleTap];
+[self.view addGestureRecognizer:doubleTap];
+[self.view addGestureRecognizer:twoFingerTap];
+[self.view addGestureRecognizer:swipeLeft];
+[self.view addGestureRecognizer:swipeRight];
+[self.view addGestureRecognizer:rotation];
+[self.view addGestureRecognizer:pan];
+[self.view addGestureRecognizer:pinch];
+[self.view addGestureRecognizer:longPress];
+</code></pre>
+
+<p>```</p>
+
+<p>step4：出现冲突时，要设定优先识别顺序</p>
+
+<p>```</p>
+
+<pre><code>[singleTap requireGestureRecognizerToFail:doubleTap];
+[singleTap requireGestureRecognizerToFail:twoFingerTap];
+[pan requireGestureRecognizerToFail:swipeRight];
+[pan requireGestureRecognizerToFail:swipeLeft];
+</code></pre>
+
+<p>```
+step5：去实现处理扑捉到手势之后的动作
+填写各个处理函数，如：</p>
+
+<p>```
+&ndash; (void)handleSingleTap:(UITapGestureRecognizer <em>)gestureRecognizer
+&ndash; (void)handleDoubleTap:(UITapGestureRecognizer </em>)gestureRecognizer
+&ndash; (void)handleTwoFingerTap:(UITapGestureRecognizer <em>)gestureRecognizer
+&ndash; (void)handleSwipe:(UISwipeGestureRecognizer </em>)gestureRecognizer
+&ndash; (void)handleRotation:(UIRotationGestureRecognizer <em>)gestureRecognizer
+&ndash; (void)handlePan:(UIPanGestureRecognizer </em>)gestureRecognizer
+&ndash; (void)handlePinch:(UIPinchGestureRecognizer <em>)gestureRecognizer
+&ndash; (void)handleLongPress:(UILongPressGestureRecognizer </em>)gestureRecognizer</p>
+
+<p>```
+在实现的时候，有几个需要注意的地方：</p>
+
+<h3>注意几个小地方</h3>
+
+<h4>区分单击双击、滑动（Swipe）和拖拽（Pan）</h4>
+
+<p>在识别单击双击时，逻辑上应该只有判断非双击时，才判定为单击，否则永远都只会判断为单击；在识别滑动和拖拽时也是一样，应该先判断是否是swipe，不是则才是拖拽，否则都只会识别拖拽。实现方式见上面Step4，使用requireGestureRecognizerToFail方法。</p>
+
+<h4>向每个方向滑动（Swipe）都是一个独立的手势</h4>
+
+<p>如果你想接受向多个方向的滑动，对每个方向都要声明一个手势，专门代表这个方向的滑动。向左向右就是两个，加上向上向下就是4个。</p>
+
+<p>```
+ UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];</p>
+
+<pre><code>UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+</code></pre>
+
+<p><code>
+然后，你在扑捉到滑动手势之后的处理函数中，去判断</code>UISwipeGestureRecognizer *<code>类型的</code>recognizer.direction```是属于：</p>
+
+<ul>
+<li>UISwipeGestureRecognizerDirectionLeft</li>
+<li>UISwipeGestureRecognizerDirectionUp</li>
+<li>UISwipeGestureRecognizerDirectionDown</li>
+<li>UISwipeGestureRecognizerDirectionRight</li>
+</ul>
+
+
+<p>中的哪个，然后再进一步去处理。</p>
+
+<h3>测试代码</h3>
+
+<p>在下面测试代码中，实现了六个手势的处理。
+<a href="http://bigbelldev.com/codes/testGestures.zip">代码下载</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[学习Apple的编码规范]]></title>

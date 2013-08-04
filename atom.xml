@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-08-04T20:01:08+08:00</updated>
+  <updated>2013-08-04T20:02:01+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,162 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[学习iOS的手势gestures]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/08/04/ios-gestures/"/>
+    <updated>2013-08-04T17:36:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/08/04/ios-gestures</id>
+    <content type="html"><![CDATA[<h3>iOS手势简介</h3>
+
+<p>iOS的手势，就是程序识别到你在屏幕上做的一些手势动作，做出反应。常见的手势有</p>
+
+<ul>
+<li>UITapGestureRecognizer</li>
+<li>UISwipeGestureRecognizer</li>
+<li>UIRotationGestureRecognizer</li>
+<li>UIPanGestureRecognizer</li>
+<li>UIPinchGestureRecognizer</li>
+<li>UILongPressGestureRecognizer</li>
+</ul>
+
+
+<p>其中tap还有单击、双击，Swipe还有向上、下、左、右等区分。</p>
+
+<p>识别这些手势，对每种手势做个反应，没啥难度。下面总结了5个步骤，和几个特殊的地方。</p>
+
+<h3>使用过程分5步</h3>
+
+<p>step1: 声明和初始化一个手势识别器</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+</span><span class='line'>UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+</span><span class='line'>UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
+</span><span class='line'>UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+</span><span class='line'>UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+</span><span class='line'>UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
+</span><span class='line'>UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+</span><span class='line'>UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+</span><span class='line'>UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>step2：对手势识别器进行属性设定</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[doubleTap setNumberOfTapsRequired:2];
+</span><span class='line'>[twoFingerTap setNumberOfTouchesRequired:2];
+</span><span class='line'>[swipeLeft setNumberOfTouchesRequired:1];
+</span><span class='line'>[swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+</span><span class='line'>[swipeRight setNumberOfTouchesRequired:1];
+</span><span class='line'>[swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>step3：把手势识别器加到view中去</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[self.view addGestureRecognizer:singleTap];
+</span><span class='line'>[self.view addGestureRecognizer:doubleTap];
+</span><span class='line'>[self.view addGestureRecognizer:twoFingerTap];
+</span><span class='line'>[self.view addGestureRecognizer:swipeLeft];
+</span><span class='line'>[self.view addGestureRecognizer:swipeRight];
+</span><span class='line'>[self.view addGestureRecognizer:rotation];
+</span><span class='line'>[self.view addGestureRecognizer:pan];
+</span><span class='line'>[self.view addGestureRecognizer:pinch];
+</span><span class='line'>[self.view addGestureRecognizer:longPress];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>step4：出现冲突时，要设定优先识别顺序</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[singleTap requireGestureRecognizerToFail:doubleTap];
+</span><span class='line'>[singleTap requireGestureRecognizerToFail:twoFingerTap];
+</span><span class='line'>[pan requireGestureRecognizerToFail:swipeRight];
+</span><span class='line'>[pan requireGestureRecognizerToFail:swipeLeft];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>step5：去实现处理扑捉到手势之后的动作
+填写各个处理函数，如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer 
+</span><span class='line'>- (void)handleDoubleTap:(UITapGestureRecognizer *)gestureRecognizer 
+</span><span class='line'>- (void)handleTwoFingerTap:(UITapGestureRecognizer *)gestureRecognizer 
+</span><span class='line'>- (void)handleSwipe:(UISwipeGestureRecognizer *)gestureRecognizer 
+</span><span class='line'>- (void)handleRotation:(UIRotationGestureRecognizer *)gestureRecognizer 
+</span><span class='line'>- (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer 
+</span><span class='line'>- (void)handlePinch:(UIPinchGestureRecognizer *)gestureRecognizer 
+</span><span class='line'>- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer 
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在实现的时候，有几个需要注意的地方：</p>
+
+<h3>注意几个小地方</h3>
+
+<h4>区分单击双击、滑动（Swipe）和拖拽（Pan）</h4>
+
+<p>在识别单击双击时，逻辑上应该只有判断非双击时，才判定为单击，否则永远都只会判断为单击；在识别滑动和拖拽时也是一样，应该先判断是否是swipe，不是则才是拖拽，否则都只会识别拖拽。实现方式见上面Step4，使用requireGestureRecognizerToFail方法。</p>
+
+<h4>向每个方向滑动（Swipe）都是一个独立的手势</h4>
+
+<p>如果你想接受向多个方向的滑动，对每个方向都要声明一个手势，专门代表这个方向的滑动。向左向右就是两个，加上向上向下就是4个。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+</span><span class='line'>    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后，你在扑捉到滑动手势之后的处理函数中，去判断<code>UISwipeGestureRecognizer *</code>类型的<code>recognizer.direction</code>是属于：</p>
+
+<ul>
+<li>UISwipeGestureRecognizerDirectionLeft</li>
+<li>UISwipeGestureRecognizerDirectionUp</li>
+<li>UISwipeGestureRecognizerDirectionDown</li>
+<li>UISwipeGestureRecognizerDirectionRight</li>
+</ul>
+
+
+<p>中的哪个，然后再进一步去处理。</p>
+
+<h3>测试代码</h3>
+
+<p>在下面测试代码中，实现了六个手势的处理。
+<a href="http://bigbelldev.com/codes/testGestures.zip">代码下载</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[学习Apple的编码规范]]></title>
