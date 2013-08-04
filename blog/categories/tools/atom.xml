@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tools | 大钟威武]]></title>
+  <link href="http://Seanli2013.github.io/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="http://Seanli2013.github.io/"/>
+  <updated>2013-07-29T16:23:44+08:00</updated>
+  <id>http://Seanli2013.github.io/</id>
+  <author>
+    <name><![CDATA[Xiang LI]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mac下的RSS阅读器]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/26/rss-read-on-mac/"/>
+    <updated>2013-07-26T21:40:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/26/rss-read-on-mac</id>
+    <content type="html"><![CDATA[<p>学一门新技术，需要有多个条件放在一起，才能学好。都需要哪些条件，仁者见仁，淫者见淫……但至少有一条，就是你需要跟前辈们学。</p>
+
+<p>很多前辈有技术博客，及时地阅读他们的著作是个不错的提升自己的方式。此外，很多网站资源也不错，订阅来看很方便。google reader不在了，在mac下，使用什么不花钱的工具阅读RSS呢？</p>
+
+<p>尝试一番后我最后选择了使用免费版的<a href="https://itunes.apple.com/cn/app/fresh-feed-rss-news-notifier/id420896063?l=en&amp;mt=12&amp;ls=1">fresh feed</a>。
+先后尝试过：</p>
+
+<ol>
+<li>此外尝试了mac下的应用RSS Bot，这个也还成，不过预览的时候，不够方便，只能看到标题，之后就得点击链接在网页里看。</li>
+<li>还尝试了Instant RSS Notifier（free版），这个免费版太烂了。</li>
+<li>mail里原来是支持RSS阅读的，和看邮件一样看RSS，多好啊，可现在也不支持了。RSS就这么不受待见么？</li>
+</ol>
+
+
+<p>综合来看还是fresh feed好用些。</p>
+
+<p>P.S. 在尝试过程中，安装了获取RSS feed的Safari插件<a href="http://www.red-sweater.com/blog/2681/subscribe-to-feed-1-0b4">subscribe-to-feed-1-0b4</a>，安装插件后，会出现RSS图标<img src="http://seanli2013.github.io/images/rss.png" alt="RSS" />，点击图标后，会在地址栏得到当前safari页面的feed。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[octopress发表blog文章和管理blog]]></title>
+    <link href="http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog/"/>
+    <updated>2011-07-11T05:59:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog</id>
+    <content type="html"><![CDATA[<h3>发表文章的过程</h3>
+
+<ol>
+<li>本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/”目录下生成一个markdown文件</li>
+<li>编辑这个markdown文件，你可以改名字，也可以改文件的内容</li>
+<li>使用命令rake generate，这时在本地把你添加的新文章做了生成</li>
+<li>使用命令rake preview，这时在浏览器中输入localhost:4000来在本地查看效果</li>
+<li>效果ok，使用命令rake deploy，把本地的部署到github服务端</li>
+<li>过一会儿之后，你的服务端的blog就更新成最新的啦</li>
+</ol>
+
+
+<h3>管理和配置界面</h3>
+
+<p>管理和配置界面，就是修改你本地的若干配置文件，之后rake generate成功后，再deploy，就完成了修改。</p>
+
+<h4>拿增加页面为例</h4>
+
+<p>搭建好的octopress，默认只有blog和achieve两个页面，要增加页面需要两步：</p>
+
+<ol>
+<li>本地建立个新文件夹。位置没关系，命令使用rake new_page[new-page-title]，这个文件夹内应该会包含一个index.markdown的文件，如果没有这个文件，请新建一个</li>
+<li><p>在blog主页的导航栏上还需要新建个页面名称，否则在blog上是看不到你新建的页面的，这需要编辑</p>
+
+<p> <code>
+ source/_includes/custom/navigation.html
+</code></p></li>
+</ol>
+
+
+<p>编辑后的结果类似：<!--more--></p>
+
+<p>```</p>
+
+<pre><code>&lt;ul class="main-navigation"&gt;
+&lt;li&gt;&lt;a href="{{ root_url }}/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="{{ root_url }}/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="{{ root_url }}/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="{{ root_url }}/test"&gt;Test Field&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;   
+</code></pre>
+
+<p>```</p>
+
+<p>实际上就是把blog主页上导航的部分指向你新建的页面所在的文件夹名称。
+部署的方式与发表文章过程一致。</p>
+
+<p>修改页面的方式也可参考<a href="http://icodeit.org/2013/01/add-new-page-to-octopress/">为octopress添加新的页面(page)</a>，在这片文章中对一个典型的octopress博客的source目录布局进行了描述。</p>
+
+<p>再提一下评论，评论多数人说多说好用，多说的设置参考<a href="http://ihavanna.org/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">为 Octopress 添加多说评论系统</a>。</p>
+
+<p>更多的配置管理，可自行进行搜索，网上信息很多。比如这位朋友写的<a href="http://www.yanjiuyanjiu.com/blog/20130402/">配置</a>。</p>
+
+<p><strong>最推荐的应该是先阅读这个octopress的<a href="http://octopress.org">官网</a></strong>，信息量非常大。例如<a href="http://octopress.org/docs/blogging/">Blogging Basics</a>详细儿清晰地介绍了发表文章的过程。</p>
+
+<h3>编辑的文章的工具</h3>
+
+<p>我在用<a href="http://mouapp.com">Mou</a>，markdown语言，挺好使的。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mac下搭建octopress]]></title>
+    <link href="http://Seanli2013.github.io/blog/2011/07/03/mac-dajian-octopress/"/>
+    <updated>2011-07-03T05:59:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2011/07/03/mac-dajian-octopress</id>
+    <content type="html"><![CDATA[<h2>准备工作</h2>
+
+<h3>安装Ruby（1.9.3）</h3>
+
+<p>mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见<a href="http://www.hoowolf.net/2012/03/29/installing-ruby-on-rails-on-mac-os-x-lion/">Mac安装Ruby on Rails</a>，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。</p>
+
+<h3>你的系统还应该装有git，rvm</h3>
+
+<h2>开始搭建</h2>
+
+<p>搭建过程参考<a href="http://ishalou.com/blog/2012/10/15/how-to-use-octopress/">使用Octopress + Github管理blog</a>和<a href="http://www.yangzhiping.com/tech/octopress.html">Ruby开源项目介绍(1)：octopress——像黑客一样写博客</a>，这第二篇有些标题党哈。这两篇都可参考。</p>
+
+<p><strong>注意:</strong>参考这两篇文章前，需要<strong><em>先安装Ruby1.9.3</em></strong>，否则按照他们说的步骤来，你可能遇到很多个步骤无法执行完全成功。</p>
+
+<h2>安装过程中可能遇到的问题</h2>
+
+<!--more-->
+
+
+<h3>1. 如何在mac系统中root权限？</h3>
+
+<p>用sudo su，像这样：</p>
+
+<p>```</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ su
+Password:
+su: Sorry
+shawntekiMacBook-Pro:~ shawnli$ sudo su
+Password:
+sh-3.2#
+</code></pre>
+
+<p>```</p>
+
+<h3>2. bundle update不成功。</h3>
+
+<h4>如果遇到的是bundle，command not found</h4>
+
+<p>这时你需要安装bundle</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+</code></pre>
+
+<p>这时你可能遇到不成功</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+WARNING:  RubyGems 1.2+ index not found for:
+
+
+RubyGems will revert to legacy indexes degrading performance.
+ERROR:  could not find gem bundler locally or in a repository
+</code></pre>
+
+<p>很可能是网络的问题，你可以尝试使用代理或者从公网换成教育网什么的……成功后显示</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+Successfully installed bundler-1.3.5
+1 gem installed
+Installing ri documentation for bundler-1.3.5...
+Installing RDoc documentation for bundler-1.3.5...
+</code></pre>
+
+<p>使用下面命令可以查看bundle安装情况</p>
+
+<pre><code>gem list --local
+</code></pre>
+
+<p>如果bundle update报找不到Gemfile，只要你切换到gemfile那个目录再运行bundle update即可。</p>
+]]></content>
+  </entry>
+  
+</feed>

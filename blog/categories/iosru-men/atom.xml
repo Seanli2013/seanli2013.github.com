@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iOS入门 | 大钟威武]]></title>
+  <link href="http://Seanli2013.github.io/blog/categories/iosru-men/atom.xml" rel="self"/>
+  <link href="http://Seanli2013.github.io/"/>
+  <updated>2013-07-29T16:23:44+08:00</updated>
+  <id>http://Seanli2013.github.io/</id>
+  <author>
+    <name><![CDATA[Xiang LI]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[学习Apple的编码规范]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/29/coding-guidelines-for-cocoa/"/>
+    <updated>2013-07-29T14:19:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/29/coding-guidelines-for-cocoa</id>
+    <content type="html"><![CDATA[<p>编码规范很重要，毕竟你的代码除了你，还有很多人可能需要阅读。遵守一个编码规范，可以使你的代码易于理解和维护。</p>
+
+<p>使用编码规范是个基础技能，采用谁家的编码规范比较好呢？看你给谁工作了。对OC，苹果、google都有自己的一套编码规范，估计其他公司也都有自己成行的编码规范。</p>
+
+<p>google家写过一个被广泛接受的C++编码规范，他家的oc编码规范是结合了苹果家的oc规范和他自家的c++规范。所以对于iOS新手，我觉得先了解一下苹果家的编码规范比较好。</p>
+
+<p>苹果家的编码规范<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html#//apple_ref/doc/uid/10000146-SW1">Coding Guidelines for Cocoa</a>。</p>
+
+<p>简单翻译了下：</p>
+
+<h2>代码名称基础</h2>
+
+<h3>基本原则</h3>
+
+<h4>清晰</h4>
+
+<ol>
+<li>又清晰又简洁是最好的了，但简洁不如清晰重要</li>
+<li>总的讲不要使用单词的简写，除了非常非常常用的简写以外（<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/APIAbbreviations.html#//apple_ref/doc/uid/20001285-BCIHCGAE">Acceptable Abbreviations and Acronyms</a>），尽量使用单词全称，长点儿不要紧</li>
+<li>API的名称不要有歧义，一看你的API就知道是以什么方式做了什么事情，不要让人有疑问</li>
+</ol>
+
+
+<h4>一致性</h4>
+
+<p>做某个事情代码通常都叫这个名字，比如tag、setStringValue，那么你也这么叫。你在不确定怎么起名字的时候，可以参考一些常用的名字：<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingMethods.html#//apple_ref/doc/uid/20001282-1001865">Method Arguments</a></p>
+
+<p><code>
+...action:(SEL)aSelector
+...alignment:(int)mode
+...atIndex:(int)index
+...content:(NSRect)aRect
+...doubleValue:(double)aDouble
+...floatValue:(float)aFloat
+...font:(NSFont *)fontObj
+...frame:(NSRect)frameRect
+...intValue:(int)anInt
+...keyEquivalent:(NSString *)charCode
+...length:(int)numBytes
+...point:(NSPoint)aPoint
+...stringValue:(NSString *)aString
+...tag:(int)anInt
+...target:(id)anObject
+...title:(NSString *)aString
+</code></p>
+
+<h3>前缀</h3>
+
+<p>前缀一般是2到3个大写之母，可以用来给类、协议、函数、常量、typedef结构起名字时用。但不要给方法用，方法存在的命名空间是类定义的。也不要给结构体的字段使用（the fields of a structure）//没明白是啥意思？</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Prefix </th>
+<th align="left"> Cocoa Framework</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">NS  </td>
+<td align="left">   Application Kit</td>
+</tr>
+<tr>
+<td align="left">   NS </td>
+<td align="left"> Foundation</td>
+</tr>
+<tr>
+<td align="left">   AB </td>
+<td align="left"> Address Book</td>
+</tr>
+<tr>
+<td align="left">IB </td>
+<td align="left"> Interface Builder</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- more -->
+
+
+<h3>字体排版规范</h3>
+
+<p>1  多个词在一起时，不要使用标点符号（包括下划线、斜杠等），一般词首字母大写即可。</p>
+
+<ul>
+<li><p>具体到方法名，第一个词首字母小些，后面的词首字母大写，不要用前缀；
+  <code>
+  fileExistsAtPath:isDirectory:
+ </code></p></li>
+<li><p>函数名、常量名使用相关联的类的同样的前缀，后面跟着的词首字母大写。
+  <code>
+  NSRunAlertPanel
+  NSCellDisabled
+ </code></p></li>
+</ul>
+
+
+<p>2  避免使用下划线来命名私有方法名（要是命名一个实例变量名是可以的），这算是Apple的保留写法，如果使用了可能会和已存在的函数重名。</p>
+
+<h3>类和协议名</h3>
+
+<p>类名中应该包含一个名词来说明这个类（或者类的对象）是做什么的。并且这个雷鸣应该有个合适的前缀。例如NSString、NSDate、NSButton、UIApplication等等。</p>
+
+<p>协议应该按照他们的行为命名</p>
+
+<p>1  多数协议是一组方法的集合，并不是专门为了某个类服务的。这类协议的命名要区别于类的命名样子，一般都是加个ing</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">NSLocking </th>
+<th align="left"> Good</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">NSLock </td>
+<td align="left"> Poor (seems like a name for a class)</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>2  还有一些协议是把一些没啥关系的方法放在一起，这种协议一般是协助一个类。这种情况下，这种协议可以和类名一样。例子就是NSObject。</p>
+
+<h3>头文件</h3>
+
+<p>1  定义一个独立的类或协议，这时类名和h文件名一样</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Header file </th>
+<th align="left"> Declares</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">NSLocale.h </td>
+<td align="left"> The NSLocale class.</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>2  定义关联的一些类或协议，一般使用最初最基本的那个类的名字</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Header file </th>
+<th align="left"> Declares</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">NSString.h </td>
+<td align="left"> NSString and NSMutableString classes.</td>
+</tr>
+<tr>
+<td align="left">NSLock.h </td>
+<td align="left"> NSLocking protocol and NSLock, NSConditionLock, and NSRecursiveLock classes.</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>3  包含Framework的头文件，使用framework的名字+.h，包含这个framework的公共头文件。</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Header file </th>
+<th align="left"> Framework</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Foundation.h </td>
+<td align="left"> Foundation.framework.</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>4  给另外一个framwork中的类增加API时，应该延用原始类的名字。例如NSBundleAdditions.h header file of the Application Kit</p>
+
+<p>5  相关联的函数和数据类型在一起时，使用一个最贴切的名字做头文件。例如NSGraphics.h (Application Kit)，包含了相关的函数、常量、结构体、数据类型等。</p>
+
+<p>以上是基础的明明规则，在苹果家的代码规范中，接下来分别介绍了方法命名、函数命名、属性和数据类型命名。新手都应该好好阅读下。</p>
+
+<p>最后还专门为framework开发者提供了一些Tips和Techniques。有兴趣的童鞋也可好好阅读下。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[学习iOS的delegation的实现]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/26/ios-delegation-and-protocol/"/>
+    <updated>2013-07-26T14:11:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/26/ios-delegation-and-protocol</id>
+    <content type="html"><![CDATA[<h2>什么是delegation</h2>
+
+<p>delegation<em>[ˌdelɪ'ɡeɪʃn]</em>，中文叫委托，是两个类之间传递信息的一种方式。也是一种设计模式。</p>
+
+<p>其作用和实现过程可以这么理解：</p>
+
+<p>A类：A正在工作中发现，有的工作自己做不方便，需要委托别人帮忙做。A要制定个协议，委托的人要遵守这个协议，按照协议中的方法把工作给做了。A的属性有遵守这个协议的delegate，A知道这个delegate会帮助完成协议中的工作。</p>
+
+<p>B类：B会受A委托，B类需要接受这个协议，把协议中的必须执行的方法给执行了。B有个属性是A的对象，在B类中把A的对象的delegate设置成B。</p>
+
+<p>这里提到的协议，即protocol，不熟的孩纸可以仔细阅读<a href="http://www.cocoachina.com/newbie/basic/2010/0917/2106.html">协议（Protocol）的用法和代码例子</a></p>
+
+<h2>什么时候使用delegation</h2>
+
+<p>类之间传递信息可以有多种机制，除了delegation还有notification、observer等方式。一般两个类之间有点儿关系（比如view和subview，view和controller之间，使用delegate）的时候，经常使用delegation；两个模块之间没有啥关系，可能使用notification会更好。有兴趣的孩纸推荐阅读一下<a href="http://blog.shinetech.com/2011/06/14/delegation-notification-and-observation/">When to use Delegation, Notification, or Observation in iOS</a>。</p>
+
+<p>在我们使用控件如textField、textView等时，都会碰到他们的delegation，这是非常好的delegation的例子，要好好去理解delegation的功效。</p>
+
+<h2>delegation实践</h2>
+
+<h3>模拟场景</h3>
+
+<p>张老师在外地开会，她会发短信告诉学生代表什么时候让学生们放假，学生代表承诺老师会准确传达。张老师发了短信给学生代表，说7月26日周五大家放假。</p>
+
+<h3>设计</h3>
+
+<p>张老师是委托人，学生代表是受委托人，她和学生代表定的协议中的方法：由学生代表告诉学生们什么时候放假。
+张老师发短信给学生代表这个时候会触发他们之间协议的方法。</p>
+
+<h3>测试代码</h3>
+
+<p>测试代码中有老师和学生代表两个类，输出的结果见NSLog。<a href="http://seanli2013.github.io/codes/textDelegationAndProtocol.zip">代码下载</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[学习iOS的单例模式实现]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/25/singleton/"/>
+    <updated>2013-07-25T20:42:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/25/singleton</id>
+    <content type="html"><![CDATA[<h2>为什么学习iOS的单例模式实现</h2>
+
+<p>从设计模式开始说起。<a href="http://baike.baidu.com/view/66964.htm">设计模式（Design pattern）</a>是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。</p>
+
+<p>单例模式是设计模式中的一种，并且比较简单，在iOS开发中会常用到，所以新手可以先学习使用单例模式。</p>
+
+<p>新手想了解更多设计模式，可以先了解一下<a href="http://blog.csdn.net/zhengzhb/article/details/7187278">类之间的关系</a>，然后看看<a href="http://blog.csdn.net/zhengzhb/article/details/7278174">设计模式一般遵循的6个原则</a>，之后可以了解下<a href="http://blog.csdn.net/zhengzhb/article/details/7331369">23个设计模式</a>。这里23个设计模式，作者是针对java讲的，但对ios程序设计也一样非常有意义。设计模式本身就是最佳实践的一些总结，新手不必一口气把每个设计模式的奥义都搞清楚，只要了解有这种设计模式，在实践中逐步研究和理解，会更有效率。</p>
+
+<p>对于iOS常用的设计模式，<strong>推荐阅读</strong><a href="http://beyondvincent.com">破船之家</a>写的<a href="http://beyondvincent.com/2013/05/05/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%AF%9F%E8%80%85/">三篇iOS设计模式</a>文章，此外，可以参考<a href="http://marshal.easymorse.com/archives/3296">iOS的一些基本设计模式</a>。</p>
+
+<h2>什么是单例模式</h2>
+
+<p>单例模式，英文名叫Singleton。规定这个类只能同时存在一个实例，这个实例可以全局调用。</p>
+
+<h3>什么情况下使用</h3>
+
+<p>有个事你只想让一个人去做，这个人把这个事儿做怎么样，你又希望大家都知道，这种时候可以使用单例模式。这个模式可以用来做一些比较“专注”的任务，同时方便的把资源共享出来。</p>
+
+<h3>什么情况下不使用</h3>
+
+<p>有人说当这个单例类非常频繁会扩展时，单例模式不适用<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
+
+<p>还有违反了单一职责的设计原则，使代码之间耦合度变强，无法进行有效的单元测试<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。
+所以使用的时候要避免这些情况，尽量让单例不存在过于复杂的依赖性和继承，保证其松耦合等<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>。</p>
+
+<h2>单例模式实现</h2>
+
+<p>在<a href="http://beyondvincent.com">破船之家</a>的<a href="http://beyondvincent.com/2013/05/09/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">iOS设计模式(02):单例模式</a>文章中写得很清楚，分为使用ARC情况和非ARC情况。我尝试了其中ARC+GCD的方法，it works fine。</p>
+
+<h3>测试代码</h3>
+
+<p>在下面测试代码中，实现了2个viewController都从单例类实例中拿数据，第1个viewController的按钮更改了单例类实例的内容，在第2个viewController中可以看到更改。
+<a href="http://seanli2013.github.io/codes/testSingleton.zip">代码下载</a></p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><a href="http://www.nowamagic.net/librarys/veda/detail/1776">使用单例模式需要注意的几个问题</a>——这篇文章我看得一头雾水，应该怎么理解？<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p><a href="http://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons">What is so bad about Singletons?</a>，这个问题的被采纳答案<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p><a href="http://gracelancy.com/?p=386">Singletons in Cocoa, are they evil?</a>推荐大家看这个，这个里面援引了stackflow中有人提到的单例的4个缺点。<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[学习使用code实现iOS界面]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/07/25/ios-gui-implementation-discuss/"/>
+    <updated>2013-07-25T19:08:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/07/25/ios-gui-implementation-discuss</id>
+    <content type="html"><![CDATA[<h2>为什么要学习使用code实现iOS界面？</h2>
+
+<h3>iOS界面三种实现方式</h3>
+
+<p>code、IB、Storyboard这三种方式都可以实现iOS界面，哪种实现方式合适呢？众说纷纭，合理的答案是依情况而定——嘿，废话。作为iOS的初学者，该如何选择呢？</p>
+
+<h4>发展趋势</h4>
+
+<p>最早时候，大家都用code，后来出现了IB（interface builder），再后来出现了Storyboard。现在的初学者们，上来接触的就是Storyboard，因为苹果现在的官网教材也好、stanford有名的CS193P课程（2013年叫做Coding Together: Developing Apps for iPhone and iPad, 可以在iTunesU中免费下载）都在推Storyboard。</p>
+
+<h4>优缺点<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></h4>
+
+<p>简单对比一下，更多优缺点比较，请搜搜看<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> 方法 </th>
+<th> 优点 </th>
+<th> 缺点 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>code </td>
+<td> 可以对界面掌控得非常精确；代码容易管理和追踪，很干净，控件属性等有修改可以非常容易看到  </td>
+<td> 代码量大，略显麻烦；接手项目的新人不容易看清楚模块之间的关系 </td>
+</tr>
+<tr>
+<td></td>
+<td>ib </td>
+<td> 较容易地把界面设计出来  </td>
+<td> 界面在ib中体现一部分，在code中体现一部分，阅读和维护起来有难度 </td>
+</tr>
+<tr>
+<td></td>
+<td>Storyboard </td>
+<td> 较为清晰的体现各模块之间的关系；较容易把界面设计出来 </td>
+<td> 也会借助code来实现一些界面；多人协作开发时，不好管理 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>可见，使用code实现界面是最基础的方式，ib和storyboard是希望减少工作量。学习使用code开发界面有助于新手理解其中的原理。</p>
+
+<h4>新手要熟练使用code，也会Storyboard</h4>
+
+<p>真正干活的时候，大家可能会哪个用得熟就用哪个了。对于我们新手，有精力的话，三种方式都要精通。如果没有那么多精力，至少要熟练使用code实现，同时也要会使用Storyboard。因为Storyboard在快速实现demo时，或小项目你自己开发时，效率是非常高的，可以节约你大量时间。并且从发展角度看，Storyboard会做得越来越完善。</p>
+
+<h2>如何用code设置控件</h2>
+
+<p>推荐这篇文章：<a href="http://www.cocoachina.com/bbs/read.php?tid=131516">IOS开发之纯代码界面&mdash;基本控件使用篇</a>，学习的时候，从第一课开始，一节一节仔细阅读。全是干货，非常容易的你就学会了。</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p><a href="http://blog.devtang.com/blog/2012/12/15/do-not-use-storyboard/">Storyboard看上去很美</a>.在这篇文章中，作者根据切身实践对优缺点进行了评述，值得借鉴<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>可以参考搜索结果:<a href="http://www.zhihu.com/question/20256649">iOS开发过程中，你更喜欢用Storyboard/xib做界面，还是直接用代码来写界面？</a>; <a href="http://www.zhihu.com/question/19670944">iPhone开发中，代码写界面和IB设计界面哪个更方便？</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>
