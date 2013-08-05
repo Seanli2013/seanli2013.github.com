@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS入门 | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/iosru-men/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-08-05T01:32:57+08:00</updated>
+  <updated>2013-08-05T10:32:34+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -38,9 +38,8 @@
 
 <h3>使用过程分5步</h3>
 
-<p>step1: 声明和初始化一个手势识别器</p>
-
-<p>```</p>
+<p>step1: 声明和初始化一个手势识别器
+{% codeblock lang:objc %}</p>
 
 <pre><code>UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
 UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
@@ -53,11 +52,10 @@ UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarg
 UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
 </code></pre>
 
-<p>```</p>
+<p>{% endcodeblock %}
+step2：对手势识别器进行属性设定</p>
 
-<p>step2：对手势识别器进行属性设定</p>
-
-<p>```</p>
+<p>{% codeblock lang:objc %}</p>
 
 <pre><code>[doubleTap setNumberOfTapsRequired:2];
 [twoFingerTap setNumberOfTouchesRequired:2];
@@ -67,11 +65,11 @@ UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] 
 [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
 </code></pre>
 
-<p>```</p>
+<p>{% endcodeblock %}</p>
 
 <p>step3：把手势识别器加到view中去</p>
 
-<p>```</p>
+<p>{% codeblock lang:objc %}</p>
 
 <pre><code>[self.view addGestureRecognizer:singleTap];
 [self.view addGestureRecognizer:doubleTap];
@@ -84,11 +82,11 @@ UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] 
 [self.view addGestureRecognizer:longPress];
 </code></pre>
 
-<p>```</p>
+<p>{% endcodeblock %}</p>
 
 <p>step4：出现冲突时，要设定优先识别顺序</p>
 
-<p>```</p>
+<p>{% codeblock lang:objc %}</p>
 
 <pre><code>[singleTap requireGestureRecognizerToFail:doubleTap];
 [singleTap requireGestureRecognizerToFail:twoFingerTap];
@@ -96,11 +94,11 @@ UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] 
 [pan requireGestureRecognizerToFail:swipeLeft];
 </code></pre>
 
-<p>```
+<p>{% endcodeblock %}
 step5：去实现处理扑捉到手势之后的动作
 填写各个处理函数，如：</p>
 
-<p>```
+<p>{% codeblock lang:objc %}
 &ndash; (void)handleSingleTap:(UITapGestureRecognizer <em>)gestureRecognizer
 &ndash; (void)handleDoubleTap:(UITapGestureRecognizer </em>)gestureRecognizer
 &ndash; (void)handleTwoFingerTap:(UITapGestureRecognizer <em>)gestureRecognizer
@@ -110,7 +108,7 @@ step5：去实现处理扑捉到手势之后的动作
 &ndash; (void)handlePinch:(UIPinchGestureRecognizer <em>)gestureRecognizer
 &ndash; (void)handleLongPress:(UILongPressGestureRecognizer </em>)gestureRecognizer</p>
 
-<p>```
+<p>{% endcodeblock %}
 在实现的时候，有几个需要注意的地方：</p>
 
 <h3>注意几个小地方</h3>
@@ -123,14 +121,15 @@ step5：去实现处理扑捉到手势之后的动作
 
 <p>如果你想接受向多个方向的滑动，对每个方向都要声明一个手势，专门代表这个方向的滑动。向左向右就是两个，加上向上向下就是4个。</p>
 
-<p>```
+<p>{% codeblock lang:objc %}
  UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];</p>
 
 <pre><code>UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
 </code></pre>
 
-<p><code>
-然后，你在扑捉到滑动手势之后的处理函数中，去判断</code>UISwipeGestureRecognizer *<code>类型的</code>recognizer.direction```是属于：</p>
+<p>{% endcodeblock %}</p>
+
+<p>然后，你在扑捉到滑动手势之后的处理函数中，去判断<code>UISwipeGestureRecognizer *</code>类型的<code>recognizer.direction</code>是属于：</p>
 
 <ul>
 <li>UISwipeGestureRecognizerDirectionLeft</li>

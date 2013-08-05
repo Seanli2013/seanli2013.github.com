@@ -134,7 +134,7 @@ UIPanGestureRecognizer &hellip;">
 
 <p>step1: 声明和初始化一个手势识别器</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -143,36 +143,38 @@ UIPanGestureRecognizer &hellip;">
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-</span><span class='line'>UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-</span><span class='line'>UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
-</span><span class='line'>UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-</span><span class='line'>UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-</span><span class='line'>UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
-</span><span class='line'>UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-</span><span class='line'>UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
-</span><span class='line'>UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="n">singleTap</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UITapGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleSingleTap:</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="n">doubleTap</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UITapGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleDoubleTap:</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="n">twoFingerTap</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UITapGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleTwoFingerTap:</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">UISwipeGestureRecognizer</span> <span class="o">*</span><span class="n">swipeLeft</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UISwipeGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleSwipe:</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">UISwipeGestureRecognizer</span> <span class="o">*</span><span class="n">swipeRight</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UISwipeGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleSwipe:</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">UIRotationGestureRecognizer</span> <span class="o">*</span><span class="n">rotation</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIRotationGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleRotation:</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">UIPanGestureRecognizer</span> <span class="o">*</span><span class="n">pan</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIPanGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handlePan:</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">UIPinchGestureRecognizer</span> <span class="o">*</span><span class="n">pinch</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIPinchGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handlePinch:</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">UILongPressGestureRecognizer</span> <span class="o">*</span><span class="n">longPress</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UILongPressGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleLongPress:</span><span class="p">)];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>step2：对手势识别器进行属性设定</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[doubleTap setNumberOfTapsRequired:2];
-</span><span class='line'>[twoFingerTap setNumberOfTouchesRequired:2];
-</span><span class='line'>[swipeLeft setNumberOfTouchesRequired:1];
-</span><span class='line'>[swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-</span><span class='line'>[swipeRight setNumberOfTouchesRequired:1];
-</span><span class='line'>[swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="p">[</span><span class="n">doubleTap</span> <span class="nl">setNumberOfTapsRequired:</span><span class="mi">2</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">twoFingerTap</span> <span class="nl">setNumberOfTouchesRequired:</span><span class="mi">2</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">swipeLeft</span> <span class="nl">setNumberOfTouchesRequired:</span><span class="mi">1</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">swipeLeft</span> <span class="nl">setDirection:</span><span class="n">UISwipeGestureRecognizerDirectionLeft</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">swipeRight</span> <span class="nl">setNumberOfTouchesRequired:</span><span class="mi">1</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">swipeRight</span> <span class="nl">setDirection:</span><span class="n">UISwipeGestureRecognizerDirectionRight</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>step3：把手势识别器加到view中去</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -181,33 +183,35 @@ UIPanGestureRecognizer &hellip;">
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[self.view addGestureRecognizer:singleTap];
-</span><span class='line'>[self.view addGestureRecognizer:doubleTap];
-</span><span class='line'>[self.view addGestureRecognizer:twoFingerTap];
-</span><span class='line'>[self.view addGestureRecognizer:swipeLeft];
-</span><span class='line'>[self.view addGestureRecognizer:swipeRight];
-</span><span class='line'>[self.view addGestureRecognizer:rotation];
-</span><span class='line'>[self.view addGestureRecognizer:pan];
-</span><span class='line'>[self.view addGestureRecognizer:pinch];
-</span><span class='line'>[self.view addGestureRecognizer:longPress];</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">singleTap</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">doubleTap</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">twoFingerTap</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">swipeLeft</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">swipeRight</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">rotation</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">pan</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">pinch</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">longPress</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>step4：出现冲突时，要设定优先识别顺序</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[singleTap requireGestureRecognizerToFail:doubleTap];
-</span><span class='line'>[singleTap requireGestureRecognizerToFail:twoFingerTap];
-</span><span class='line'>[pan requireGestureRecognizerToFail:swipeRight];
-</span><span class='line'>[pan requireGestureRecognizerToFail:swipeLeft];</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="p">[</span><span class="n">singleTap</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">doubleTap</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">singleTap</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">twoFingerTap</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">pan</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">swipeRight</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">pan</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">swipeLeft</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>step5：去实现处理扑捉到手势之后的动作
 填写各个处理函数，如：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -215,14 +219,14 @@ UIPanGestureRecognizer &hellip;">
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>- (void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer 
-</span><span class='line'>- (void)handleDoubleTap:(UITapGestureRecognizer *)gestureRecognizer 
-</span><span class='line'>- (void)handleTwoFingerTap:(UITapGestureRecognizer *)gestureRecognizer 
-</span><span class='line'>- (void)handleSwipe:(UISwipeGestureRecognizer *)gestureRecognizer 
-</span><span class='line'>- (void)handleRotation:(UIRotationGestureRecognizer *)gestureRecognizer 
-</span><span class='line'>- (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer 
-</span><span class='line'>- (void)handlePinch:(UIPinchGestureRecognizer *)gestureRecognizer 
-</span><span class='line'>- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer 
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleSingleTap:</span><span class="p">(</span><span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleDoubleTap:</span><span class="p">(</span><span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleTwoFingerTap:</span><span class="p">(</span><span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleSwipe:</span><span class="p">(</span><span class="n">UISwipeGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleRotation:</span><span class="p">(</span><span class="n">UIRotationGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handlePan:</span><span class="p">(</span><span class="n">UIPanGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handlePinch:</span><span class="p">(</span><span class="n">UIPinchGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleLongPress:</span><span class="p">(</span><span class="n">UILongPressGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -238,10 +242,11 @@ UIPanGestureRecognizer &hellip;">
 
 <p>如果你想接受向多个方向的滑动，对每个方向都要声明一个手势，专门代表这个方向的滑动。向左向右就是两个，加上向上向下就是4个。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'> UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-</span><span class='line'>    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="n">UISwipeGestureRecognizer</span> <span class="o">*</span><span class="n">swipeLeft</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UISwipeGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleSwipe:</span><span class="p">)];</span>
+</span><span class='line'>    <span class="n">UISwipeGestureRecognizer</span> <span class="o">*</span><span class="n">swipeRight</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UISwipeGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleSwipe:</span><span class="p">)];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>然后，你在扑捉到滑动手势之后的处理函数中，去判断<code>UISwipeGestureRecognizer *</code>类型的<code>recognizer.direction</code>是属于：</p>
