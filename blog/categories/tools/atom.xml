@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tools | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-08-05T10:32:34+08:00</updated>
+  <updated>2013-08-05T12:09:59+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -43,7 +43,13 @@
     <link href="http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog/"/>
     <updated>2011-07-11T05:59:00+08:00</updated>
     <id>http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog</id>
-    <content type="html"><![CDATA[<h3>发表文章的过程</h3>
+    <content type="html"><![CDATA[<h2>octopress的官方文档</h2>
+
+<h5>octopress的官方文档写得非常清晰和简洁，你需要的，基本他都教给你了。虽然中文的大家写的octopress的使用博文非常非常多，但还是建议你先阅读一遍octopress的官方文档，你可以从全貌上了解octopress都能做哪些。</h5>
+
+<p><a href="http://octopress.org/docs/">Octopress Documentation</a></p>
+
+<h3>发表文章的过程</h3>
 
 <ol>
 <li>本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/”目录下生成一个markdown文件</li>
