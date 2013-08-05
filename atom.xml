@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-08-05T22:48:10+08:00</updated>
+  <updated>2013-08-05T23:00:07+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -65,6 +65,9 @@
 在代码的实现过程中，对view的层次有了更深的体会。此外，在给label供数的时候，发现刚好使用代理的方式，算是也对代理做了联系。</p>
 
 <h3>编码过程中遇到七七八八问题的记录</h3>
+
+<!---more--->
+
 
 <h4>Code Sign error:</h4>
 
@@ -244,9 +247,17 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h3>测试代码</h3>
+
+<p>在下面测试代码中，实现了六个手势的处理。
+<a href="http://bigbelldev.com/codes/testGestures.zip">代码下载</a></p>
+
 <p>在实现的时候，有几个需要注意的地方：</p>
 
 <h3>注意几个小地方</h3>
+
+<!---more--->
+
 
 <h4>区分单击双击、滑动（Swipe）和拖拽（Pan）</h4>
 
@@ -274,11 +285,6 @@
 
 
 <p>中的哪个，然后再进一步去处理。</p>
-
-<h3>测试代码</h3>
-
-<p>在下面测试代码中，实现了六个手势的处理。
-<a href="http://bigbelldev.com/codes/testGestures.zip">代码下载</a></p>
 ]]></content>
   </entry>
   
