@@ -165,63 +165,12 @@
 
 <h3>编码过程中遇到七七八八问题的记录</h3>
 
-<!---more--->
-
-
-<h4>Code Sign error:</h4>
-
-<p>着手时，借鉴了<a href="http://code4app.com/ios/Gravity-View/4fb086d96803fa1b5e000000">这个代码</a>，在编译时遇到了这个问题：</p>
-
-<pre><code>Code Sign error: The identity 'iPhone Developer: Haomian Wang (33P29785DD)' doesn't match any valid certificate/private key pair in the default keychain
-</code></pre>
-
-<p><strong>原因：</strong></p>
-
-<p>CodeSigning签署的不是你的provisioning，没法在真机上使用。</p>
-
-<p><strong>解决办法：</strong></p>
-
-<p>在TARGETS中的Build Settings里，找Code Signing Identity，里面把不是自己的developer改成自己的provisioning。</p>
-
-<p><img src="http://bigbelldev.com/images/codeSignErr.png"></p>
-
-<p><strong>注：</strong></p>
-
-<p>借鉴的这份代码是使用acceleroImeter:didAccelerate方法来处理扑捉到的加速度信息，但这个方法已经在iOS5废弃了，现在都使用CoreMotion框架来实现。</p>
-
-<h4>未添加CoreMotion.framework</h4>
-
-<p>编译自己代码时，首先出现了如下错误：</p>
-
-<p><img src="http://bigbelldev.com/images/frameworkErr.png"></p>
-
-<p><strong>原因：</strong></p>
-
-<p>很简单，是代码中使用了CoreMotion，但工程中没有添加CoreMotion.framework。这很常见：在使用CoreLocation等framework时，也要想着在工程中添加framework。</p>
-
-<p><strong>解决办法：</strong>
-在下图处添加CoreMotion.framework</p>
-
-<p><img src="http://bigbelldev.com/images/addFramework.png"></p>
-
-<h4>给工程改名字导致编译不过</h4>
-
-<p><strong>原因：</strong></p>
-
-<p>都很简单了，都是名字、路径更改导致的找不到文件。</p>
-
-<p><strong>解决办法：</strong></p>
-
-<p>改名字注意三点：</p>
-
-<ol>
-<li>修改了Project的名字后，Xcode会提示你一些其他地方也需要修改，你就按着提示修改；</li>
-<li>也修改本地文件夹的名字后，注意xcode工程中的文件列表文件名是否会变为红色，如果是红色，需要你再想办法重新加一下路径；</li>
-<li>工程中的BuildSettings，这里最好搜一下你原来的名字，进行更改。我遇到的编译不过都是这里的路径还保留着原来的名字，未作更改。</li>
-</ol>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/05/ios-accelerometer/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -387,37 +336,12 @@
 
 <h3>注意几个小地方</h3>
 
-<!---more--->
-
-
-<h4>区分单击双击、滑动（Swipe）和拖拽（Pan）</h4>
-
-<p>在识别单击双击时，逻辑上应该只有判断非双击时，才判定为单击，否则永远都只会判断为单击；在识别滑动和拖拽时也是一样，应该先判断是否是swipe，不是则才是拖拽，否则都只会识别拖拽。实现方式见上面Step4，使用requireGestureRecognizerToFail方法。</p>
-
-<h4>向每个方向滑动（Swipe）都是一个独立的手势</h4>
-
-<p>如果你想接受向多个方向的滑动，对每个方向都要声明一个手势，专门代表这个方向的滑动。向左向右就是两个，加上向上向下就是4个。</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="n">UISwipeGestureRecognizer</span> <span class="o">*</span><span class="n">swipeLeft</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UISwipeGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleSwipe:</span><span class="p">)];</span>
-</span><span class='line'>    <span class="n">UISwipeGestureRecognizer</span> <span class="o">*</span><span class="n">swipeRight</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UISwipeGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleSwipe:</span><span class="p">)];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后，你在扑捉到滑动手势之后的处理函数中，去判断<code>UISwipeGestureRecognizer *</code>类型的<code>recognizer.direction</code>是属于：</p>
-
-<ul>
-<li>UISwipeGestureRecognizerDirectionLeft</li>
-<li>UISwipeGestureRecognizerDirectionUp</li>
-<li>UISwipeGestureRecognizerDirectionDown</li>
-<li>UISwipeGestureRecognizerDirectionRight</li>
-</ul>
-
-
-<p>中的哪个，然后再进一步去处理。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/04/ios-gestures/">Read on &rarr;</a>
+    </footer>
   
 
 
