@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-08-05T12:09:58+08:00</updated>
+  <updated>2013-08-05T22:48:10+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,114 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[学习iOS传感器的使用]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/08/05/ios-accelerometer/"/>
+    <updated>2013-08-05T18:17:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/08/05/ios-accelerometer</id>
+    <content type="html"><![CDATA[<h3>iOS涉及到的传感器</h3>
+
+<p>不用查资料，用过iPhone的同学都知道。iphone中有加速度传感器，可以感知手机在哪个方向上有加速度，比如屏幕的翻转、飞行控制游戏等都是利用这个特征做的；有指南针（貌似叫陀螺仪？），可以知道你的方向；还有定位装置，可以知道你现在的位置在哪里。</p>
+
+<p>加速度传感器相关功能是由CoreMotion提供；指南针、定位信息相关功能由CoreLocation提供。</p>
+
+<h3>CoreMotion</h3>
+
+<p>在CoreMotion.framework中，有下面这些类：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CMAccelerometerData
+</span><span class='line'>CMAttitude
+</span><span class='line'>CMDeviceMotion
+</span><span class='line'>CMGyroData
+</span><span class='line'>CMLogItem
+</span><span class='line'>CMMagnetometerData
+</span><span class='line'>CMMotionManager</span></code></pre></td></tr></table></div></figure>
+
+
+<p>每个是做什么的，可以在官方文档中阅读，就不在这翻译了。其中实现对设备加速度的识别，主要是使用CMMotionManager。</p>
+
+<h3>CMMotionManager</h3>
+
+<p>如何使用CMMotionManager？</p>
+
+<p>Step1：产生一个CMMotionManager的实例mManager。</p>
+
+<p>Step2：实例使用方法isAccelerometerAvailable判断加速度传感器是否可用。</p>
+
+<p>Step3：如果可用，则通过方法setAccelerometerUpdateInterval设定采样频率。</p>
+
+<p>Step4：最后使用startAccelerometerUpdatesToQueue:withHandler开始采样及对采样进行处理。</p>
+
+<h3>测试代码</h3>
+
+<p>实现一个小球在一个框中运动，运动的轨迹是根据手机的倾斜角度计算，运动的方向同倾斜的角度一致，并且倾斜角度越大运动速度越快。
+<a href="http://bigbelldev.com/codes/testGravity.zip">代码下载</a>
+在代码的实现过程中，对view的层次有了更深的体会。此外，在给label供数的时候，发现刚好使用代理的方式，算是也对代理做了联系。</p>
+
+<h3>编码过程中遇到七七八八问题的记录</h3>
+
+<h4>Code Sign error:</h4>
+
+<p>着手时，借鉴了<a href="http://code4app.com/ios/Gravity-View/4fb086d96803fa1b5e000000">这个代码</a>，在编译时遇到了这个问题：</p>
+
+<pre><code>Code Sign error: The identity 'iPhone Developer: Haomian Wang (33P29785DD)' doesn't match any valid certificate/private key pair in the default keychain
+</code></pre>
+
+<p><strong>原因：</strong></p>
+
+<p>CodeSigning签署的不是你的provisioning，没法在真机上使用。</p>
+
+<p><strong>解决办法：</strong></p>
+
+<p>在TARGETS中的Build Settings里，找Code Signing Identity，里面把不是自己的developer改成自己的provisioning。</p>
+
+<p><img src="http://bigbelldev.com/images/codeSignErr.png"></p>
+
+<p><strong>注：</strong></p>
+
+<p>借鉴的这份代码是使用acceleroImeter:didAccelerate方法来处理扑捉到的加速度信息，但这个方法已经在iOS5废弃了，现在都使用CoreMotion框架来实现。</p>
+
+<h4>未添加CoreMotion.framework</h4>
+
+<p>编译自己代码时，首先出现了如下错误：</p>
+
+<p><img src="http://bigbelldev.com/images/frameworkErr.png"></p>
+
+<p><strong>原因：</strong></p>
+
+<p>很简单，是代码中使用了CoreMotion，但工程中没有添加CoreMotion.framework。这很常见：在使用CoreLocation等framework时，也要想着在工程中添加framework。</p>
+
+<p><strong>解决办法：</strong>
+在下图处添加CoreMotion.framework</p>
+
+<p><img src="http://bigbelldev.com/images/addFramework.png"></p>
+
+<h4>给工程改名字导致编译不过</h4>
+
+<p><strong>原因：</strong></p>
+
+<p>都很简单了，都是名字、路径更改导致的找不到文件。</p>
+
+<p><strong>解决办法：</strong></p>
+
+<p>改名字注意三点：</p>
+
+<ol>
+<li>修改了Project的名字后，Xcode会提示你一些其他地方也需要修改，你就按着提示修改；</li>
+<li>也修改本地文件夹的名字后，注意xcode工程中的文件列表文件名是否会变为红色，如果是红色，需要你再想办法重新加一下路径；</li>
+<li>工程中的BuildSettings，这里最好搜一下你原来的名字，进行更改。我遇到的编译不过都是这里的路径还保留着原来的名字，未作更改。</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[学习iOS的手势gestures]]></title>

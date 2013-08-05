@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>学习使用code实现iOS界面 - 大钟威武</title>
+  <title>学习iOS传感器的使用 - 大钟威武</title>
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="为什么要学习使用code实现iOS界面？ iOS界面三种实现方式 code、IB、Storyboard这三种方式都可以实现iOS界面，哪种实现方式合适呢？众说纷纭，合理的答案是依情况而定——嘿，废话。作为iOS的初学者，该如何选择呢？ 发展趋势 最早时候，大家都用code，后来出现了IB（ &hellip;">
+  <meta name="description" content="iOS涉及到的传感器 不用查资料，用过iPhone的同学都知道。iphone中有加速度传感器，可以感知手机在哪个方向上有加速度，比如屏幕的翻转、飞行控制游戏等都是利用这个特征做的；有指南针（貌似叫陀螺仪？），可以知道你的方向；还有定位装置，可以知道你现在的位置在哪里。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Seanli2013.github.io/blog/2013/07/25/ios-gui-implementation-discuss">
+  <link rel="canonical" href="http://Seanli2013.github.io/blog/2013/08/05/ios-accelerometer">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="大钟威武" type="application/atom+xml">
@@ -86,7 +86,7 @@
   
   <header>
     
-      <h1 class="entry-title">学习使用code实现iOS界面</h1>
+      <h1 class="entry-title">学习iOS传感器的使用</h1>
     
     
       <p class="meta">
@@ -102,7 +102,7 @@
   
 
 
-<time datetime="2013-07-25T19:08:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
+<time datetime="2013-08-05T18:17:00+08:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time>
         
       
 
@@ -114,70 +114,105 @@
   </header>
 
 
-<div class="entry-content"><h2>为什么要学习使用code实现iOS界面？</h2>
+<div class="entry-content"><h3>iOS涉及到的传感器</h3>
 
-<h3>iOS界面三种实现方式</h3>
+<p>不用查资料，用过iPhone的同学都知道。iphone中有加速度传感器，可以感知手机在哪个方向上有加速度，比如屏幕的翻转、飞行控制游戏等都是利用这个特征做的；有指南针（貌似叫陀螺仪？），可以知道你的方向；还有定位装置，可以知道你现在的位置在哪里。</p>
 
-<p>code、IB、Storyboard这三种方式都可以实现iOS界面，哪种实现方式合适呢？众说纷纭，合理的答案是依情况而定——嘿，废话。作为iOS的初学者，该如何选择呢？</p>
+<p>加速度传感器相关功能是由CoreMotion提供；指南针、定位信息相关功能由CoreLocation提供。</p>
 
-<h4>发展趋势</h4>
+<h3>CoreMotion</h3>
 
-<p>最早时候，大家都用code，后来出现了IB（interface builder），再后来出现了Storyboard。现在的初学者们，上来接触的就是Storyboard，因为苹果现在的官网教材也好、stanford有名的CS193P课程（2013年叫做Coding Together: Developing Apps for iPhone and iPad, 可以在iTunesU中免费下载）都在推Storyboard。</p>
+<p>在CoreMotion.framework中，有下面这些类：</p>
 
-<h4>优缺点<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></h4>
-
-<p>简单对比一下，更多优缺点比较，请搜搜看<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th> 方法 </th>
-<th> 优点 </th>
-<th> 缺点 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td>code </td>
-<td> 可以对界面掌控得非常精确；代码容易管理和追踪，很干净，控件属性等有修改可以非常容易看到  </td>
-<td> 代码量大，略显麻烦；接手项目的新人不容易看清楚模块之间的关系 </td>
-</tr>
-<tr>
-<td></td>
-<td>ib </td>
-<td> 较容易地把界面设计出来  </td>
-<td> 界面在ib中体现一部分，在code中体现一部分，阅读和维护起来有难度 </td>
-</tr>
-<tr>
-<td></td>
-<td>Storyboard </td>
-<td> 较为清晰的体现各模块之间的关系；较容易把界面设计出来 </td>
-<td> 也会借助code来实现一些界面；多人协作开发时，不好管理 </td>
-</tr>
-</tbody>
-</table>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CMAccelerometerData
+</span><span class='line'>CMAttitude
+</span><span class='line'>CMDeviceMotion
+</span><span class='line'>CMGyroData
+</span><span class='line'>CMLogItem
+</span><span class='line'>CMMagnetometerData
+</span><span class='line'>CMMotionManager</span></code></pre></td></tr></table></div></figure>
 
 
-<p>可见，使用code实现界面是最基础的方式，ib和storyboard是希望减少工作量。学习使用code开发界面有助于新手理解其中的原理。</p>
+<p>每个是做什么的，可以在官方文档中阅读，就不在这翻译了。其中实现对设备加速度的识别，主要是使用CMMotionManager。</p>
 
-<h4>新手要熟练使用code，也会Storyboard</h4>
+<h3>CMMotionManager</h3>
 
-<p>真正干活的时候，大家可能会哪个用得熟就用哪个了。对于我们新手，有精力的话，三种方式都要精通。如果没有那么多精力，至少要熟练使用code实现，同时也要会使用Storyboard。因为Storyboard在快速实现demo时，或小项目你自己开发时，效率是非常高的，可以节约你大量时间。并且从发展角度看，Storyboard会做得越来越完善。</p>
+<p>如何使用CMMotionManager？</p>
 
-<h2>如何用code设置控件</h2>
+<p>Step1：产生一个CMMotionManager的实例mManager。</p>
 
-<p>推荐这篇文章：<a href="http://www.cocoachina.com/bbs/read.php?tid=131516">IOS开发之纯代码界面&mdash;基本控件使用篇</a>，学习的时候，从第一课开始，一节一节仔细阅读。全是干货，非常容易的你就学会了。</p>
-<div class="footnotes">
-<hr/>
+<p>Step2：实例使用方法isAccelerometerAvailable判断加速度传感器是否可用。</p>
+
+<p>Step3：如果可用，则通过方法setAccelerometerUpdateInterval设定采样频率。</p>
+
+<p>Step4：最后使用startAccelerometerUpdatesToQueue:withHandler开始采样及对采样进行处理。</p>
+
+<h3>测试代码</h3>
+
+<p>实现一个小球在一个框中运动，运动的轨迹是根据手机的倾斜角度计算，运动的方向同倾斜的角度一致，并且倾斜角度越大运动速度越快。
+<a href="http://bigbelldev.com/codes/testGravity.zip">代码下载</a>
+在代码的实现过程中，对view的层次有了更深的体会。此外，在给label供数的时候，发现刚好使用代理的方式，算是也对代理做了联系。</p>
+
+<h3>编码过程中遇到七七八八问题的记录</h3>
+
+<h4>Code Sign error:</h4>
+
+<p>着手时，借鉴了<a href="http://code4app.com/ios/Gravity-View/4fb086d96803fa1b5e000000">这个代码</a>，在编译时遇到了这个问题：</p>
+
+<pre><code>Code Sign error: The identity 'iPhone Developer: Haomian Wang (33P29785DD)' doesn't match any valid certificate/private key pair in the default keychain
+</code></pre>
+
+<p><strong>原因：</strong></p>
+
+<p>CodeSigning签署的不是你的provisioning，没法在真机上使用。</p>
+
+<p><strong>解决办法：</strong></p>
+
+<p>在TARGETS中的Build Settings里，找Code Signing Identity，里面把不是自己的developer改成自己的provisioning。</p>
+
+<p><img src="http://bigbelldev.com/images/codeSignErr.png"></p>
+
+<p><strong>注：</strong></p>
+
+<p>借鉴的这份代码是使用acceleroImeter:didAccelerate方法来处理扑捉到的加速度信息，但这个方法已经在iOS5废弃了，现在都使用CoreMotion框架来实现。</p>
+
+<h4>未添加CoreMotion.framework</h4>
+
+<p>编译自己代码时，首先出现了如下错误：</p>
+
+<p><img src="http://bigbelldev.com/images/frameworkErr.png"></p>
+
+<p><strong>原因：</strong></p>
+
+<p>很简单，是代码中使用了CoreMotion，但工程中没有添加CoreMotion.framework。这很常见：在使用CoreLocation等framework时，也要想着在工程中添加framework。</p>
+
+<p><strong>解决办法：</strong>
+在下图处添加CoreMotion.framework</p>
+
+<p><img src="http://bigbelldev.com/images/addFramework.png"></p>
+
+<h4>给工程改名字导致编译不过</h4>
+
+<p><strong>原因：</strong></p>
+
+<p>都很简单了，都是名字、路径更改导致的找不到文件。</p>
+
+<p><strong>解决办法：</strong></p>
+
+<p>改名字注意三点：</p>
+
 <ol>
-<li id="fn:1">
-<p><a href="http://blog.devtang.com/blog/2012/12/15/do-not-use-storyboard/">Storyboard看上去很美</a>.在这篇文章中，作者根据切身实践对优缺点进行了评述，值得借鉴<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>可以参考搜索结果:<a href="http://www.zhihu.com/question/20256649">iOS开发过程中，你更喜欢用Storyboard/xib做界面，还是直接用代码来写界面？</a>; <a href="http://www.zhihu.com/question/19670944">iPhone开发中，代码写界面和IB设计界面哪个更方便？</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li>修改了Project的名字后，Xcode会提示你一些其他地方也需要修改，你就按着提示修改；</li>
+<li>也修改本地文件夹的名字后，注意xcode工程中的文件列表文件名是否会变为红色，如果是红色，需要你再想办法重新加一下路径；</li>
+<li>工程中的BuildSettings，这里最好搜一下你原来的名字，进行更改。我遇到的编译不过都是这里的路径还保留着原来的名字，未作更改。</li>
 </ol>
-</div>
 
 </div>
 
@@ -201,7 +236,7 @@
   
 
 
-<time datetime="2013-07-25T19:08:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
+<time datetime="2013-08-05T18:17:00+08:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time>
       
 
 <span class="categories">
@@ -215,7 +250,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2013/07/25/ios-gui-implementation-discuss/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2013/07/25/ios-gui-implementation-discuss/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2013/08/05/ios-accelerometer/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2013/08/05/ios-accelerometer/" >Tweet</a>
   
   
   
@@ -224,10 +259,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/07/11/octopress-create-and-manage-blog/" title="Previous Post: octopress发表blog文章和管理blog">&laquo; octopress发表blog文章和管理blog</a>
+        <a class="basic-alignment left" href="/blog/2013/08/04/ios-gestures/" title="Previous Post: 学习iOS的手势gestures">&laquo; 学习iOS的手势gestures</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/25/singleton/" title="Next Post: 学习iOS的单例模式实现">学习iOS的单例模式实现 &raquo;</a>
       
     </p>
   </footer>
