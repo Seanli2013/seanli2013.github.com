@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 产品支持 | 大钟威武]]></title>
+  <link href="http://Seanli2013.github.io/blog/categories/chan-pin-zhi-chi/atom.xml" rel="self"/>
+  <link href="http://Seanli2013.github.io/"/>
+  <updated>2013-09-18T14:17:08+08:00</updated>
+  <id>http://Seanli2013.github.io/</id>
+  <author>
+    <name><![CDATA[Xiang LI]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[mReminder版本路线]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/09/18/product-support-mreminder/"/>
+    <updated>2013-09-18T14:13:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/09/18/product-support-mreminder</id>
+    <content type="html"><![CDATA[<p>目前最新版本是V1.0</p>
+]]></content>
+  </entry>
+  
+</feed>
