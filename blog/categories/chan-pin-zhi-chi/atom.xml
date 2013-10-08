@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 产品支持 | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/chan-pin-zhi-chi/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-10-03T16:43:19+08:00</updated>
+  <updated>2013-10-08T23:51:52+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[药提醒你]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/10/08/product-support-sreminder-main-page/"/>
+    <updated>2013-10-08T23:50:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/10/08/product-support-sreminder-main-page</id>
+    <content type="html"><![CDATA[<p>药提醒你：关心自己的健康，也关心对你重要的人的健康。提醒自己也别忘了提醒他们：按时按量遵医嘱用药。</p>
+
+<p>药提醒你的主要特点：</p>
+
+<ul>
+<li><p> 设置多种时间重复周期的提醒
+      例如每2天1次、每2周1次、每天3次等</p></li>
+<li><p> 可方便快捷地通知你所关心的人
+      例如短信、电话通知ta。短信内容可预先编写好。</p></li>
+<li><p> 浏览近期提醒
+      当用药周期不是每天时，用药人有时想知道是否明天该用药，或者近期什么时候该用药。在近期提醒列表中可一目了然。</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[“药提醒你”V1.0反馈]]></title>
