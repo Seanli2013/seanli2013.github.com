@@ -9,8 +9,7 @@
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="我的这个博客的副标题叫从白痴到大师的点滴积累，不知道有多少小伙伴和我是一样的想法？ 我们刚生下来时，都是白痴，懵懂地看着这个世界。随着一步步地成长，你有了一点一滴的积累，逐渐地，你在某些方面不再是白痴，甚至你成为了那方面的大师。
-我们在接触一门新技术的时候，刚开始都是白痴，然后你开始成长， &hellip;">
+  <meta name="description" content="在UITableView中针对某个Cell的操作 要针对某个UITableView中的Cell做些操作，比如对这个Cell的内容进行查看详细、编辑、删除、或者触发其他功能比如发短信、打电话等，删除、和点击这个Cell在UITableView的Delegate方法中提供， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +84,158 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/">UITableViewCell在iOS7之后superview的问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-12T22:36:00+08:00" pubdate data-updated="true">Oct 12<span>th</span>, 2013</time>
+        
+      
+
+          | <a href="/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/#comments">Comments</a>
+         
+
+	</p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>在UITableView中针对某个Cell的操作</h3>
+
+<p>要针对某个UITableView中的Cell做些操作，比如对这个Cell的内容进行查看详细、编辑、删除、或者触发其他功能比如发短信、打电话等，删除、和点击这个Cell在UITableView的Delegate方法中提供，其他的操作就需要识别Cell上的控件（比如Button）对应的action是针对这个Cell的。</p>
+
+<p>一种常用的方式是使用view的层次，在action中找到这个Cell。在</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</span></code></pre></td></tr></table></div></figure>
+
+
+<p>方法中，把这个Cell的Button加入到Cell的contentView的subView，并且为这个button添加Target。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// Button 操作
+</span><span class='line'>[cell.contentView addSubview:cell.button];
+</span><span class='line'>[cell.button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];        </span></code></pre></td></tr></table></div></figure>
+
+
+<p>之后在对应的</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>- (void)buttonAction:(id)sender</span></code></pre></td></tr></table></div></figure>
+
+
+<p>action中，去找到对应的Cell，通过view的层次：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// iOS7 之前
+</span><span class='line'>- (void)editRemindAction:(id)sender
+</span><span class='line'>{
+</span><span class='line'>    UIButton *button = (UIButton *)sender;
+</span><span class='line'>    UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];
+</span><span class='line'>    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+</span><span class='line'>  // 继续其他的处理
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>iOS7之后出的问题</h3>
+
+<p>在iOS7之后，这样的办法会报错，错误在通过</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。
+原因是在iOS7中，在 UITableViewCell 和 UITableViewCellContentView之间，还有一个UITableViewCellScrollView，这样两次superview往上“爬”，是爬不到UITableViewCell的。</p>
+
+<h3>解决方式</h3>
+
+<p>直观地看，就是向上爬三次superview就行了。为了更好地处理这个问题，应该建立一个UIView的Category（因为这里使用的view的层次是UIView的方法），写个方法来区分不同情况来得到Cell：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@implementation UIView (GetCellFromContentviewSubview)
+</span><span class='line'>- (UITableViewCell *)getCellFromContentviewSubview
+</span><span class='line'>{
+</span><span class='line'>    if ([[[self superview] superview] isKindOfClass:[UITableViewCell class]]) {
+</span><span class='line'>        return (UITableViewCell *)[[self superview] superview];
+</span><span class='line'>    }
+</span><span class='line'>    else if ([[[[self superview] superview] superview] isKindOfClass:[UITableViewCell class]]) {
+</span><span class='line'>        return (UITableViewCell *)[[[self superview] superview] superview];
+</span><span class='line'>    }
+</span><span class='line'>    else{
+</span><span class='line'>         NSLog(@"Something Panic Happens");
+</span><span class='line'>    }
+</span><span class='line'>    return nil;
+</span><span class='line'>}
+</span><span class='line'>@end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之后，把</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>替换成</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UITableViewCell *cell = (UITableViewCell *)[button getCellFromContentviewSubview];</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就可以了。</p>
+
+<h3>讨论</h3>
+
+<p>另外一种办法给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
+
+<p>但我所提供的这个办法，在stackflow上有1人给vote up，还有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -949,67 +1100,9 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/03/mac-dajian-octopress/">Mac下搭建octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-03T05:59:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2011</time>
-        
-      
-
-          | <a href="/blog/2011/07/03/mac-dajian-octopress/#comments">Comments</a>
-         
-
-	</p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>准备工作</h2>
-
-<h3>安装Ruby（1.9.3）</h3>
-
-<p>mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见<a href="http://www.hoowolf.net/2012/03/29/installing-ruby-on-rails-on-mac-os-x-lion/">Mac安装Ruby on Rails</a>，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。</p>
-
-<h3>你的系统还应该装有git，rvm</h3>
-
-<h2>开始搭建</h2>
-
-<p>搭建过程参考<a href="http://ishalou.com/blog/2012/10/15/how-to-use-octopress/">使用Octopress + Github管理blog</a>和<a href="http://www.yangzhiping.com/tech/octopress.html">Ruby开源项目介绍(1)：octopress——像黑客一样写博客</a>，这第二篇有些标题党哈。这两篇都可参考。</p>
-
-<p><strong>注意:</strong>参考这两篇文章前，需要<strong><em>先安装Ruby1.9.3</em></strong>，否则按照他们说的步骤来，你可能遇到很多个步骤无法执行完全成功。</p>
-
-<h2>安装过程中可能遇到的问题</h2>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/07/03/mac-dajian-octopress/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -1019,11 +1112,15 @@
   
     <section>
   <h1>分类列表</h1>
-    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (6)</a></li><li><a href='/blog/categories/tools/'>Tools (3)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (7)</a></li><li><a href='/blog/categories/tools/'>Tools (3)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
 </section>
 <section>
   <h1>最新文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/">UITableViewCell在iOS7之后superview的问题</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/10/08/product-support-sreminder-main-page/">药提醒你</a>
@@ -1059,10 +1156,6 @@
     
       <li class="post">
         <a href="/blog/2013/07/26/ios-delegation-and-protocol/">学习iOS的delegation的实现</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/25/singleton/">学习iOS的单例模式实现</a>
       </li>
     
   </ul>

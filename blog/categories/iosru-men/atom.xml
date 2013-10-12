@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS入门 | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/iosru-men/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-10-09T21:36:52+08:00</updated>
+  <updated>2013-10-12T23:46:42+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[UITableViewCell在iOS7之后superview的问题]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/"/>
+    <updated>2013-10-12T22:36:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk</id>
+    <content type="html"><![CDATA[<h3>在UITableView中针对某个Cell的操作</h3>
+
+<p>要针对某个UITableView中的Cell做些操作，比如对这个Cell的内容进行查看详细、编辑、删除、或者触发其他功能比如发短信、打电话等，删除、和点击这个Cell在UITableView的Delegate方法中提供，其他的操作就需要识别Cell上的控件（比如Button）对应的action是针对这个Cell的。</p>
+
+<p>一种常用的方式是使用view的层次，在action中找到这个Cell。在</p>
+
+<p><code>
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+</code>
+方法中，把这个Cell的Button加入到Cell的contentView的subView，并且为这个button添加Target。</p>
+
+<p><code>
+// Button 操作
+[cell.contentView addSubview:cell.button];
+[cell.button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];        
+</code>
+之后在对应的
+<code>
+- (void)buttonAction:(id)sender
+</code>
+action中，去找到对应的Cell，通过view的层次：</p>
+
+<p>```
+// iOS7 之前
+&ndash; (void)editRemindAction:(id)sender
+{</p>
+
+<pre><code>UIButton *button = (UIButton *)sender;
+UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];
+NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+// 继续其他的处理
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>iOS7之后出的问题</h3>
+
+<p>在iOS7之后，这样的办法会报错，错误在通过
+<code>
+UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];
+</code>
+的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。
+原因是在iOS7中，在 UITableViewCell 和 UITableViewCellContentView之间，还有一个UITableViewCellScrollView，这样两次superview往上“爬”，是爬不到UITableViewCell的。</p>
+
+<h3>解决方式</h3>
+
+<p>直观地看，就是向上爬三次superview就行了。为了更好地处理这个问题，应该建立一个UIView的Category（因为这里使用的view的层次是UIView的方法），写个方法来区分不同情况来得到Cell：</p>
+
+<p>```
+@implementation UIView (GetCellFromContentviewSubview)
+&ndash; (UITableViewCell *)getCellFromContentviewSubview
+{</p>
+
+<pre><code>if ([[[self superview] superview] isKindOfClass:[UITableViewCell class]]) {
+    return (UITableViewCell *)[[self superview] superview];
+}
+else if ([[[[self superview] superview] superview] isKindOfClass:[UITableViewCell class]]) {
+    return (UITableViewCell *)[[[self superview] superview] superview];
+}
+else{
+     NSLog(@"Something Panic Happens");
+}
+return nil;
+</code></pre>
+
+<p>}
+@end
+```</p>
+
+<p>之后，把
+<code>
+UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];
+</code></p>
+
+<p>替换成
+<code>
+UITableViewCell *cell = (UITableViewCell *)[button getCellFromContentviewSubview];
+</code></p>
+
+<p>就可以了。</p>
+
+<h3>讨论</h3>
+
+<p>另外一种办法给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
+
+<p>但我所提供的这个办法，在stackflow上有1人给vote up，还有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[学习iOS传感器的使用]]></title>
@@ -562,59 +657,6 @@ step5：去实现处理扑捉到手势之后的动作
 <h3>测试代码</h3>
 
 <p>测试代码中有老师和学生代表两个类，输出的结果见NSLog。<a href="http://seanli2013.github.io/codes/textDelegationAndProtocol.zip">代码下载</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[学习iOS的单例模式实现]]></title>
-    <link href="http://Seanli2013.github.io/blog/2013/07/25/singleton/"/>
-    <updated>2013-07-25T20:42:00+08:00</updated>
-    <id>http://Seanli2013.github.io/blog/2013/07/25/singleton</id>
-    <content type="html"><![CDATA[<h2>为什么学习iOS的单例模式实现</h2>
-
-<p>从设计模式开始说起。<a href="http://baike.baidu.com/view/66964.htm">设计模式（Design pattern）</a>是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。</p>
-
-<p>单例模式是设计模式中的一种，并且比较简单，在iOS开发中会常用到，所以新手可以先学习使用单例模式。</p>
-
-<p>新手想了解更多设计模式，可以先了解一下<a href="http://blog.csdn.net/zhengzhb/article/details/7187278">类之间的关系</a>，然后看看<a href="http://blog.csdn.net/zhengzhb/article/details/7278174">设计模式一般遵循的6个原则</a>，之后可以了解下<a href="http://blog.csdn.net/zhengzhb/article/details/7331369">23个设计模式</a>。这里23个设计模式，作者是针对java讲的，但对ios程序设计也一样非常有意义。设计模式本身就是最佳实践的一些总结，新手不必一口气把每个设计模式的奥义都搞清楚，只要了解有这种设计模式，在实践中逐步研究和理解，会更有效率。</p>
-
-<p>对于iOS常用的设计模式，<strong>推荐阅读</strong><a href="http://beyondvincent.com">破船之家</a>写的<a href="http://beyondvincent.com/2013/05/05/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%AF%9F%E8%80%85/">三篇iOS设计模式</a>文章，此外，可以参考<a href="http://marshal.easymorse.com/archives/3296">iOS的一些基本设计模式</a>。</p>
-
-<h2>什么是单例模式</h2>
-
-<p>单例模式，英文名叫Singleton。规定这个类只能同时存在一个实例，这个实例可以全局调用。</p>
-
-<h3>什么情况下使用</h3>
-
-<p>有个事你只想让一个人去做，这个人把这个事儿做怎么样，你又希望大家都知道，这种时候可以使用单例模式。这个模式可以用来做一些比较“专注”的任务，同时方便的把资源共享出来。</p>
-
-<h3>什么情况下不使用</h3>
-
-<p>有人说当这个单例类非常频繁会扩展时，单例模式不适用<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。</p>
-
-<p>还有违反了单一职责的设计原则，使代码之间耦合度变强，无法进行有效的单元测试<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。
-所以使用的时候要避免这些情况，尽量让单例不存在过于复杂的依赖性和继承，保证其松耦合等<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>。</p>
-
-<h2>单例模式实现</h2>
-
-<p>在<a href="http://beyondvincent.com">破船之家</a>的<a href="http://beyondvincent.com/2013/05/09/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">iOS设计模式(02):单例模式</a>文章中写得很清楚，分为使用ARC情况和非ARC情况。我尝试了其中ARC+GCD的方法，it works fine。</p>
-
-<h3>测试代码</h3>
-
-<p>在下面测试代码中，实现了2个viewController都从单例类实例中拿数据，第1个viewController的按钮更改了单例类实例的内容，在第2个viewController中可以看到更改。
-<a href="http://seanli2013.github.io/codes/testSingleton.zip">代码下载</a></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p><a href="http://www.nowamagic.net/librarys/veda/detail/1776">使用单例模式需要注意的几个问题</a>——这篇文章我看得一头雾水，应该怎么理解？<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p><a href="http://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons">What is so bad about Singletons?</a>，这个问题的被采纳答案<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p><a href="http://gracelancy.com/?p=386">Singletons in Cocoa, are they evil?</a>推荐大家看这个，这个里面援引了stackflow中有人提到的单例的4个缺点。<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   
