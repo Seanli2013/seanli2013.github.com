@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-10-12T23:46:42+08:00</updated>
+  <updated>2013-10-13T00:13:19+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -44,7 +44,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>- (void)buttonAction:(id)sender</span></code></pre></td></tr></table></div></figure>
 
 
-<p>action中，去找到对应的Cell，通过view的层次：</p>
+<p>action中，通过view的层次，去找到对应的Cell：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -72,12 +72,13 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];</span></code></pre></td></tr></table></div></figure>
 
 
-<p>的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。
-原因是在iOS7中，在 UITableViewCell 和 UITableViewCellContentView之间，还有一个UITableViewCellScrollView，这样两次superview往上“爬”，是爬不到UITableViewCell的。</p>
+<p>的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。</p>
+
+<p>原因是在iOS7中，在 UITableViewCell 和 UITableViewCell的ContentView之间，还有一个UITableViewCellScrollView，所以通过两次superview往上“爬”，是爬不到UITableViewCell的。</p>
 
 <h3>解决方式</h3>
 
-<p>直观地看，就是向上爬三次superview就行了。为了更好地处理这个问题，应该建立一个UIView的Category（因为这里使用的view的层次是UIView的方法），写个方法来区分不同情况来得到Cell：</p>
+<p>直观地看，就是向上爬三次superview就行了。为了更好地处理这个问题，应该建立一个UIView的Category（因为这里使用的view的层次superview是UIView的方法），写个Category方法来区分不同情况来得到Cell：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -127,7 +128,7 @@
 
 <h3>讨论</h3>
 
-<p>另外一种办法给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
+<p>另外一种办法是给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
 
 <p>但我所提供的这个办法，在stackflow上有1人给vote up，还有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
 ]]></content>
