@@ -119,7 +119,7 @@
 
 <p>要针对某个UITableView中的Cell做些操作，比如对这个Cell的内容进行查看详细、编辑、删除、或者触发其他功能比如发短信、打电话等，删除、和点击这个Cell在UITableView的Delegate方法中提供，其他的操作就需要识别Cell上的控件（比如Button）对应的action是针对这个Cell的。</p>
 
-<p>一种常用的方式是使用view的层次，在action中找到这个Cell。在</p>
+<p>一种常用的方式是使用view的层次，在action中找到这个Cell：在</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</span></code></pre></td></tr></table></div></figure>
@@ -155,7 +155,7 @@
 </span><span class='line'>- (void)editRemindAction:(id)sender
 </span><span class='line'>{
 </span><span class='line'>    UIButton *button = (UIButton *)sender;
-</span><span class='line'>    UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];
+</span><span class='line'>    UITableViewCell *cell = (UITableViewCell *)[[button superview] superview];
 </span><span class='line'>    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
 </span><span class='line'>  // 继续其他的处理
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
@@ -212,7 +212,7 @@
 <p>之后，把</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UITableViewCell *cell = (UITableViewCell *)[[button superview] superview];</span></code></pre></td></tr></table></div></figure>
 
 
 <p>替换成</p>
@@ -227,7 +227,7 @@
 
 <p>另外一种办法是给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
 
-<p>但我所提供的这个办法，在stackflow上有1人给vote up，还有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
+<p>但我所提供的这个办法，在stackflow上有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
 </div>
 
 
