@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-10-19T12:12:53+08:00</updated>
+  <updated>2013-10-19T12:31:12+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -139,7 +139,13 @@
     <link href="http://Seanli2013.github.io/blog/2013/10/08/product-support-sreminder-main-page/"/>
     <updated>2013-10-08T23:50:00+08:00</updated>
     <id>http://Seanli2013.github.io/blog/2013/10/08/product-support-sreminder-main-page</id>
-    <content type="html"><![CDATA[<p>药提醒你：关心自己的健康，也关心对你重要的人的健康。提醒自己也别忘了提醒他们：按时按量遵医嘱用药。</p>
+    <content type="html"><![CDATA[<p><a href="http://bigbelldev.com/images/products/Reminder/icon1024.png"><img src="http://bigbelldev.com/images/products/Reminder/icon.png" alt="药提醒你" /></a></p>
+
+<p><a href="https://itunes.apple.com/us/app/yao-ti-xing-ni/id722613216?ls=1&amp;mt=8">去app store下载 药提醒你</a></p>
+
+<hr />
+
+<p>药提醒你：关心自己的健康，也关心对你重要的人的健康。提醒自己也别忘了提醒他们：按时按量遵医嘱用药。</p>
 
 <h4>药提醒你的主要特点：</h4>
 
@@ -175,6 +181,8 @@
 <li>更多：支持微信等其他方式通知他人、是否有什么健康策略等</li>
 </ol>
 
+
+<hr />
 
 <p><a href="http://bigbelldev.com/blog/2013/09/18/product-support-mreminder">讨论：“药提醒你”接下来需要什么功能？</a></p></a>
 <a href="http://bigbelldev.com/blog/2013/10/03/product-support-reminder-feedback-1-dot-0">反馈：“药提醒你” V1.0</a></p>
