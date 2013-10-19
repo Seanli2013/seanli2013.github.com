@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-10-19T12:10:44+08:00</updated>
+  <updated>2013-10-19T12:12:53+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -141,7 +141,7 @@
     <id>http://Seanli2013.github.io/blog/2013/10/08/product-support-sreminder-main-page</id>
     <content type="html"><![CDATA[<p>药提醒你：关心自己的健康，也关心对你重要的人的健康。提醒自己也别忘了提醒他们：按时按量遵医嘱用药。</p>
 
-<h5>药提醒你的主要特点：</h5>
+<h4>药提醒你的主要特点：</h4>
 
 <ul>
 <li> 设置多种时间重复周期的提醒
@@ -166,7 +166,7 @@
 </ul>
 
 
-<h5>接下来升级的功能可能包括</h5>
+<h4>接下来升级的功能可能包括</h4>
 
 <ol>
 <li>数据更新：用药历史、用药效果统计等信息展现给用户、icloud支持</li>
