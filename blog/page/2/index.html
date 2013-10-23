@@ -9,7 +9,7 @@
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="准备工作 安装Ruby（1.9.3） mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见Mac安装Ruby on Rails，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。 你的系统还应该装有git，rvm 开始搭建 &hellip;">
+  <meta name="description" content="octopress的官方文档 octopress的官方文档写得非常清晰和简洁，你需要的，基本他都教给你了。虽然中文的大家写的octopress的使用博文非常非常多，但还是建议你先阅读一遍octopress的官方文档，你可以从全貌上了解octopress都能做哪些。 Octopress &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,86 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2011/07/11/octopress-create-and-manage-blog/">Octopress发表blog文章和管理blog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-11T05:59:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2011</time>
+        
+      
+
+          | <a href="/blog/2011/07/11/octopress-create-and-manage-blog/#comments">Comments</a>
+         
+
+	</p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>octopress的官方文档</h2>
+
+<h5>octopress的官方文档写得非常清晰和简洁，你需要的，基本他都教给你了。虽然中文的大家写的octopress的使用博文非常非常多，但还是建议你先阅读一遍octopress的官方文档，你可以从全貌上了解octopress都能做哪些。</h5>
+
+<p><a href="http://octopress.org/docs/">Octopress Documentation</a></p>
+
+<h3>发表文章的过程</h3>
+
+<ol>
+<li>本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/”目录下生成一个markdown文件</li>
+<li>编辑这个markdown文件，你可以改名字，也可以改文件的内容</li>
+<li>使用命令rake generate，这时在本地把你添加的新文章做了生成</li>
+<li>使用命令rake preview，这时在浏览器中输入localhost:4000来在本地查看效果</li>
+<li>效果ok，使用命令rake deploy，把本地的部署到github服务端</li>
+<li>过一会儿之后，你的服务端的blog就更新成最新的啦</li>
+</ol>
+
+
+<h3>管理和配置界面</h3>
+
+<p>管理和配置界面，就是修改你本地的若干配置文件，之后rake generate成功后，再deploy，就完成了修改。</p>
+
+<h4>拿增加页面为例</h4>
+
+<p>搭建好的octopress，默认只有blog和achieve两个页面，要增加页面需要两步：</p>
+
+<ol>
+<li>本地建立个新文件夹。位置没关系，命令使用rake new_page[new-page-title]，这个文件夹内应该会包含一个index.markdown的文件，如果没有这个文件，请新建一个</li>
+<li><p>在blog主页的导航栏上还需要新建个页面名称，否则在blog上是看不到你新建的页面的，这需要编辑</p>
+
+<p> <code>
+ source/_includes/custom/navigation.html
+</code></p></li>
+</ol>
+
+
+<p>编辑后的结果类似：</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/07/11/octopress-create-and-manage-blog/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2011/07/03/mac-dajian-octopress/">Mac下搭建octopress</a></h1>
     
     
@@ -157,11 +237,15 @@
   
     <section>
   <h1>分类列表</h1>
-    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (7)</a></li><li><a href='/blog/categories/tools/'>Tools (3)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (8)</a></li><li><a href='/blog/categories/tools/'>Tools (3)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
 </section>
 <section>
   <h1>最新文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/23/ios7-auto-layout/">iOS7 Autolayout入门</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/">UITableViewCell在iOS7之后superview的问题</a>
@@ -197,10 +281,6 @@
     
       <li class="post">
         <a href="/blog/2013/07/26/rss-read-on-mac/">Mac下的RSS阅读器</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/26/ios-delegation-and-protocol/">学习iOS的delegation的实现</a>
       </li>
     
   </ul>
