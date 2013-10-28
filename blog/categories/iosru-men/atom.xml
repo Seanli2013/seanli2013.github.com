@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS入门 | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/iosru-men/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-10-28T21:51:33+08:00</updated>
+  <updated>2013-10-29T00:28:48+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -124,6 +124,9 @@
 
 <h1>使用方式</h1>
 
+<!-- more -->
+
+
 <p>这里只介绍Storyboard/Xib使用方式，如果想了解code实现，还要继续阅读其他资料。</p>
 
 <h3>设计及实现方法：</h3>
@@ -214,43 +217,61 @@
 
 <p>一种常用的方式是使用view的层次，在action中找到这个Cell：在</p>
 
-<p><code>
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-</code>
-方法中，把这个Cell的Button加入到Cell的contentView的subView，并且为这个button添加Target。</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nl">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">tableView</span> <span class="nl">cellForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="n">indexPath</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p><code>
-// Button 操作
-[cell.contentView addSubview:cell.button];
-[cell.button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];        
-</code>
-之后在对应的
-<code>
-- (void)buttonAction:(id)sender
-</code>
-action中，通过view的层次，去找到对应的Cell：</p>
+<p>方法中，把这个Cell的Button加入到Cell的contentView的subView，并且为这个button添加Target。</p>
 
-<p>```
-// iOS7 之前
-&ndash; (void)editRemindAction:(id)sender
-{</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// Button 操作</span>
+</span><span class='line'><span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">contentView</span> <span class="nl">addSubview:</span><span class="n">cell</span><span class="p">.</span><span class="n">button</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">button</span> <span class="nl">addTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">buttonAction:</span><span class="p">)</span> <span class="nl">forControlEvents:</span><span class="n">UIControlEventTouchUpInside</span><span class="p">];</span>      <span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<pre><code>UIButton *button = (UIButton *)sender;
-UITableViewCell *cell = (UITableViewCell *)[[button superview] superview];
-NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-// 继续其他的处理
-</code></pre>
+<p>之后在对应的</p>
 
-<p>}
-```</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">buttonAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>action中，通过view的层次，去找到对应的Cell：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// iOS7 之前</span>
+</span><span class='line'><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">editRemindAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">UIButton</span> <span class="o">*</span><span class="n">button</span> <span class="o">=</span> <span class="p">(</span><span class="n">UIButton</span> <span class="o">*</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class='line'><span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="nl">indexPathForCell:</span><span class="n">cell</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// 继续其他的处理</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>iOS7之后出的问题</h3>
 
-<p>在iOS7之后，这样的办法会报错，错误在通过
-<code>
-UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];
-</code>
-的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。</p>
+<p>在iOS7之后，这样的办法会报错，错误在通过</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)[[]</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。</p>
 
 <p>原因是在iOS7中，在 UITableViewCell 和 UITableViewCell的ContentView之间，还有一个UITableViewCellScrollView，所以通过两次superview往上“爬”，是爬不到UITableViewCell的。</p>
 
@@ -258,36 +279,53 @@ UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];
 
 <p>直观地看，就是向上爬三次superview就行了。为了更好地处理这个问题，应该建立一个UIView的Category（因为这里使用的view的层次superview是UIView的方法），写个Category方法来区分不同情况来得到Cell：</p>
 
-<p>```
-@implementation UIView (GetCellFromContentviewSubview)
-&ndash; (UITableViewCell *)getCellFromContentviewSubview
-{</p>
-
-<pre><code>if ([[[self superview] superview] isKindOfClass:[UITableViewCell class]]) {
-    return (UITableViewCell *)[[self superview] superview];
-}
-else if ([[[[self superview] superview] superview] isKindOfClass:[UITableViewCell class]]) {
-    return (UITableViewCell *)[[[self superview] superview] superview];
-}
-else{
-     NSLog(@"Something Panic Happens");
-}
-return nil;
-</code></pre>
-
-<p>}
-@end
-```</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@implementation</span> <span class="nc">UIView</span> <span class="nl">(GetCellFromContentviewSubview)</span>
+</span><span class='line'><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="n">getCellFromContentviewSubview</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">([[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="nl">isKindOfClass:</span><span class="p">[</span><span class="n">UITableViewCell</span> <span class="n">class</span><span class="p">]])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">else</span> <span class="k">if</span> <span class="p">([[[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="nl">isKindOfClass:</span><span class="p">[</span><span class="n">UITableViewCell</span> <span class="n">class</span><span class="p">]])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">else</span><span class="p">{</span>
+</span><span class='line'>     <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Something Panic Happens&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>之后，把
-<code>
-UITableViewCell *cell = (UITableViewCell *)[[button superview] superview];
-</code></p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)[[</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>替换成
-<code>
-UITableViewCell *cell = (UITableViewCell *)[button getCellFromContentviewSubview];
-</code></p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)[</span><span class="n">button</span> <span class="n">getCellFromContentviewSubview</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>就可以了。</p>
 

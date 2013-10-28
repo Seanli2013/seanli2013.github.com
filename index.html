@@ -251,34 +251,12 @@
 
 <h3>解决方式</h3>
 
-<p>不双击，而是按住Control键，单击。此时在出现的菜单中选择open。</p>
-
-<p><img src="http://bigbelldev.com/images/tools/iWorkFree/ControlClick.png" alt="ControlClick" /></p>
-
-<p>此时再选择open，就可以啦！</p>
-
-<p><img src="http://bigbelldev.com/images/tools/iWorkFree/ChooseOpenAgain.png" alt="ChooseOpenAgain" /></p>
-
-<p>安装完成后进入第二步。</p>
-
-<h1>第二步，在App Store进行免费更新</h1>
-
-<h2>1. 打开App Store切换国家</h2>
-
-<p>在AppStore页面右下角，有当前国家的标志，点击这里进行切换。点击选择美国后，App Store市场切换到美国：</p>
-
-<p><img src="http://bigbelldev.com/images/tools/iWorkFree/ChangeCountry.png" alt="ChangeCountry" /></p>
-
-<p>“128元”的标志不见了，取而代之的是“update”。这时需要你的美国账号了。（没有美国账号的同学试试把系统语言改为英文，据说也行）
-<img src="http://bigbelldev.com/images/tools/iWorkFree/CanUpdateNow.png" alt="CanUpdateNow" /></p>
-
-<p>选择update，输入美国账号，搞定！</p>
-
-<hr />
-
-<p>苹果公司让这些产品免费，真挺好，赞一个！</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/24/iwork-free/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -342,84 +320,12 @@
 
 <h1>使用方式</h1>
 
-<p>这里只介绍Storyboard/Xib使用方式，如果想了解code实现，还要继续阅读其他资料。</p>
-
-<h3>设计及实现方法：</h3>
-
-<p>理清view想要摆放的位置逻辑（设计），根据这个逻辑来设置Constraints（实现）。比如这个Button要距离那个Button固定20个点的距离，并且两个Button要顶端对齐等。把这些逻辑条件变成constraints，当constraints完备到可以确定view的位置时，就完成了设计和实现。</p>
-
-<h3>在Storyboard/Xib上使用</h3>
-
-<ul>
-<li><p>Autolayout的checkbox默认是check上的，这个配置是对整个Storyboard或整个Xib生效的</p></li>
-<li><p>可以设置Constraints的地方</p>
-
-<p>1 Editor菜单下的Pin以上的4个菜单</p>
-
-<p><img src="http://cdn2.raywenderlich.com/wp-content/uploads/2013/09/StrutsProblem-pin-widths-equally.png" alt="Editor" /></p>
-
-<p>2 在View层次列表中选中Constraints后，在Attributes Inspector中设置</p>
-
-<p><img src="http://cdn2.raywenderlich.com/wp-content/uploads/2013/09/Equal-widths-in-document-outline.png" alt="viewhierachy" />
-<img src="http://cdn2.raywenderlich.com/wp-content/uploads/2013/09/Tango-vertical-space-attributes.png" alt="Inspector" /></p>
-
-<p>3 最方面快捷的方式是在悬浮在界面编辑右下角的几个图标</p>
-
-<p><img src="http://cdn2.raywenderlich.com/wp-content/uploads/2013/09/Auto-Layout-buttons.png" alt="quick menu" /></p></li>
-<li><p>蓝色的辅助线：表明Constraints已经足以说明这个view的位置了</p></li>
-</ul>
-
-
-<p>  <img src="http://cdn5.raywenderlich.com/wp-content/uploads/2013/09/Tango-left-align-constraint.png" alt="blue" /></p>
-
-<ul>
-<li>橙色的辅助线：表示constraints没有完备到可以说明这个view的位置</li>
-</ul>
-
-
-<p>  <img src="http://cdn5.raywenderlich.com/wp-content/uploads/2013/09/Tango-badge-on-V-space.png" alt="orange" /></p>
-
-<ul>
-<li><p>橙色的辅助线上的数字：有时是正数，有时是负数。当你设定或更改了Constraints的时候，可能Constraints与界面上你放置的view的位置是不同的。系统会以Constraints为准，界面上提示你橙色辅助线，线上的数字是这个view的位置与Constraints的差距。这时可以在“Resolve Auto Layout Issues”中选择update frame，这样这个view会自动移动到Constraints所指示的地方；也可以update constraints，这时view的位置不变，constraints变为与界面上的view位置一致的数值</p></li>
-<li><p>对没有提供Constraints的view，系统会自动加上constraints，这些constraints是界面上不可见的。这一点是Xcode5与Xcode4在Autolayout技术升级上最大的改进！Xcode4是系统强加constraints，往往会对开发者进行了干扰，因为强加的Constraints往往不是你想要的。Xcode5的这个改进方便了开发者按照自己的意图去设计和实施：首先不用去修改系统强加的constraints；其次有些view的位置你不需要增加Constraints，就可以不用理会。注：这种自动给View加Constraints的方式只适用于你一个Constraints都没加的情况，如果你加了x方向的，y方向的也需要手动添加。</p></li>
-<li><p>preview：preview可真方便，你一边在左侧（Portrait、4寸屏）设计实施，一边在preview中看到lanscape的样子或者在3.5寸屏中的样子</p></li>
-</ul>
-
-
-<p>  <img src="http://cdn2.raywenderlich.com/wp-content/uploads/2013/09/Storyboard-preview.png" alt="preview" /></p>
-
-<ul>
-<li>可设置的constraints的类别：
-
-<ol>
-<li>几个View之间对齐
-
-<ul>
-<li>边缘对齐、中心对齐等</li>
-<li>这几个view宽、高相等等</li>
-</ul>
-</li>
-<li>相对距离。
-
-<ul>
-<li>距离最近的一个view的距离</li>
-<li>两个view之间的距离</li>
-<li>距离顶端、底端、左边缘、右边缘的距离</li>
-<li>自己的宽、高</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-
-
-<h1>接下来</h1>
-
-<p>以上是一些基础要点，如果觉得这些要点不够，可以参照Matthijs Hollemans在这两篇文章中举的例子，这个例子将带你进行一步步操作。</p>
-
-<p>有的要求，界面上的autolayout也无法实现，需要代码方式的autolayout来实现。具体如何实现，再找时间研究。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/23/ios7-auto-layout/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -464,29 +370,32 @@
 
 <p>一种常用的方式是使用view的层次，在action中找到这个Cell：在</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</span></code></pre></td></tr></table></div></figure>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">cellForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>方法中，把这个Cell的Button加入到Cell的contentView的subView，并且为这个button添加Target。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>// Button 操作
-</span><span class='line'>[cell.contentView addSubview:cell.button];
-</span><span class='line'>[cell.button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];        </span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// Button 操作</span>
+</span><span class='line'><span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">contentView</span> <span class="nl">addSubview:</span><span class="n">cell</span><span class="p">.</span><span class="n">button</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">button</span> <span class="nl">addTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">buttonAction:</span><span class="p">)</span> <span class="nl">forControlEvents:</span><span class="n">UIControlEventTouchUpInside</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>之后在对应的</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>- (void)buttonAction:(id)sender</span></code></pre></td></tr></table></div></figure>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">buttonAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>action中，通过view的层次，去找到对应的Cell：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -494,22 +403,24 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>// iOS7 之前
-</span><span class='line'>- (void)editRemindAction:(id)sender
-</span><span class='line'>{
-</span><span class='line'>    UIButton *button = (UIButton *)sender;
-</span><span class='line'>    UITableViewCell *cell = (UITableViewCell *)[[button superview] superview];
-</span><span class='line'>    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-</span><span class='line'>  // 继续其他的处理
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// iOS7 之前</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">editRemindAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">UIButton</span> <span class="o">*</span><span class="n">button</span> <span class="o">=</span> <span class="p">(</span><span class="n">UIButton</span> <span class="o">*</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="nl">indexPathForCell:</span><span class="n">cell</span><span class="p">];</span>
+</span><span class='line'>  <span class="c1">// 继续其他的处理</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h3>iOS7之后出的问题</h3>
 
 <p>在iOS7之后，这样的办法会报错，错误在通过</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];</span></code></pre></td></tr></table></div></figure>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[]</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。</p>
@@ -520,7 +431,7 @@
 
 <p>直观地看，就是向上爬三次superview就行了。为了更好地处理这个问题，应该建立一个UIView的Category（因为这里使用的view的层次superview是UIView的方法），写个Category方法来区分不同情况来得到Cell：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -535,33 +446,36 @@
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>@implementation UIView (GetCellFromContentviewSubview)
-</span><span class='line'>- (UITableViewCell *)getCellFromContentviewSubview
-</span><span class='line'>{
-</span><span class='line'>    if ([[[self superview] superview] isKindOfClass:[UITableViewCell class]]) {
-</span><span class='line'>        return (UITableViewCell *)[[self superview] superview];
-</span><span class='line'>    }
-</span><span class='line'>    else if ([[[[self superview] superview] superview] isKindOfClass:[UITableViewCell class]]) {
-</span><span class='line'>        return (UITableViewCell *)[[[self superview] superview] superview];
-</span><span class='line'>    }
-</span><span class='line'>    else{
-</span><span class='line'>         NSLog(@"Something Panic Happens");
-</span><span class='line'>    }
-</span><span class='line'>    return nil;
-</span><span class='line'>}
-</span><span class='line'>@end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@implementation</span> <span class="nc">UIView</span> <span class="nl">(GetCellFromContentviewSubview)</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="nf">getCellFromContentviewSubview</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">([[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="nl">isKindOfClass:</span><span class="p">[</span><span class="n">UITableViewCell</span> <span class="n">class</span><span class="p">]])</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span> <span class="k">if</span> <span class="p">([[[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="nl">isKindOfClass:</span><span class="p">[</span><span class="n">UITableViewCell</span> <span class="n">class</span><span class="p">]])</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span><span class="p">{</span>
+</span><span class='line'>         <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Something Panic Happens&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>之后，把</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>UITableViewCell *cell = (UITableViewCell *)[[button superview] superview];</span></code></pre></td></tr></table></div></figure>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>替换成</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>UITableViewCell *cell = (UITableViewCell *)[button getCellFromContentviewSubview];</span></code></pre></td></tr></table></div></figure>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[</span><span class="n">button</span> <span class="n">getCellFromContentviewSubview</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>就可以了。</p>
