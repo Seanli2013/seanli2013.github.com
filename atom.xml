@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-10-29T17:28:02+08:00</updated>
+  <updated>2013-11-07T16:38:26+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -386,7 +386,7 @@
 
 <p>另外一种办法是给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
 
-<p>但我所提供的这个办法，在stackflow上有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
+<p>但我所提供的这个办法，在stackoverflow上有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
 ]]></content>
   </entry>
   
@@ -464,6 +464,12 @@
     <id>http://Seanli2013.github.io/blog/2013/09/18/product-support-sreminder</id>
     <content type="html"><![CDATA[<p>哪些bug是要修复的？
 哪些功能是很需要的？</p>
+
+<h5>有位同学建议增加个app密码功能。</h5>
+
+<p>恩，听了一下她的解释，我也觉得挺有必要的。
+打算在后面的版本给实现了。
+谢谢她咯！</p>
 ]]></content>
   </entry>
   

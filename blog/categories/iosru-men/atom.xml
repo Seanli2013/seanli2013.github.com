@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS入门 | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/iosru-men/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-10-29T17:28:02+08:00</updated>
+  <updated>2013-11-07T16:38:26+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -333,7 +333,7 @@
 
 <p>另外一种办法是给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
 
-<p>但我所提供的这个办法，在stackflow上有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
+<p>但我所提供的这个办法，在stackoverflow上有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
 ]]></content>
   </entry>
   

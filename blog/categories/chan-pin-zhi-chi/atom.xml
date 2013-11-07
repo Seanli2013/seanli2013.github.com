@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 产品支持 | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/chan-pin-zhi-chi/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-10-29T17:28:02+08:00</updated>
+  <updated>2013-11-07T16:38:26+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -87,6 +87,12 @@
     <id>http://Seanli2013.github.io/blog/2013/09/18/product-support-sreminder</id>
     <content type="html"><![CDATA[<p>哪些bug是要修复的？
 哪些功能是很需要的？</p>
+
+<h5>有位同学建议增加个app密码功能。</h5>
+
+<p>恩，听了一下她的解释，我也觉得挺有必要的。
+打算在后面的版本给实现了。
+谢谢她咯！</p>
 ]]></content>
   </entry>
   
