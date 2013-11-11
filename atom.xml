@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-11-11T10:31:53+08:00</updated>
+  <updated>2013-11-11T17:30:44+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -150,7 +150,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[iOS7 Autolayout入门]]></title>
+    <title type="html"><![CDATA[iOS7 Autolayout 瞬间入门！]]></title>
     <link href="http://Seanli2013.github.io/blog/2013/10/23/ios7-auto-layout/"/>
     <updated>2013-10-23T20:05:00+08:00</updated>
     <id>http://Seanli2013.github.io/blog/2013/10/23/ios7-auto-layout</id>
@@ -255,9 +255,9 @@
 
 <h1>接下来</h1>
 
-<p>以上是一些基础要点，如果觉得这些要点不够，可以参照Matthijs Hollemans在这两篇文章中举的例子，这个例子将带你进行一步步操作。</p>
+<p>以上是一些基础要点，当你用Storyboard/Xib做设计的时候，基本就够用啦。如果觉得这些要点不够，可以参照Matthijs Hollemans在这两篇文章中举的例子，这个例子将带你进行一步步操作。</p>
 
-<p>有的要求，界面上的autolayout也无法实现，需要代码方式的autolayout来实现。具体如何实现，再找时间研究。</p>
+<p>有些特殊的场景，使用Storyboard/Xib的autolayout是无法实现，需要代码方式的autolayout来实现。代码实现主要围绕着对NSLayoutConstraint对象的操作。具体如何实现，等需要的时候再找时间研究了。</p>
 ]]></content>
   </entry>
   
