@@ -9,7 +9,7 @@
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="现在，iOS系统已经发展到iOS7，而iOS5时引入的ARC技术早已成为主流了。所以iOS新手们对ARC技术已经习以为常了吧，对之前的手工内存管理可能完全不了解，因为基本用不到。ARC又是如此简单，貌似也没有什么必须学习的。但了解一下ARC的原理原则还是必须的—— &hellip;">
+  <meta name="description" content="问题 windows8系统，装了Outlook2013，占用了C盘大约10G空间，主要都是数据文件（OST文件）占用的。希望能够把数据文件从C盘移至其他盘。并且账户是IMAP账户，不是Exchange。 google一下，绝大多数解决方案是针对以下两种情况： 使用Exchange的账户， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/13/outlook-move-ost-location/">Outlook 转移OST数据文件 IMAP账户</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-13T10:17:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+        
+      
+
+          | <a href="/blog/2013/11/13/outlook-move-ost-location/#comments">Comments</a>
+         
+
+	</p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>问题</h3>
+
+<p>windows8系统，装了Outlook2013，占用了C盘大约10G空间，主要都是数据文件（OST文件）占用的。希望能够把数据文件从C盘移至其他盘。并且账户是IMAP账户，不是Exchange。</p>
+
+<p>google一下，绝大多数解决方案是针对以下两种情况：</p>
+
+<ul>
+<li>使用Exchange的账户，如何做到移动ost文件</li>
+<li>移动pst文件，而不是移动ost文件</li>
+</ul>
+
+
+<p>都不适用。后来发现了这个解决方案，尝试后，成功！分享给大家：</p>
+
+<h3>解决方案</h3>
+
+<p>把ost文件移动到其他盘，在原来C盘的ost文件位置简历一个链接，链接到移动后的那个文件，大功告成。引用原作者的描述：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>在Outlook2013 IMAP账户中
+</span><span class='line'>
+</span><span class='line'>假设你目前的demo.pst文件在路径C:\Users\%username%\AppData\Local\Microsoft\Outlook下(已创建)
+</span><span class='line'>
+</span><span class='line'>1. 关闭Outlook，移动此文件到D:\Outlook Files下。
+</span><span class='line'>
+</span><span class='line'>2. 打开CMD，键入 mklink "C:\Users\%username%\AppData\Local\Microsoft\Outlook\XXXX.com.ost" "E:\Profile\Outlook\XXXX.com.ost"
+</span><span class='line'>
+</span><span class='line'>3. 此时C:\Users\%username%\AppData\Local\Microsoft\Outlook下会有一个类似于快捷方式的同步文件demo.ost存在（0KB）。
+</span><span class='line'>
+</span><span class='line'>4. 打开Outlook，IMAP账户仍然会挂接到C:\Users\%username%\AppData\Local\Microsoft\Outlook\demo.ost上，但该文件只是D盘下数据文件的映射，实际不消耗任何磁盘空间。</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原文地址：<a href="http://beijing-zhanglei.blog.sohu.com/272769443.html">Outlook2013 迁移OST存储位置</a></p>
+
+<h3>注意事项</h3>
+
+<p>使用的过程中需要使用管理员身份运行cmd。</p>
+
+<p>P.S. 虽然windows是个很伟大的系统，并且其中的很多软件也异常优秀。但我已经很久不用windows了，日常使用，我觉得Mac系统是胜过windows的，尤其是对编程写代码的人。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1013,78 +1102,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/26/ios-delegation-and-protocol/">学习iOS的delegation的实现</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-26T14:11:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
-        
-      
-
-          | <a href="/blog/2013/07/26/ios-delegation-and-protocol/#comments">Comments</a>
-         
-
-	</p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>什么是delegation</h2>
-
-<p>delegation<em>[ˌdelɪ&#8217;ɡeɪʃn]</em>，中文叫委托，是两个类之间传递信息的一种方式。也是一种设计模式。</p>
-
-<p>其作用和实现过程可以这么理解：</p>
-
-<p>A类：A正在工作中发现，有的工作自己做不方便，需要委托别人帮忙做。A要制定个协议，委托的人要遵守这个协议，按照协议中的方法把工作给做了。A的属性有遵守这个协议的delegate，A知道这个delegate会帮助完成协议中的工作。</p>
-
-<p>B类：B会受A委托，B类需要接受这个协议，把协议中的必须执行的方法给执行了。B有个属性是A的对象，在B类中把A的对象的delegate设置成B。</p>
-
-<p>这里提到的协议，即protocol，不熟的孩纸可以仔细阅读<a href="http://www.cocoachina.com/newbie/basic/2010/0917/2106.html">协议（Protocol）的用法和代码例子</a></p>
-
-<h2>什么时候使用delegation</h2>
-
-<p>类之间传递信息可以有多种机制，除了delegation还有notification、observer等方式。一般两个类之间有点儿关系（比如view和subview，view和controller之间，使用delegate）的时候，经常使用delegation；两个模块之间没有啥关系，可能使用notification会更好。有兴趣的孩纸推荐阅读一下<a href="http://blog.shinetech.com/2011/06/14/delegation-notification-and-observation/">When to use Delegation, Notification, or Observation in iOS</a>。</p>
-
-<p>在我们使用控件如textField、textView等时，都会碰到他们的delegation，这是非常好的delegation的例子，要好好去理解delegation的功效。</p>
-
-<h2>delegation实践</h2>
-
-<h3>模拟场景</h3>
-
-<p>张老师在外地开会，她会发短信告诉学生代表什么时候让学生们放假，学生代表承诺老师会准确传达。张老师发了短信给学生代表，说7月26日周五大家放假。</p>
-
-<h3>设计</h3>
-
-<p>张老师是委托人，学生代表是受委托人，她和学生代表定的协议中的方法：由学生代表告诉学生们什么时候放假。
-张老师发短信给学生代表这个时候会触发他们之间协议的方法。</p>
-
-<h3>测试代码</h3>
-
-<p>测试代码中有老师和学生代表两个类，输出的结果见NSLog。<a href="http://seanli2013.github.io/codes/textDelegationAndProtocol.zip">代码下载</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1097,7 +1114,7 @@
   
     <section>
   <h1>分类列表</h1>
-    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (9)</a></li><li><a href='/blog/categories/tools/'>Tools (4)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (9)</a></li><li><a href='/blog/categories/tools/'>Tools (5)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
 </section>
 <section>
 <h1>我的产品</h1>
@@ -1112,6 +1129,10 @@
 <section>
   <h1>最新文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/13/outlook-move-ost-location/">Outlook 转移OST数据文件 IMAP账户</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/10/28/ios-arc/">iOS ARC入门</a>
@@ -1147,10 +1168,6 @@
     
       <li class="post">
         <a href="/blog/2013/08/05/ios-accelerometer/">学习iOS传感器的使用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/04/ios-gestures/">学习iOS的手势gestures</a>
       </li>
     
   </ul>

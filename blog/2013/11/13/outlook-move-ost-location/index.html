@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Tools - 大钟威武</title>
+  <title>Outlook 转移OST数据文件 IMAP账户 - 大钟威武</title>
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="Category: Tools">
+  <meta name="description" content="问题 windows8系统，装了Outlook2013，占用了C盘大约10G空间，主要都是数据文件（OST文件）占用的。希望能够把数据文件从C盘移至其他盘。并且账户是IMAP账户，不是Exchange。 google一下，绝大多数解决方案是针对以下两种情况： 使用Exchange的账户， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Seanli2013.github.ioblog/categories/tools">
+  <link rel="canonical" href="http://Seanli2013.github.io/blog/2013/11/13/outlook-move-ost-location">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="大钟威武" type="application/atom+xml">
@@ -85,98 +85,159 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Tools</h1>
+    
+      <h1 class="entry-title">Outlook 转移OST数据文件 IMAP账户</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-13T10:17:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+        
+      
+
+          | <a href="#comments">Comments</a>
+         
+
+	</p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><h3>问题</h3>
 
-  
-  <h2>2013</h2>
+<p>windows8系统，装了Outlook2013，占用了C盘大约10G空间，主要都是数据文件（OST文件）占用的。希望能够把数据文件从C盘移至其他盘。并且账户是IMAP账户，不是Exchange。</p>
 
-<article>
-  
-<h1><a href="/blog/2013/11/13/outlook-move-ost-location/">Outlook 转移OST数据文件 IMAP账户</a></h1>
-<time datetime="2013-11-13T10:17:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>13</span> <span class='year'>2013</span></time>
+<p>google一下，绝大多数解决方案是针对以下两种情况：</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tools/'>Tools</a></span>
-</footer>
+<ul>
+<li>使用Exchange的账户，如何做到移动ost文件</li>
+<li>移动pst文件，而不是移动ost文件</li>
+</ul>
 
 
-</article>
+<p>都不适用。后来发现了这个解决方案，尝试后，成功！分享给大家：</p>
+
+<h3>解决方案</h3>
+
+<p>把ost文件移动到其他盘，在原来C盘的ost文件位置简历一个链接，链接到移动后的那个文件，大功告成。引用原作者的描述：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>在Outlook2013 IMAP账户中
+</span><span class='line'>
+</span><span class='line'>假设你目前的demo.pst文件在路径C:\Users\%username%\AppData\Local\Microsoft\Outlook下(已创建)
+</span><span class='line'>
+</span><span class='line'>1. 关闭Outlook，移动此文件到D:\Outlook Files下。
+</span><span class='line'>
+</span><span class='line'>2. 打开CMD，键入 mklink "C:\Users\%username%\AppData\Local\Microsoft\Outlook\XXXX.com.ost" "E:\Profile\Outlook\XXXX.com.ost"
+</span><span class='line'>
+</span><span class='line'>3. 此时C:\Users\%username%\AppData\Local\Microsoft\Outlook下会有一个类似于快捷方式的同步文件demo.ost存在（0KB）。
+</span><span class='line'>
+</span><span class='line'>4. 打开Outlook，IMAP账户仍然会挂接到C:\Users\%username%\AppData\Local\Microsoft\Outlook\demo.ost上，但该文件只是D盘下数据文件的映射，实际不消耗任何磁盘空间。</span></code></pre></td></tr></table></div></figure>
 
 
+<p>原文地址：<a href="http://beijing-zhanglei.blog.sohu.com/272769443.html">Outlook2013 迁移OST存储位置</a></p>
 
-<article>
-  
-<h1><a href="/blog/2013/10/24/iwork-free/">老旧Mac如何免费获得iWork</a></h1>
-<time datetime="2013-10-24T18:24:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>24</span> <span class='year'>2013</span></time>
+<h3>注意事项</h3>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tools/'>Tools</a></span>
-</footer>
+<p>使用的过程中需要使用管理员身份运行cmd。</p>
 
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/26/rss-read-on-mac/">Mac下的RSS阅读器</a></h1>
-<time datetime="2013-07-26T21:40:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>26</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tools/'>Tools</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2011</h2>
-
-<article>
-  
-<h1><a href="/blog/2011/07/11/octopress-create-and-manage-blog/">octopress发表blog文章和管理blog</a></h1>
-<time datetime="2011-07-11T05:59:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>11</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tools/'>Tools</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2011/07/03/mac-dajian-octopress/">mac下搭建octopress</a></h1>
-<time datetime="2011-07-03T05:59:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>03</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tools/'>Tools</a></span>
-</footer>
-
-
-</article>
-
+<p>P.S. 虽然windows是个很伟大的系统，并且其中的很多软件也异常优秀。但我已经很久不用windows了，日常使用，我觉得Mac系统是胜过windows的，尤其是对编程写代码的人。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Xiang LI</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-13T10:17:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tools/'>Tools</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2013/11/13/outlook-move-ost-location/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2013/11/13/outlook-move-ost-location/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/28/ios-arc/" title="Previous Post: iOS ARC入门">&laquo; iOS ARC入门</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 
 
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"bigbell"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
 
 
 </div>
