@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-11-20T11:25:14+08:00</updated>
+  <updated>2013-11-20T17:49:53+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,130 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[NSUserDefault 常用功能 检测应用（或app的某个版本）第一次运行 或 记录用户设定的属性”]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings/"/>
+    <updated>2013-11-20T16:36:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings</id>
+    <content type="html"><![CDATA[<p>NSUserDefault，从名称也可看出，一般用来记录用户的设置的。这里介绍两种常用场景：<strong>检测应用（或app的某个版本）第一次运行</strong> 和 <strong>记录用户设定的属性</strong>。</p>
+
+<h3>原理</h3>
+
+<p>几句话说下我的理解：</p>
+
+<ol>
+<li>NSUserDefault使用方法standardUserDefaults得到全局的一个<a href="http://bigbelldev.com/blog/2013/07/25/singleton/">单例</a></li>
+<li>在这个单例是个dictionary，即通过key-object来存、取信息</li>
+<li>信息会存在plist文件中，你不删它，它就一直存在</li>
+</ol>
+
+
+<h3>检测app第一次运行</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="c1">// 以下这段代码，检查是否app的这个版本是否是第一次运行</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">bundleVersion</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">objectForInfoDictionaryKey:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">kCFBundleVersionKey</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">appFirstStartOfVersionKey</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;first_start_%@&quot;</span><span class="p">,</span> <span class="n">bundleVersion</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSNumber</span> <span class="o">*</span><span class="n">alreadyStartedOnVersion</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="n">appFirstStartOfVersionKey</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">alreadyStartedOnVersion</span> <span class="o">||</span> <span class="p">[</span><span class="n">alreadyStartedOnVersion</span> <span class="n">boolValue</span><span class="p">]</span> <span class="o">==</span> <span class="n">NO</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span> <span class="n">versionFirstStart</span><span class="p">];</span><span class="c1">// app的bundleVersion这个版本第一次运行，你希望这时做点儿什么</span>
+</span><span class='line'>        <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">setObject:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithBool:</span><span class="n">YES</span><span class="p">]</span> <span class="nl">forKey:</span><span class="n">appFirstStartOfVersionKey</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>每次启动app时候，调用这段代码。检查一个叫做first_start_加版本号这么个key，对应的NSNumber类型Object，是否存在，或是否是0（NO），如果不存在，或者是0（NO），那么是这个版本的第一次运行，这时做你想在app第一次运行时做的事儿，比如[self versionFirstStart]，之后在plist中添加这个key对应的NSNumber类型object，设置成1（YES）。这样，以后app只要未改变版本，启动时就再也不会执行[self versionFirstStart]了。</p>
+
+<p><a href="http://stackoverflow.com/questions/7758775/detecting-the-first-ever-run-of-an-app/7758850#7758850">参见stackoverflow</a></p>
+
+<p>P.S. 虽然我并未更改这段代码进行更多尝试，但肯定不一定非要NSNumber这个类型，只要plist能存储和读取的类型就可以。</p>
+
+<h3>记录用户设定的属性</h3>
+
+<p>想设定一个属性，你给这个属性起个独有的key，比如叫做@&ldquo;your property key&#8221;。</p>
+
+<p>设置属性：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">setObject:</span><span class="s">@&quot;off&quot;</span> <span class="nl">forKey:</span><span class="s">@&quot;your property key&quot;</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>读取和判断属性：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">if</span><span class="p">([[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="s">@&quot;your property key&quot;</span><span class="p">]</span> <span class="nl">isEqualToString:</span><span class="s">@&quot;off&quot;</span><span class="p">])</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>更多你要了解的NSUserDefault</h3>
+
+<h5>1. 可存储的类型</h5>
+
+<p>NSUserDefault中存储的object的格式只能是以下列表中的类型，这是plist存储方式决定的。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>array
+</span><span class='line'>dictionary
+</span><span class='line'>data
+</span><span class='line'>date
+</span><span class='line'>number - integer
+</span><span class='line'>number - floating point
+</span><span class='line'>Boolean</span></code></pre></td></tr></table></div></figure>
+
+
+<p>了解更多，可查阅<a href="https://developer.apple.com/library/mac/documentation/cocoa/Conceptual/PropertyLists/Introduction/Introduction.html#//apple_ref/doc/uid/10000048i">Property List Programming Guide</a></p>
+
+<h5>2. 自动存储</h5>
+
+<p>使用NSUserDefault，默认是自动存储的，即你修改完之后，ios自动找个时候，同步（synchronize）一下内存和plist。</p>
+
+<p>手动存储可直接调用synchronize方法：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="n">synchronize</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>3. 查看目前NSUserDefaults standardUserDefaults中的内容</h5>
+
+<p>查看全部dict内容</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="n">dictionaryRepresentation</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当然，也可以查看全部的key</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span> <span class="p">[[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="n">dictionaryRepresentation</span><span class="p">]</span> <span class="n">allKeys</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Outlook 转移OST数据文件 IMAP账户]]></title>
