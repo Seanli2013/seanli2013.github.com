@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-11-20T17:49:53+08:00</updated>
+  <updated>2013-11-21T22:27:37+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[通过代码调用Storyboard中的scene —— Call storyboard scene programmatically]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/11/21/call-storyboard-scene-programmatically/"/>
+    <updated>2013-11-21T20:26:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/11/21/call-storyboard-scene-programmatically</id>
+    <content type="html"><![CDATA[<p>通过Storyboard搭建app框架，以及设计和实现一些view controller和view，是非常方便和高效的。</p>
+
+<p>有时，同样一个scene(i.e. view controller)，除了在Storyboard上通过segue达到以外，还需要在代码的某个地方，让它展现出来。</p>
+
+<p>如何在代码中，调用一个已经在storyboard中设计好的scene呢？代码如下：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span> <span class="o">*</span> <span class="n">storyboardName</span> <span class="o">=</span> <span class="s">@&quot;MainStoryboard_iPhone&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span> <span class="n">viewControllerID</span> <span class="o">=</span> <span class="s">@&quot;ViewID&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">UIStoryboard</span> <span class="o">*</span> <span class="n">storyboard</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIStoryboard</span> <span class="nl">storyboardWithName:</span><span class="n">storyboardName</span> <span class="nl">bundle:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="n">MyViewController</span> <span class="o">*</span> <span class="n">controller</span> <span class="o">=</span> <span class="p">(</span><span class="n">MyViewController</span> <span class="o">*</span><span class="p">)[</span><span class="n">storyboard</span> <span class="nl">instantiateViewControllerWithIdentifier:</span><span class="n">viewControllerID</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">presentViewController:</span><span class="n">controller</span> <span class="nl">animated:</span><span class="n">YES</span> <span class="nl">completion:</span><span class="nb">nil</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注：代码段来自<a href="http://stackoverflow.com/questions/10522957/call-storyboard-scene-programmatically-without-needing-segue">Call storyboard scene programmatically (without needing segue)?</a></p>
+
+<h5>有两个注意的地方：</h5>
+
+<ol>
+<li>上面代码中的storyboardName不要包括&#8221;.storyboard&#8221;后缀。即，如果你的Storyboard文档叫做“Main.storyboard”，那么storyboardName应该叫@&ldquo;Main&rdquo;</li>
+<li>注意：在Storyboard中，先给你的viewController加上ID，添加的地方如下图所示：在Indentity中的Storyboard ID。通过这个viewControllerID（图中的例子就是@&ldquo;UserGuide&#8221;），在代码中找到这个vc。</li>
+</ol>
+
+
+<p><img src="http://bigbelldev.com/images/blogs/storyboardID.png" alt="storyboardID" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[NSUserDefault 常用功能 检测应用（或app的某个版本）第一次运行 或 记录用户设定的属性”]]></title>

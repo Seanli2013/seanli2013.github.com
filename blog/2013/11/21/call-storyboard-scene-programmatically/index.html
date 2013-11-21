@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>about-me - 大钟威武</title>
+  <title>通过代码调用Storyboard中的scene —— Call storyboard scene programmatically - 大钟威武</title>
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="About-me Jul 10th, 2013 Jul 10th, 2013 Tweet Comments var duoshuoQuery = {short_name:"bigbell"}; (function() { var ds = document.createElement(' &hellip;">
+  <meta name="description" content="通过Storyboard搭建app框架，以及设计和实现一些view controller和view，是非常方便和高效的。 有时，同样一个scene(i.e. view controller)，除了在Storyboard上通过segue达到以外，还需要在代码的某个地方，让它展现出来。 如何在代码中， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Seanli2013.github.io/about-me">
+  <link rel="canonical" href="http://Seanli2013.github.io/blog/2013/11/21/call-storyboard-scene-programmatically">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="大钟威武" type="application/atom+xml">
@@ -85,32 +85,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">About-me</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-10T19:23:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time></p>
-  </header>
-  
-  
-
-  
-    <footer>
+    
+      <h1 class="entry-title">通过代码调用Storyboard中的scene —— Call Storyboard Scene Programmatically</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -122,21 +105,98 @@
   
 
 
-<time datetime="2013-07-10T19:23:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+<time datetime="2013-11-21T20:26:00+08:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
         
-      </p>
       
-        <div class="sharing">
+
+          | <a href="#comments">Comments</a>
+         
+
+	</p>
+    
+  </header>
+
+
+<div class="entry-content"><p>通过Storyboard搭建app框架，以及设计和实现一些view controller和view，是非常方便和高效的。</p>
+
+<p>有时，同样一个scene(i.e. view controller)，除了在Storyboard上通过segue达到以外，还需要在代码的某个地方，让它展现出来。</p>
+
+<p>如何在代码中，调用一个已经在storyboard中设计好的scene呢？代码如下：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span> <span class="o">*</span> <span class="n">storyboardName</span> <span class="o">=</span> <span class="s">@&quot;MainStoryboard_iPhone&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span> <span class="n">viewControllerID</span> <span class="o">=</span> <span class="s">@&quot;ViewID&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="n">UIStoryboard</span> <span class="o">*</span> <span class="n">storyboard</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIStoryboard</span> <span class="nl">storyboardWithName:</span><span class="n">storyboardName</span> <span class="nl">bundle:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="n">MyViewController</span> <span class="o">*</span> <span class="n">controller</span> <span class="o">=</span> <span class="p">(</span><span class="n">MyViewController</span> <span class="o">*</span><span class="p">)[</span><span class="n">storyboard</span> <span class="nl">instantiateViewControllerWithIdentifier:</span><span class="n">viewControllerID</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">presentViewController:</span><span class="n">controller</span> <span class="nl">animated:</span><span class="n">YES</span> <span class="nl">completion:</span><span class="nb">nil</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注：代码段来自<a href="http://stackoverflow.com/questions/10522957/call-storyboard-scene-programmatically-without-needing-segue">Call storyboard scene programmatically (without needing segue)?</a></p>
+
+<h5>有两个注意的地方：</h5>
+
+<ol>
+<li>上面代码中的storyboardName不要包括&#8221;.storyboard&#8221;后缀。即，如果你的Storyboard文档叫做“Main.storyboard”，那么storyboardName应该叫@&ldquo;Main&rdquo;</li>
+<li>注意：在Storyboard中，先给你的viewController加上ID，添加的地方如下图所示：在Indentity中的Storyboard ID。通过这个viewControllerID（图中的例子就是@&ldquo;UserGuide&#8221;），在代码中找到这个vc。</li>
+</ol>
+
+
+<p><img src="http://bigbelldev.com/images/blogs/storyboardID.png" alt="storyboardID" /></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/about-me/index.html" data-via="" data-counturl="http://Seanli2013.github.io/about-me/index.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">Xiang LI</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-21T20:26:00+08:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/iosru-men/'>iOS入门</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2013/11/21/call-storyboard-scene-programmatically/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2013/11/21/call-storyboard-scene-programmatically/" >Tweet</a>
   
   
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings/" title="Previous Post: NSUserDefault 常用功能 检测应用（或app的某个版本）第一次运行 或 记录用户设定的属性”">&laquo; NSUserDefault 常用功能 检测应用（或app的某个版本）第一次运行 或 记录用户设定的属性”</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 
@@ -159,7 +219,6 @@
 <!-- Duoshuo Comment END -->
 </div>
   </section>
-
 
 
 </div>
