@@ -9,7 +9,7 @@
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="通过Storyboard搭建app框架，以及设计和实现一些view controller和view，是非常方便和高效的。 有时，同样一个scene(i.e. view controller)，除了在Storyboard上通过segue达到以外，还需要在代码的某个地方，让它展现出来。 如何在代码中， &hellip;">
+  <meta name="description" content="环境和想要实现的功能 在Storyboard上，TabBarController作为rootViewController，此时想要在某个tab的VC中，点击个button，跳转到另外的tab上。如下图所示： 上图中，在第一个Tab上，点击“点击此处，去新建和管理提醒”，会跳转到第二个Tab， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -92,6 +92,87 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/11/24/change-tab-on-button-click/">点击button实现Storyboard中TabBar Controller的tab切换</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-24T18:10:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
+        
+      
+
+          | <a href="/blog/2013/11/24/change-tab-on-button-click/#comments">Comments</a>
+         
+
+	</p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>环境和想要实现的功能</h3>
+
+<p>在Storyboard上，TabBarController作为rootViewController，此时想要在某个tab的VC中，点击个button，跳转到另外的tab上。如下图所示：</p>
+
+<p><img src="http://bigbelldev.com/images/change_tab_vc_on_button.png" alt="" /></p>
+
+<p>上图中，在第一个Tab上，点击“点击此处，去新建和管理提醒”，会跳转到第二个Tab，显示全部提醒的列表，来新建和管理提醒。</p>
+
+<h3>实现代码：</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="n">AppDelegate</span> <span class="o">*</span><span class="n">thisAppDelegate</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">delegate</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[(</span><span class="n">UITabBarController</span> <span class="o">*</span><span class="p">)</span><span class="n">thisAppDelegate</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">rootViewController</span> <span class="nl">setSelectedIndex:</span><span class="mi">1</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>分析：
+我们在用代码创建app的时候，要在appDelegate中，去指定rootViewController。【不熟悉代码创建app的同学可以阅读这篇<a href="http://bigbelldev.com/blog/2013/07/25/ios-gui-implementation-discuss/">学习使用code实现iOS界面</a>，在这篇blog中，推荐的<a href="http://www.cocoachina.com/bbs/read.php?tid=131516">IOS开发之纯代码界面—基本控件使用篇</a>，非常适合新手学习code实现界面】在用Storyboard创建app的时候，虽然不用我们自己去指定rootViewController，但原理是一样的。</p>
+
+<p>Storyboard中，app的入口箭头指向的VC，通常就是rootViewController。在这个例子中，就是UITabBarController。</p>
+
+<p>通过</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[[UIApplication sharedApplication] delegate]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>得到自己这个appDelegate，通过调用</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(UITabBarController *)thisAppDelegate.window.rootViewController</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就得到了这个UITabBarController（的实例）。再使用UITabBarController（的实例）方法setSelectedIndex，去设定，要跳转到哪个Tab。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[(UITabBarController *)thisAppDelegate.window.rootViewController setSelectedIndex:1]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就是跳转到index为1的Tab，也就是第二个Tab了。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/11/21/call-storyboard-scene-programmatically/">通过代码调用Storyboard中的scene —— Call Storyboard Scene Programmatically</a></h1>
     
     
@@ -150,6 +231,10 @@
 
 
 <p><img src="http://bigbelldev.com/images/blogs/storyboardID.png" alt="storyboardID" /></p>
+
+<hr />
+
+<p>关键字：代码中调用storyboard中的vc，代码中present storyboard scene</p>
 </div>
   
   
@@ -975,177 +1060,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/04/ios-gestures/">学习iOS的手势gestures</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-04T17:36:00+08:00" pubdate data-updated="true">Aug 4<span>th</span>, 2013</time>
-        
-      
-
-          | <a href="/blog/2013/08/04/ios-gestures/#comments">Comments</a>
-         
-
-	</p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>iOS手势简介</h3>
-
-<p>iOS的手势，就是程序识别到你在屏幕上做的一些手势动作，做出反应。常见的手势有</p>
-
-<ul>
-<li>UITapGestureRecognizer</li>
-<li>UISwipeGestureRecognizer</li>
-<li>UIRotationGestureRecognizer</li>
-<li>UIPanGestureRecognizer</li>
-<li>UIPinchGestureRecognizer</li>
-<li>UILongPressGestureRecognizer</li>
-</ul>
-
-
-<p>其中tap还有单击、双击，Swipe还有向上、下、左、右等区分。</p>
-
-<p>识别这些手势，对每种手势做个反应，没啥难度。下面总结了5个步骤，和几个特殊的地方。</p>
-
-<h3>使用过程分5步</h3>
-
-<p>step1: 声明和初始化一个手势识别器</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="n">singleTap</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UITapGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleSingleTap:</span><span class="p">)];</span>
-</span><span class='line'>    <span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="n">doubleTap</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UITapGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleDoubleTap:</span><span class="p">)];</span>
-</span><span class='line'>    <span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="n">twoFingerTap</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UITapGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleTwoFingerTap:</span><span class="p">)];</span>
-</span><span class='line'>    <span class="n">UISwipeGestureRecognizer</span> <span class="o">*</span><span class="n">swipeLeft</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UISwipeGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleSwipe:</span><span class="p">)];</span>
-</span><span class='line'>    <span class="n">UISwipeGestureRecognizer</span> <span class="o">*</span><span class="n">swipeRight</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UISwipeGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleSwipe:</span><span class="p">)];</span>
-</span><span class='line'>    <span class="n">UIRotationGestureRecognizer</span> <span class="o">*</span><span class="n">rotation</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIRotationGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleRotation:</span><span class="p">)];</span>
-</span><span class='line'>    <span class="n">UIPanGestureRecognizer</span> <span class="o">*</span><span class="n">pan</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIPanGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handlePan:</span><span class="p">)];</span>
-</span><span class='line'>    <span class="n">UIPinchGestureRecognizer</span> <span class="o">*</span><span class="n">pinch</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIPinchGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handlePinch:</span><span class="p">)];</span>
-</span><span class='line'>    <span class="n">UILongPressGestureRecognizer</span> <span class="o">*</span><span class="n">longPress</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UILongPressGestureRecognizer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">handleLongPress:</span><span class="p">)];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>step2：对手势识别器进行属性设定</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'> <span class="p">[</span><span class="n">doubleTap</span> <span class="nl">setNumberOfTapsRequired:</span><span class="mi">2</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">twoFingerTap</span> <span class="nl">setNumberOfTouchesRequired:</span><span class="mi">2</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">swipeLeft</span> <span class="nl">setNumberOfTouchesRequired:</span><span class="mi">1</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">swipeLeft</span> <span class="nl">setDirection:</span><span class="n">UISwipeGestureRecognizerDirectionLeft</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">swipeRight</span> <span class="nl">setNumberOfTouchesRequired:</span><span class="mi">1</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">swipeRight</span> <span class="nl">setDirection:</span><span class="n">UISwipeGestureRecognizerDirectionRight</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>step3：把手势识别器加到view中去</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">singleTap</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">doubleTap</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">twoFingerTap</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">swipeLeft</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">swipeRight</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">rotation</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">pan</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">pinch</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">view</span> <span class="nl">addGestureRecognizer:</span><span class="n">longPress</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>step4：出现冲突时，要设定优先识别顺序</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="p">[</span><span class="n">singleTap</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">doubleTap</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">singleTap</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">twoFingerTap</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">pan</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">swipeRight</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">pan</span> <span class="nl">requireGestureRecognizerToFail:</span><span class="n">swipeLeft</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>step5：去实现处理扑捉到手势之后的动作
-填写各个处理函数，如：</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleSingleTap:</span><span class="p">(</span><span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleDoubleTap:</span><span class="p">(</span><span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleTwoFingerTap:</span><span class="p">(</span><span class="n">UITapGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleSwipe:</span><span class="p">(</span><span class="n">UISwipeGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleRotation:</span><span class="p">(</span><span class="n">UIRotationGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handlePan:</span><span class="p">(</span><span class="n">UIPanGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handlePinch:</span><span class="p">(</span><span class="n">UIPinchGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
-</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">handleLongPress:</span><span class="p">(</span><span class="n">UILongPressGestureRecognizer</span> <span class="o">*</span><span class="p">)</span><span class="nv">gestureRecognizer</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>测试代码</h3>
-
-<p>在下面测试代码中，实现了六个手势的处理。
-<a href="http://bigbelldev.com/codes/testGestures.zip">代码下载</a></p>
-
-<p>在实现的时候，有几个需要注意的地方：</p>
-
-<h3>注意几个小地方</h3>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/04/ios-gestures/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1158,7 +1072,7 @@
   
     <section>
   <h1>分类列表</h1>
-    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (11)</a></li><li><a href='/blog/categories/tools/'>Tools (5)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (12)</a></li><li><a href='/blog/categories/tools/'>Tools (5)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
 </section>
 <section>
 <h1>我的产品</h1>
@@ -1173,6 +1087,10 @@
 <section>
   <h1>最新文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/24/change-tab-on-button-click/">点击button实现Storyboard中TabBar Controller的tab切换</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/21/call-storyboard-scene-programmatically/">通过代码调用Storyboard中的scene —— Call Storyboard Scene Programmatically</a>
@@ -1208,10 +1126,6 @@
     
       <li class="post">
         <a href="/blog/2013/10/03/product-support-reminder-feedback-1-dot-0/">“药提醒你”V1.0/V1.0.1/V1.1反馈</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/18/product-support-sreminder/">“药提醒你”接下来需要什么功能？</a>
       </li>
     
   </ul>

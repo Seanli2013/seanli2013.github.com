@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-11-21T22:27:37+08:00</updated>
+  <updated>2013-11-24T18:47:29+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[点击button实现Storyboard中TabBar Controller的tab切换]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/11/24/change-tab-on-button-click/"/>
+    <updated>2013-11-24T18:10:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/11/24/change-tab-on-button-click</id>
+    <content type="html"><![CDATA[<h3>环境和想要实现的功能</h3>
+
+<p>在Storyboard上，TabBarController作为rootViewController，此时想要在某个tab的VC中，点击个button，跳转到另外的tab上。如下图所示：</p>
+
+<p><img src="http://bigbelldev.com/images/change_tab_vc_on_button.png" alt="" /></p>
+
+<p>上图中，在第一个Tab上，点击“点击此处，去新建和管理提醒”，会跳转到第二个Tab，显示全部提醒的列表，来新建和管理提醒。</p>
+
+<h3>实现代码：</h3>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="n">AppDelegate</span> <span class="o">*</span><span class="n">thisAppDelegate</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">delegate</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[(</span><span class="n">UITabBarController</span> <span class="o">*</span><span class="p">)</span><span class="n">thisAppDelegate</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">rootViewController</span> <span class="nl">setSelectedIndex:</span><span class="mi">1</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>分析：
+我们在用代码创建app的时候，要在appDelegate中，去指定rootViewController。【不熟悉代码创建app的同学可以阅读这篇<a href="http://bigbelldev.com/blog/2013/07/25/ios-gui-implementation-discuss/">学习使用code实现iOS界面</a>，在这篇blog中，推荐的<a href="http://www.cocoachina.com/bbs/read.php?tid=131516">IOS开发之纯代码界面—基本控件使用篇</a>，非常适合新手学习code实现界面】在用Storyboard创建app的时候，虽然不用我们自己去指定rootViewController，但原理是一样的。</p>
+
+<p>Storyboard中，app的入口箭头指向的VC，通常就是rootViewController。在这个例子中，就是UITabBarController。</p>
+
+<p>通过</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[[UIApplication sharedApplication] delegate]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>得到自己这个appDelegate，通过调用</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(UITabBarController *)thisAppDelegate.window.rootViewController</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就得到了这个UITabBarController（的实例）。再使用UITabBarController（的实例）方法setSelectedIndex，去设定，要跳转到哪个Tab。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[(UITabBarController *)thisAppDelegate.window.rootViewController setSelectedIndex:1]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就是跳转到index为1的Tab，也就是第二个Tab了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[通过代码调用Storyboard中的scene —— Call storyboard scene programmatically]]></title>
@@ -48,6 +97,10 @@
 
 
 <p><img src="http://bigbelldev.com/images/blogs/storyboardID.png" alt="storyboardID" /></p>
+
+<hr />
+
+<p>关键字：代码中调用storyboard中的vc，代码中present storyboard scene</p>
 ]]></content>
   </entry>
   
@@ -1503,85 +1556,6 @@
 <h3>编辑的文章的工具</h3>
 
 <p>我在用<a href="http://mouapp.com">Mou</a>，markdown语言，挺好使的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[mac下搭建octopress]]></title>
-    <link href="http://Seanli2013.github.io/blog/2011/07/03/mac-dajian-octopress/"/>
-    <updated>2011-07-03T05:59:00+08:00</updated>
-    <id>http://Seanli2013.github.io/blog/2011/07/03/mac-dajian-octopress</id>
-    <content type="html"><![CDATA[<h2>准备工作</h2>
-
-<h3>安装Ruby（1.9.3）</h3>
-
-<p>mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见<a href="http://www.hoowolf.net/2012/03/29/installing-ruby-on-rails-on-mac-os-x-lion/">Mac安装Ruby on Rails</a>，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。</p>
-
-<h3>你的系统还应该装有git，rvm</h3>
-
-<h2>开始搭建</h2>
-
-<p>搭建过程参考<a href="http://ishalou.com/blog/2012/10/15/how-to-use-octopress/">使用Octopress + Github管理blog</a>和<a href="http://www.yangzhiping.com/tech/octopress.html">Ruby开源项目介绍(1)：octopress——像黑客一样写博客</a>，这第二篇有些标题党哈。这两篇都可参考。</p>
-
-<p><strong>注意:</strong>参考这两篇文章前，需要<strong><em>先安装Ruby1.9.3</em></strong>，否则按照他们说的步骤来，你可能遇到很多个步骤无法执行完全成功。</p>
-
-<h2>安装过程中可能遇到的问题</h2>
-
-<!--more-->
-
-
-<h3>1. 如何在mac系统中root权限？</h3>
-
-<p>用sudo su，像这样：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>shawntekiMacBook-Pro:~ shawnli$ su
-</span><span class='line'>Password:
-</span><span class='line'>su: Sorry
-</span><span class='line'>shawntekiMacBook-Pro:~ shawnli$ sudo su
-</span><span class='line'>Password:
-</span><span class='line'>sh-3.2#</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>2. bundle update不成功。</h3>
-
-<h4>如果遇到的是bundle，command not found</h4>
-
-<p>这时你需要安装bundle</p>
-
-<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
-</code></pre>
-
-<p>这时你可能遇到不成功</p>
-
-<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
-WARNING:  RubyGems 1.2+ index not found for:
-
-
-RubyGems will revert to legacy indexes degrading performance.
-ERROR:  could not find gem bundler locally or in a repository
-</code></pre>
-
-<p>很可能是网络的问题，你可以尝试使用代理或者从公网换成教育网什么的……成功后显示</p>
-
-<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
-Successfully installed bundler-1.3.5
-1 gem installed
-Installing ri documentation for bundler-1.3.5...
-Installing RDoc documentation for bundler-1.3.5...
-</code></pre>
-
-<p>使用下面命令可以查看bundle安装情况</p>
-
-<pre><code>gem list --local
-</code></pre>
-
-<p>如果bundle update报找不到Gemfile，只要你切换到gemfile那个目录再运行bundle update即可。</p>
 ]]></content>
   </entry>
   

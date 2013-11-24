@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS入门 | 大钟威武]]></title>
   <link href="http://Seanli2013.github.io/blog/categories/iosru-men/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-11-21T22:27:37+08:00</updated>
+  <updated>2013-11-24T18:47:29+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[点击button实现Storyboard中TabBar Controller的tab切换]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/11/24/change-tab-on-button-click/"/>
+    <updated>2013-11-24T18:10:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/11/24/change-tab-on-button-click</id>
+    <content type="html"><![CDATA[<h3>环境和想要实现的功能</h3>
+
+<p>在Storyboard上，TabBarController作为rootViewController，此时想要在某个tab的VC中，点击个button，跳转到另外的tab上。如下图所示：</p>
+
+<p><img src="http://bigbelldev.com/images/change_tab_vc_on_button.png" alt="" /></p>
+
+<p>上图中，在第一个Tab上，点击“点击此处，去新建和管理提醒”，会跳转到第二个Tab，显示全部提醒的列表，来新建和管理提醒。</p>
+
+<h3>实现代码：</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">AppDelegate</span> <span class="o">*</span><span class="n">thisAppDelegate</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">delegate</span><span class="p">];</span>
+</span><span class='line'><span class="p">[(</span><span class="n">UITabBarController</span> <span class="o">*</span><span class="p">)</span><span class="n">thisAppDelegate</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">rootViewController</span> <span class="nl">setSelectedIndex:</span><span class="mi">1</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>分析：
+我们在用代码创建app的时候，要在appDelegate中，去指定rootViewController。【不熟悉代码创建app的同学可以阅读这篇<a href="http://bigbelldev.com/blog/2013/07/25/ios-gui-implementation-discuss/">学习使用code实现iOS界面</a>，在这篇blog中，推荐的<a href="http://www.cocoachina.com/bbs/read.php?tid=131516">IOS开发之纯代码界面—基本控件使用篇</a>，非常适合新手学习code实现界面】在用Storyboard创建app的时候，虽然不用我们自己去指定rootViewController，但原理是一样的。</p>
+
+<p>Storyboard中，app的入口箭头指向的VC，通常就是rootViewController。在这个例子中，就是UITabBarController。</p>
+
+<p>通过
+<code>
+[[UIApplication sharedApplication] delegate]
+</code>
+得到自己这个appDelegate，通过调用
+<code>
+(UITabBarController *)thisAppDelegate.window.rootViewController
+</code>
+就得到了这个UITabBarController（的实例）。再使用UITabBarController（的实例）方法setSelectedIndex，去设定，要跳转到哪个Tab。
+<code>
+[(UITabBarController *)thisAppDelegate.window.rootViewController setSelectedIndex:1]
+</code>
+就是跳转到index为1的Tab，也就是第二个Tab了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[通过代码调用Storyboard中的scene —— Call storyboard scene programmatically]]></title>
@@ -47,6 +99,10 @@
 
 
 <p><img src="http://bigbelldev.com/images/blogs/storyboardID.png" alt="storyboardID" /></p>
+
+<hr />
+
+<p>关键字：代码中调用storyboard中的vc，代码中present storyboard scene</p>
 ]]></content>
   </entry>
   
@@ -357,137 +413,6 @@ Boolean
 <p>以上是一些基础要点，当你用Storyboard/Xib做设计的时候，基本就够用啦。如果觉得这些要点不够，可以参照Matthijs Hollemans在这两篇文章中举的例子，这个例子将带你进行一步步操作。</p>
 
 <p>有些特殊的场景，使用Storyboard/Xib的autolayout是无法实现，需要代码方式的autolayout来实现。代码实现主要围绕着对NSLayoutConstraint对象的操作。具体如何实现，等需要的时候再找时间研究了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[UITableViewCell在iOS7之后superview的问题]]></title>
-    <link href="http://Seanli2013.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/"/>
-    <updated>2013-10-12T22:36:00+08:00</updated>
-    <id>http://Seanli2013.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk</id>
-    <content type="html"><![CDATA[<h3>在UITableView中针对某个Cell的操作</h3>
-
-<p>要针对某个UITableView中的Cell做些操作，比如对这个Cell的内容进行查看详细、编辑、删除、或者触发其他功能比如发短信、打电话等，删除、和点击这个Cell在UITableView的Delegate方法中提供，其他的操作就需要识别Cell上的控件（比如Button）对应的action是针对这个Cell的。</p>
-
-<p>一种常用的方式是使用view的层次，在action中找到这个Cell：在</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nl">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">tableView</span> <span class="nl">cellForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="n">indexPath</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>方法中，把这个Cell的Button加入到Cell的contentView的subView，并且为这个button添加Target。</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// Button 操作</span>
-</span><span class='line'><span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">contentView</span> <span class="nl">addSubview:</span><span class="n">cell</span><span class="p">.</span><span class="n">button</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">button</span> <span class="nl">addTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">buttonAction:</span><span class="p">)</span> <span class="nl">forControlEvents:</span><span class="n">UIControlEventTouchUpInside</span><span class="p">];</span>      <span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>之后在对应的</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">buttonAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>action中，通过view的层次，去找到对应的Cell：</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// iOS7 之前</span>
-</span><span class='line'><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">editRemindAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">sender</span>
-</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">UIButton</span> <span class="o">*</span><span class="n">button</span> <span class="o">=</span> <span class="p">(</span><span class="n">UIButton</span> <span class="o">*</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
-</span><span class='line'><span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="nl">indexPathForCell:</span><span class="n">cell</span><span class="p">];</span>
-</span><span class='line'><span class="c1">// 继续其他的处理</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<h3>iOS7之后出的问题</h3>
-
-<p>在iOS7之后，这样的办法会报错，错误在通过</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)[[]</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。</p>
-
-<p>原因是在iOS7中，在 UITableViewCell 和 UITableViewCell的ContentView之间，还有一个UITableViewCellScrollView，所以通过两次superview往上“爬”，是爬不到UITableViewCell的。</p>
-
-<h3>解决方式</h3>
-
-<p>直观地看，就是向上爬三次superview就行了。为了更好地处理这个问题，应该建立一个UIView的Category（因为这里使用的view的层次superview是UIView的方法），写个Category方法来区分不同情况来得到Cell：</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@implementation</span> <span class="nc">UIView</span> <span class="nl">(GetCellFromContentviewSubview)</span>
-</span><span class='line'><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="n">getCellFromContentviewSubview</span>
-</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">([[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="nl">isKindOfClass:</span><span class="p">[</span><span class="n">UITableViewCell</span> <span class="n">class</span><span class="p">]])</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">else</span> <span class="k">if</span> <span class="p">([[[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="nl">isKindOfClass:</span><span class="p">[</span><span class="n">UITableViewCell</span> <span class="n">class</span><span class="p">]])</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">else</span><span class="p">{</span>
-</span><span class='line'>     <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Something Panic Happens&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
-</span><span class='line'><span class="k">@end</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>之后，把
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)[[</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>替换成
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)[</span><span class="n">button</span> <span class="n">getCellFromContentviewSubview</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>就可以了。</p>
-
-<h3>讨论</h3>
-
-<p>另外一种办法是给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
-
-<p>但我所提供的这个办法，在stackoverflow上有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
 ]]></content>
   </entry>
   

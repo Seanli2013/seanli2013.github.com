@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>老旧Mac如何免费获得iWork - 大钟威武</title>
+  <title>点击button实现Storyboard中TabBar Controller的tab切换 - 大钟威武</title>
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="iWork免费了！以前仰望着的128元的产品，现在终于可以免费使用了！不过，据说需要买最新的硬件才能享受免费。于是就有了下面：老旧mac得到免费iWork的方式。 注：第二步中可能需要你有美国账号（其他国家的账号没试过，中国的不行），如果没有美国账号，据说更改系统的语言为英文也行。 第一步， &hellip;">
+  <meta name="description" content="环境和想要实现的功能 在Storyboard上，TabBarController作为rootViewController，此时想要在某个tab的VC中，点击个button，跳转到另外的tab上。如下图所示： 上图中，在第一个Tab上，点击“点击此处，去新建和管理提醒”，会跳转到第二个Tab， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Seanli2013.github.io/blog/2013/10/24/iwork-free">
+  <link rel="canonical" href="http://Seanli2013.github.io/blog/2013/11/24/change-tab-on-button-click">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="大钟威武" type="application/atom+xml">
@@ -89,7 +89,7 @@
   
   <header>
     
-      <h1 class="entry-title">老旧Mac如何免费获得iWork</h1>
+      <h1 class="entry-title">点击button实现Storyboard中TabBar Controller的tab切换</h1>
     
     
       <p class="meta">
@@ -105,7 +105,7 @@
   
 
 
-<time datetime="2013-10-24T18:24:00+08:00" pubdate data-updated="true">Oct 24<span>th</span>, 2013</time>
+<time datetime="2013-11-24T18:10:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
         
       
 
@@ -117,53 +117,47 @@
   </header>
 
 
-<div class="entry-content"><p>iWork免费了！以前仰望着的128元的产品，现在终于可以免费使用了！不过，据说需要买最新的硬件才能享受免费。于是就有了下面：老旧mac得到免费iWork的方式。</p>
+<div class="entry-content"><h3>环境和想要实现的功能</h3>
 
-<p>注：<strong>第二步中可能需要你有美国账号</strong>（其他国家的账号没试过，中国的不行），如果没有美国账号，据说更改系统的语言为英文也行。</p>
+<p>在Storyboard上，TabBarController作为rootViewController，此时想要在某个tab的VC中，点击个button，跳转到另外的tab上。如下图所示：</p>
 
-<h1>第一步，装个09年的trial版</h1>
+<p><img src="http://bigbelldev.com/images/change_tab_vc_on_button.png" alt="" /></p>
 
-<p>下载地址可以去<a href="http://pan.baidu.com/s/1cLWWT">这里</a></p>
+<p>上图中，在第一个Tab上，点击“点击此处，去新建和管理提醒”，会跳转到第二个Tab，显示全部提醒的列表，来新建和管理提醒。</p>
 
-<h2>安装可能遇到的问题</h2>
+<h3>实现代码：</h3>
 
-<h3>无法open安装包</h3>
-
-<p>双击安装时，出现下面的对话框：</p>
-
-<p><img src="http://bigbelldev.com/images/tools/iWorkFree/CannotOpen.png" alt="CannotOpen" /></p>
-
-<h3>解决方式</h3>
-
-<!-- more -->
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="n">AppDelegate</span> <span class="o">*</span><span class="n">thisAppDelegate</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">delegate</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[(</span><span class="n">UITabBarController</span> <span class="o">*</span><span class="p">)</span><span class="n">thisAppDelegate</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">rootViewController</span> <span class="nl">setSelectedIndex:</span><span class="mi">1</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>不双击，而是按住Control键，单击。此时在出现的菜单中选择open。</p>
+<p>分析：
+我们在用代码创建app的时候，要在appDelegate中，去指定rootViewController。【不熟悉代码创建app的同学可以阅读这篇<a href="http://bigbelldev.com/blog/2013/07/25/ios-gui-implementation-discuss/">学习使用code实现iOS界面</a>，在这篇blog中，推荐的<a href="http://www.cocoachina.com/bbs/read.php?tid=131516">IOS开发之纯代码界面—基本控件使用篇</a>，非常适合新手学习code实现界面】在用Storyboard创建app的时候，虽然不用我们自己去指定rootViewController，但原理是一样的。</p>
 
-<p><img src="http://bigbelldev.com/images/tools/iWorkFree/ControlClick.png" alt="ControlClick" /></p>
+<p>Storyboard中，app的入口箭头指向的VC，通常就是rootViewController。在这个例子中，就是UITabBarController。</p>
 
-<p>此时再选择open，就可以啦！</p>
+<p>通过</p>
 
-<p><img src="http://bigbelldev.com/images/tools/iWorkFree/ChooseOpenAgain.png" alt="ChooseOpenAgain" /></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[[UIApplication sharedApplication] delegate]</span></code></pre></td></tr></table></div></figure>
 
-<p>安装完成后进入第二步。</p>
 
-<h1>第二步，在App Store进行免费更新</h1>
+<p>得到自己这个appDelegate，通过调用</p>
 
-<h2>1. 打开App Store切换国家</h2>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(UITabBarController *)thisAppDelegate.window.rootViewController</span></code></pre></td></tr></table></div></figure>
 
-<p>在AppStore页面右下角，有当前国家的标志，点击这里进行切换。点击选择美国后，App Store市场切换到美国：</p>
 
-<p><img src="http://bigbelldev.com/images/tools/iWorkFree/ChangeCountry.png" alt="ChangeCountry" /></p>
+<p>就得到了这个UITabBarController（的实例）。再使用UITabBarController（的实例）方法setSelectedIndex，去设定，要跳转到哪个Tab。</p>
 
-<p>“128元”的标志不见了，取而代之的是“update”。这时需要你的美国账号了。（没有美国账号的同学试试把系统语言改为英文，据说也行）
-<img src="http://bigbelldev.com/images/tools/iWorkFree/CanUpdateNow.png" alt="CanUpdateNow" /></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[(UITabBarController *)thisAppDelegate.window.rootViewController setSelectedIndex:1]</span></code></pre></td></tr></table></div></figure>
 
-<p>选择update，输入美国账号，搞定！</p>
 
-<hr />
-
-<p>苹果公司让这些产品免费，真挺好，赞一个！</p>
+<p>就是跳转到index为1的Tab，也就是第二个Tab了。</p>
 </div>
 
 
@@ -186,12 +180,12 @@
   
 
 
-<time datetime="2013-10-24T18:24:00+08:00" pubdate data-updated="true">Oct 24<span>th</span>, 2013</time>
+<time datetime="2013-11-24T18:10:00+08:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/tools/'>Tools</a>
+    <a class='category' href='/blog/categories/iosru-men/'>iOS入门</a>
   
 </span>
 
@@ -200,7 +194,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2013/10/24/iwork-free/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2013/10/24/iwork-free/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2013/11/24/change-tab-on-button-click/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2013/11/24/change-tab-on-button-click/" >Tweet</a>
   
   
   
@@ -209,10 +203,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/10/23/ios7-auto-layout/" title="Previous Post: iOS7 Autolayout 瞬间入门！">&laquo; iOS7 Autolayout 瞬间入门！</a>
+        <a class="basic-alignment left" href="/blog/2013/11/21/call-storyboard-scene-programmatically/" title="Previous Post: 通过代码调用Storyboard中的scene —— Call storyboard scene programmatically">&laquo; 通过代码调用Storyboard中的scene —— Call storyboard scene programmatically</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/10/28/ios-arc/" title="Next Post: iOS ARC入门">iOS ARC入门 &raquo;</a>
       
     </p>
   </footer>
