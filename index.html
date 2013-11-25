@@ -9,7 +9,7 @@
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="环境和想要实现的功能 在Storyboard上，TabBarController作为rootViewController，此时想要在某个tab的VC中，点击个button，跳转到另外的tab上。如下图所示： 上图中，在第一个Tab上，点击“点击此处，去新建和管理提醒”，会跳转到第二个Tab， &hellip;">
+  <meta name="description" content="iOS 播放 gif最棒的库，简单高效。 Animated GIFs implemented the right way on iOS iOS上播放gif，没有自带的API，所以我找了现成的库，借过来使用。github上我对比了3个star数目较多的代码，最终选择了OLImageView。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,119 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/">iOS播放gif最棒的库，简单高效</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-25T07:15:00+08:00" pubdate data-updated="true">Nov 25<span>th</span>, 2013</time>
+        
+      
+
+          | <a href="/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/#comments">Comments</a>
+         
+
+	</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>iOS 播放 gif最棒的库，简单高效。</p>
+
+<p>Animated GIFs implemented the right way on iOS</p>
+
+<hr />
+
+<p>iOS上播放gif，没有自带的API，所以我找了现成的库，借过来使用。github上我对比了3个star数目较多的代码，最终选择了<a href="https://github.com/ondalabs/OLImageView">OLImageView</a>。</p>
+
+<p>参与对比的是OLImageView，<a href="https://github.com/scspijker/iOS_AnimatedGif">iOS_AnimatedGif</a>，<a href="https://github.com/arturogutierrez/Animated-GIF-iPhone">Animated-GIF-iPhone</a>。</p>
+
+<h3>选择合适的库</h3>
+
+<p>对比的指标，我选择</p>
+
+<h5>1. 效率高，占用内存小</h5>
+
+<p>只播放同样一个Gif，OLImageView占用内存是后两者的4/5。</p>
+
+<p>（这个测试可能不完备，没有测试同时播放多个gif，或者播放不同类型gif的对比。但对我使用来讲，只播放这个Gif，就可以说明问题了。）</p>
+
+<h5>2. 代码维护活跃</h5>
+
+<p>OLImageView近来都有更新。</p>
+
+<p>后两个中，Animated-GIF-iPhone是从iOS_AnimatedGif分出来的，两个都已经分别3年多、1年多没有更新了，虽然去年iOS_AnimatedGif的作者在blog上说要做对ARC的支持，但也没看更新。</p>
+
+<h3>OLImageView用法</h3>
+
+<p>大家可以在github上，看到<a href="https://github.com/ondalabs/OLImageView">OLImageView</a>的用法，用法是描述如何从code中创建和使用，非常简单直白。</p>
+
+<p>我在这里介绍一下实际在Storyboard中使用的方式。</p>
+
+<h5>1. 文件拖入工程</h5>
+
+<p>下载的OLImageView文件共有6个，但只要把下面四个文件拖进你的工程即可：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/OLImageViewFilesInProject.png" alt="OLImageViewFilesInProject" /></p>
+
+<h5>2. Storyboard中设置UIImageView为OLImageView</h5>
+
+<p>正常拖入一个UIImageView，在这个view的CustomClass中设定为OLImageView：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/CustomClass.png" alt="CustomClass" /></p>
+
+<p>在Outlet中，设定为OLImageView类型</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/Outlet.png" alt="Outlet" /></p>
+
+<h5>3. code中操作</h5>
+
+<p>在合适的地方，把gif设定进去，注意这里的UIImage要换成OLImage：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">guideImageGif1</span> <span class="nl">setImage:</span><span class="p">[</span><span class="n">OLImage</span> <span class="nl">imageNamed:</span><span class="s">@&quot;peaceful.gif&quot;</span><span class="p">]];</span><span class="c1">//注意这里的image要使用OLImage</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我的gif是在scrolllView中播放，所以我还需要设定frame：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">guideImageGif1</span> <span class="nl">setFrame:</span><span class="n">self</span><span class="p">.</span><span class="n">myScrollView</span><span class="p">.</span><span class="n">frame</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>效果</h3>
+
+<p>我在“药提醒你”的帮助VC中，背景是个gif，具体效果，你可以下载个下来看看^_^</p>
+
+<h3>最后</h3>
+
+<p>要是有时间，你尽量阅读一下库的代码。知其然也知其所以然。</p>
+
+<p>我在这里也就写写用法，比较浅显。目的是能让有同样需求的同学，减少一点儿时间开销，哪怕只减少了几分钟，也值得了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -968,98 +1081,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/05/ios-accelerometer/">学习iOS传感器的使用</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-05T18:17:00+08:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time>
-        
-      
-
-          | <a href="/blog/2013/08/05/ios-accelerometer/#comments">Comments</a>
-         
-
-	</p>
-    
-  </header>
-
-
-  <div class="entry-content"><h3>iOS涉及到的传感器</h3>
-
-<p>不用查资料，用过iPhone的同学都知道。iphone中有加速度传感器，可以感知手机在哪个方向上有加速度，比如屏幕的翻转、飞行控制游戏等都是利用这个特征做的；有指南针（貌似叫陀螺仪？），可以知道你的方向；还有定位装置，可以知道你现在的位置在哪里。</p>
-
-<p>加速度传感器相关功能是由CoreMotion提供；指南针、定位信息相关功能由CoreLocation提供。</p>
-
-<h3>CoreMotion</h3>
-
-<p>在CoreMotion.framework中，有下面这些类：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CMAccelerometerData
-</span><span class='line'>CMAttitude
-</span><span class='line'>CMDeviceMotion
-</span><span class='line'>CMGyroData
-</span><span class='line'>CMLogItem
-</span><span class='line'>CMMagnetometerData
-</span><span class='line'>CMMotionManager</span></code></pre></td></tr></table></div></figure>
-
-
-<p>每个是做什么的，可以在官方文档中阅读，就不在这翻译了。其中实现对设备加速度的识别，主要是使用CMMotionManager。</p>
-
-<h3>CMMotionManager</h3>
-
-<p>如何使用CMMotionManager？</p>
-
-<p>Step1：产生一个CMMotionManager的实例mManager。</p>
-
-<p>Step2：实例使用方法isAccelerometerAvailable判断加速度传感器是否可用。</p>
-
-<p>Step3：如果可用，则通过方法setAccelerometerUpdateInterval设定采样频率。</p>
-
-<p>Step4：最后使用startAccelerometerUpdatesToQueue:withHandler开始采样及对采样进行处理。</p>
-
-<h3>测试代码</h3>
-
-<p>实现一个小球在一个框中运动，运动的轨迹是根据手机的倾斜角度计算，运动的方向同倾斜的角度一致，并且倾斜角度越大运动速度越快。
-<a href="http://bigbelldev.com/codes/testGravity.zip">代码下载</a>
-在代码的实现过程中，对view的层次有了更深的体会。此外，在给label供数的时候，发现刚好使用代理的方式，算是也对代理做了联系。</p>
-
-<h3>编码过程中遇到七七八八问题的记录</h3>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/05/ios-accelerometer/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1072,7 +1093,7 @@
   
     <section>
   <h1>分类列表</h1>
-    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (12)</a></li><li><a href='/blog/categories/tools/'>Tools (5)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (13)</a></li><li><a href='/blog/categories/tools/'>Tools (5)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
 </section>
 <section>
 <h1>我的产品</h1>
@@ -1087,6 +1108,10 @@
 <section>
   <h1>最新文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/">iOS播放gif最棒的库，简单高效</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/24/change-tab-on-button-click/">点击button实现Storyboard中TabBar Controller的tab切换</a>
@@ -1122,10 +1147,6 @@
     
       <li class="post">
         <a href="/blog/2013/10/08/product-support-sreminder-main-page/">药提醒你</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/03/product-support-reminder-feedback-1-dot-0/">“药提醒你”V1.0/V1.0.1/V1.1反馈</a>
       </li>
     
   </ul>

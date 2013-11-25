@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://Seanli2013.github.io/atom.xml" rel="self"/>
   <link href="http://Seanli2013.github.io/"/>
-  <updated>2013-11-24T18:51:52+08:00</updated>
+  <updated>2013-11-25T08:17:41+08:00</updated>
   <id>http://Seanli2013.github.io/</id>
   <author>
     <name><![CDATA[Xiang LI]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS播放gif最棒的库，简单高效]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/"/>
+    <updated>2013-11-25T07:15:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios</id>
+    <content type="html"><![CDATA[<p>iOS 播放 gif最棒的库，简单高效。</p>
+
+<p>Animated GIFs implemented the right way on iOS</p>
+
+<hr />
+
+<p>iOS上播放gif，没有自带的API，所以我找了现成的库，借过来使用。github上我对比了3个star数目较多的代码，最终选择了<a href="https://github.com/ondalabs/OLImageView">OLImageView</a>。</p>
+
+<p>参与对比的是OLImageView，<a href="https://github.com/scspijker/iOS_AnimatedGif">iOS_AnimatedGif</a>，<a href="https://github.com/arturogutierrez/Animated-GIF-iPhone">Animated-GIF-iPhone</a>。</p>
+
+<h3>选择合适的库</h3>
+
+<p>对比的指标，我选择</p>
+
+<h5>1. 效率高，占用内存小</h5>
+
+<p>只播放同样一个Gif，OLImageView占用内存是后两者的4/5。</p>
+
+<p>（这个测试可能不完备，没有测试同时播放多个gif，或者播放不同类型gif的对比。但对我使用来讲，只播放这个Gif，就可以说明问题了。）</p>
+
+<h5>2. 代码维护活跃</h5>
+
+<p>OLImageView近来都有更新。</p>
+
+<p>后两个中，Animated-GIF-iPhone是从iOS_AnimatedGif分出来的，两个都已经分别3年多、1年多没有更新了，虽然去年iOS_AnimatedGif的作者在blog上说要做对ARC的支持，但也没看更新。</p>
+
+<h3>OLImageView用法</h3>
+
+<p>大家可以在github上，看到<a href="https://github.com/ondalabs/OLImageView">OLImageView</a>的用法，用法是描述如何从code中创建和使用，非常简单直白。</p>
+
+<p>我在这里介绍一下实际在Storyboard中使用的方式。</p>
+
+<h5>1. 文件拖入工程</h5>
+
+<p>下载的OLImageView文件共有6个，但只要把下面四个文件拖进你的工程即可：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/OLImageViewFilesInProject.png" alt="OLImageViewFilesInProject" /></p>
+
+<h5>2. Storyboard中设置UIImageView为OLImageView</h5>
+
+<p>正常拖入一个UIImageView，在这个view的CustomClass中设定为OLImageView：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/CustomClass.png" alt="CustomClass" /></p>
+
+<p>在Outlet中，设定为OLImageView类型</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/Outlet.png" alt="Outlet" /></p>
+
+<h5>3. code中操作</h5>
+
+<p>在合适的地方，把gif设定进去，注意这里的UIImage要换成OLImage：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">guideImageGif1</span> <span class="nl">setImage:</span><span class="p">[</span><span class="n">OLImage</span> <span class="nl">imageNamed:</span><span class="s">@&quot;peaceful.gif&quot;</span><span class="p">]];</span><span class="c1">//注意这里的image要使用OLImage</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我的gif是在scrolllView中播放，所以我还需要设定frame：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">guideImageGif1</span> <span class="nl">setFrame:</span><span class="n">self</span><span class="p">.</span><span class="n">myScrollView</span><span class="p">.</span><span class="n">frame</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>效果</h3>
+
+<p>我在“药提醒你”的帮助VC中，背景是个gif，具体效果，你可以下载个下来看看^_^</p>
+
+<h3>最后</h3>
+
+<p>要是有时间，你尽量阅读一下库的代码。知其然也知其所以然。</p>
+
+<p>我在这里也就写写用法，比较浅显。目的是能让有同样需求的同学，减少一点儿时间开销，哪怕只减少了几分钟，也值得了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[点击button实现Storyboard中TabBar Controller的tab切换]]></title>
@@ -1482,80 +1563,6 @@
 </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[octopress发表blog文章和管理blog]]></title>
-    <link href="http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog/"/>
-    <updated>2011-07-11T05:59:00+08:00</updated>
-    <id>http://Seanli2013.github.io/blog/2011/07/11/octopress-create-and-manage-blog</id>
-    <content type="html"><![CDATA[<h2>octopress的官方文档</h2>
-
-<h5>octopress的官方文档写得非常清晰和简洁，你需要的，基本他都教给你了。虽然中文的大家写的octopress的使用博文非常非常多，但还是建议你先阅读一遍octopress的官方文档，你可以从全貌上了解octopress都能做哪些。</h5>
-
-<p><a href="http://octopress.org/docs/">Octopress Documentation</a></p>
-
-<h3>发表文章的过程</h3>
-
-<ol>
-<li>本地建立一个新文章。rake new_post[&ldquo;new post title&rdquo;]，在“source/_posts/”目录下生成一个markdown文件</li>
-<li>编辑这个markdown文件，你可以改名字，也可以改文件的内容</li>
-<li>使用命令rake generate，这时在本地把你添加的新文章做了生成</li>
-<li>使用命令rake preview，这时在浏览器中输入localhost:4000来在本地查看效果</li>
-<li>效果ok，使用命令rake deploy，把本地的部署到github服务端</li>
-<li>过一会儿之后，你的服务端的blog就更新成最新的啦</li>
-</ol>
-
-
-<h3>管理和配置界面</h3>
-
-<p>管理和配置界面，就是修改你本地的若干配置文件，之后rake generate成功后，再deploy，就完成了修改。</p>
-
-<h4>拿增加页面为例</h4>
-
-<p>搭建好的octopress，默认只有blog和achieve两个页面，要增加页面需要两步：</p>
-
-<ol>
-<li>本地建立个新文件夹。位置没关系，命令使用rake new_page[new-page-title]，这个文件夹内应该会包含一个index.markdown的文件，如果没有这个文件，请新建一个</li>
-<li><p>在blog主页的导航栏上还需要新建个页面名称，否则在blog上是看不到你新建的页面的，这需要编辑</p>
-
-<p> <code>
- source/_includes/custom/navigation.html
-</code></p></li>
-</ol>
-
-
-<p>编辑后的结果类似：<!--more--></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;ul class="main-navigation"&gt;
-</span><span class='line'>  &lt;li&gt;&lt;a href="http://Seanli2013.github.io/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>      &lt;li&gt;&lt;a href="http://Seanli2013.github.io/blog/archives"&gt;Archives&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>      &lt;li&gt;&lt;a href="http://Seanli2013.github.io/about"&gt;About Me&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>      &lt;li&gt;&lt;a href="http://Seanli2013.github.io/test"&gt;Test Field&lt;/a&gt;&lt;/li&gt;
-</span><span class='line'>&lt;/ul&gt;   </span></code></pre></td></tr></table></div></figure>
-
-
-<p>实际上就是把blog主页上导航的部分指向你新建的页面所在的文件夹名称。
-部署的方式与发表文章过程一致。</p>
-
-<p>修改页面的方式也可参考<a href="http://icodeit.org/2013/01/add-new-page-to-octopress/">为octopress添加新的页面(page)</a>，在这片文章中对一个典型的octopress博客的source目录布局进行了描述。</p>
-
-<p>再提一下评论，评论多数人说多说好用，多说的设置参考<a href="http://ihavanna.org/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">为 Octopress 添加多说评论系统</a>。</p>
-
-<p>更多的配置管理，可自行进行搜索，网上信息很多。比如这位朋友写的<a href="http://www.yanjiuyanjiu.com/blog/20130402/">配置</a>。</p>
-
-<p><strong>最推荐的应该是先阅读这个octopress的<a href="http://octopress.org">官网</a></strong>，信息量非常大。例如<a href="http://octopress.org/docs/blogging/">Blogging Basics</a>详细儿清晰地介绍了发表文章的过程。</p>
-
-<h3>编辑的文章的工具</h3>
-
-<p>我在用<a href="http://mouapp.com">Mou</a>，markdown语言，挺好使的。</p>
 ]]></content>
   </entry>
   
