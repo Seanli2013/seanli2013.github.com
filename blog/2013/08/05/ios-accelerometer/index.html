@@ -127,20 +127,21 @@
 
 <p>在CoreMotion.framework中，有下面这些类：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>CMAccelerometerData
-</span><span class='line'>CMAttitude
-</span><span class='line'>CMDeviceMotion
-</span><span class='line'>CMGyroData
-</span><span class='line'>CMLogItem
-</span><span class='line'>CMMagnetometerData
-</span><span class='line'>CMMotionManager</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">CMAccelerometerData</span>
+</span><span class='line'><span class="n">CMAttitude</span>
+</span><span class='line'><span class="n">CMDeviceMotion</span>
+</span><span class='line'><span class="n">CMGyroData</span>
+</span><span class='line'><span class="n">CMLogItem</span>
+</span><span class='line'><span class="n">CMMagnetometerData</span>
+</span><span class='line'><span class="n">CMMotionManager</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>每个是做什么的，可以在官方文档中阅读，就不在这翻译了。其中实现对设备加速度的识别，主要是使用CMMotionManager。</p>
@@ -157,9 +158,9 @@
 
 <p>Step4：最后使用startAccelerometerUpdatesToQueue:withHandler开始采样及对采样进行处理。</p>
 
-<h3>测试代码</h3>
+<h3>示例代码</h3>
 
-<p>实现一个小球在一个框中运动，运动的轨迹是根据手机的倾斜角度计算，运动的方向同倾斜的角度一致，并且倾斜角度越大运动速度越快。
+<p>我在下面的代码中，实现了一个小球在一个框中运动，运动的轨迹是根据手机的倾斜角度计算，运动的方向同倾斜的角度一致，并且倾斜角度越大运动速度越快。
 <a href="http://bigbelldev.com/codes/testGravity.zip">代码下载</a>
 在代码的实现过程中，对view的层次有了更深的体会。此外，在给label供数的时候，发现刚好使用代理的方式，算是也对代理做了联系。</p>
 
@@ -197,7 +198,7 @@
 
 <p><strong>原因：</strong></p>
 
-<p>很简单，是代码中使用了CoreMotion，但工程中没有添加CoreMotion.framework。这很常见：在使用CoreLocation等framework时，也要想着在工程中添加framework。</p>
+<p>原因是代码中使用了CoreMotion，但工程中没有添加CoreMotion.framework。这很常见：在使用CoreLocation等framework时，也要想着在工程中添加framework。</p>
 
 <p><strong>解决办法：</strong>
 在下图处添加CoreMotion.framework</p>
@@ -206,9 +207,10 @@
 
 <h4>给工程改名字导致编译不过</h4>
 
-<p><strong>原因：</strong></p>
+<p>这是个题外话，当时想给工程改个名字，结果改了之后，编译不过。
+<strong>原因：</strong></p>
 
-<p>都很简单了，都是名字、路径更改导致的找不到文件。</p>
+<p>原因都是名字、路径更改导致的找不到文件。</p>
 
 <p><strong>解决办法：</strong></p>
 
