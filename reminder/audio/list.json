@@ -1,0 +1,20 @@
+{
+  "tunes": [
+    {
+      "filename": "systemdefault_1s.caf",
+      "size": "59KB",
+      "length": "1s"
+    },
+    {
+      "filename": "ding_7s.caf",
+      "size": "380KB",
+      "length": "7s"
+    },
+    {
+      "filename": "erhu_mario_29s.caf",
+      "size": "1.4MB",
+      "length": "29s"
+    }
+  ],
+  "path": "http://bigbelldev.com/reminder/audio/"
+}
