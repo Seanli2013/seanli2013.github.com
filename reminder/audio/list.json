@@ -133,5 +133,6 @@
       }
     ]
   },
-  "path": "http://bigbelldev.com/reminder/audio/"
+  "path": "http://bigbelldev.com/reminder/audio/",
+  "version": 1
 }
