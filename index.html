@@ -9,7 +9,7 @@
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="iOS 播放 gif最棒的库，简单高效。 Animated GIFs implemented the right way on iOS iOS上播放gif，没有自带的API，所以我找了现成的库，借过来使用。github上我对比了3个star数目较多的代码，最终选择了OLImageView。 &hellip;">
+  <meta name="description" content="这几天手机更新了iOS7.1，xcode也更新到了5.1，之后就跳进了两个坑…… 1.UITableviewCell在Xcode5.1中默认未勾选Clip Subviews 结果会导致靠改变Cell的高度，隐藏一些内容的时候，无法隐藏成功： 当switch turn off的时候，想得到： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,81 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/13/xcode5-dot-1-and-ios7-dot-1-be-aware/">更新xcode5.1后要注意的两点</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-13T21:52:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
+        
+      
+
+          | <a href="/blog/2014/03/13/xcode5-dot-1-and-ios7-dot-1-be-aware/#comments">Comments</a>
+         
+
+	</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这几天手机更新了iOS7.1，xcode也更新到了5.1，之后就跳进了两个坑……</p>
+
+<h4>1.UITableviewCell在Xcode5.1中默认未勾选Clip Subviews</h4>
+
+<p><strong>结果会导致靠改变Cell的高度，隐藏一些内容的时候，无法隐藏成功：</strong></p>
+
+<p><img src="http://bigbelldev.com/images/blogs/X-CellTallHeight.png" alt="X-CellTallHeight" /></p>
+
+<p>当switch turn off的时候，想得到：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/X-CellShortHeight.png" alt="X-CellShortHeight" /></p>
+
+<p>结果得到：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/X-CellShortHeightUnexpected.png" alt="X-CellShortHeightUnexpected" /></p>
+
+<p><strong>解决办法，就是勾选上Cell的Clip Subviews。code实现这个功能的时候也需要注意：set clipsToBounds = YES</strong></p>
+
+<p>为什么Xcode5.1中默认改为未勾选呢？在<a href="https://developer.apple.com/LIBRARY/ios/releasenotes/DeveloperTools/RN-Xcode/Introduction/Introduction.html">Xcode 5.1 Release Notes</a>中没提，所以，是为什么呢？</p>
+
+<p>在《Xcode 5.1 Release Notes》中倒是提了下面这个“坑”：</p>
+
+<h4>2.默认Arm64编译</h4>
+
+<p><strong>结果会导致不支持64位的部分都报错啦。</strong></p>
+
+<p>因为Xcode5.1把Arm64加入到了Standard architectures中，所以<strong>解决办法就是别使用“Standard architectures”。</strong></p>
+
+<p>可以在Targets—>Build Settings—>Architectures中，选择Other，然后增加armv7和armv7s，删除$(ARCH_STANDARD)，如下图：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/X-ModifyArch.png" alt="X-ModifyArch" /></p>
+
+<hr />
+
+<p>看起来修改了这两个，就和原来没啥差别了，看来我还没用到《Xcode 5.1 Release Notes》中提到的那些更新点。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1017,70 +1092,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/27/to-learn-to-explore/">在实践中快速成长</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-27T13:49:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2013</time>
-        
-      
-
-          | <a href="/blog/2013/08/27/to-learn-to-explore/#comments">Comments</a>
-         
-
-	</p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>我的这个博客的副标题叫从白痴到大师的点滴积累，不知道有多少小伙伴和我是一样的想法？</p>
-
-<p>我们刚生下来时，都是白痴，懵懂地看着这个世界。随着一步步地成长，你有了一点一滴的积累，逐渐地，你在某些方面不再是白痴，甚至你成为了那方面的大师。
-我们在接触一门新技术的时候，刚开始都是白痴，然后你开始成长，成长可能快、可能慢。最后你可能成为了大师，也可能成为了炮灰。每个人的精力有限，他最多也只能在有限的几个方面成为大师，选好方向很重要，别在每个方向上都成了炮灰。</p>
-
-<p>我现在开始学习iOS开发技术，也就是开始做起了白痴。我想我会比其他人学得慢些，因为我基础相当差，我不是计算机科班出身，而且我只会纯C。没接触过C++、Java这两个打面向对象基础的语言。我还有2年的时间没有接触代码，这两年去做产品经理了。所以这次学习iOS开发技术的起点，算是和一个上过C语言课程的大二同学，差不多。</p>
-
-<p>我想初学iOS开发技术的孩纸们，像我这种水平的还是很多的吧，不然不会有那么多培训公司的做广告了。</p>
-
-<p>当然，培训公司做广告的另外一个原因是这技术简单，入门快，可以速成。这也是我选择这门技术入手的一个原因。我希望用最短的时间，学好一门工程技术，并且能学精通。我猴急，因为自己老大不小，自己还想做个高产的开发者，时间不等我，必须让自己快速成长起来。</p>
-
-<p>我还对自己有个要求，就是要靠自学。这个要求有些过分是不是？又要自己成长得快，又要靠自己学，而且自己还没啥基础，这不是又让马儿跑又不给马儿吃草么？恩，是有难度。对我来讲，从产品转技术，是做了很大的决定，就像原来使用刀，现在决定使用剑，我能不能用好剑，还不是百分百的确定，怎么来确定？就是给我一把剑，舞一舞，上战场砍砍人，看看是胜是败。如果这个过程有人一直帮你拿着剑，你怎么能看出自己用剑的潜力呢？选个自己能做得好的方向很重要，不然小心成为炮灰。</p>
-
-<p>在之前的学习中，我学习了几个控件的使用，也学习了几个OC概念，都做了demo，但觉得这样没法说自己啥时候就算是入了iOS技术的门。咋样能算入门呢？得系统地理解iOS的技术；能娴熟应用；能紧跟趋势。这就入门了。</p>
-
-<p>想入门，首先还是得做一个完整的app，这个完整的app需要是个值得上架的产品。在做这么个产品的过程中，会涉及到iOS技术的方方面面，希望这些方面能较为系统地覆盖iOS技术的体系。</p>
-
-<p>我的这个计划从8月上旬开始，在8月9日完成了产品的设计，8月10~18日对产品可能涉及到的技术点进行了预研，做了些测试，8月19日开始开始开发。在过去的这9天的开发工作中，收获实在是大！每天都要解决很多问题，很多问题的解决方法会让自己加深对iOS相关技术的理解。</p>
-
-<p>这会儿正有个烦心的问题需要找原因和解决方案，我打算take a break，换换脑子，回头想想这几天的收获，会心一笑，于是打算唠叨几句写下来^_^。</p>
-
-<p>想让自己快速进步，就是压迫自己亮亮剑。实际做个产品，对学习iOS技术来讲，非常有帮助。学习其他技术是不是也是一样？我猜可能是，这个等我学习其他技术的时候，再做体会。忽然觉得白眉大侠是挺酷的哈，这左手屠龙刀，右手倚天剑的。希望自己别熬到眉毛都白了，才成为大师……</p>
-
-<p>从现在开始，大师之路，走起~</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1093,7 +1104,7 @@
   
     <section>
   <h1>分类列表</h1>
-    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (13)</a></li><li><a href='/blog/categories/tools/'>Tools (5)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (14)</a></li><li><a href='/blog/categories/tools/'>Tools (5)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
 </section>
 <section>
 <h1>我的产品</h1>
@@ -1108,6 +1119,10 @@
 <section>
   <h1>最新文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/13/xcode5-dot-1-and-ios7-dot-1-be-aware/">更新xcode5.1后要注意的两点</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/">iOS播放gif最棒的库，简单高效</a>
@@ -1143,10 +1158,6 @@
     
       <li class="post">
         <a href="/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/">UITableViewCell在iOS7之后superview的问题</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/08/product-support-sreminder-main-page/">药提醒你2.0版本更名为“BB提醒”！</a>
       </li>
     
   </ul>

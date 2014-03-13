@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>“药提醒你”接下来需要什么功能？ - 大钟威武</title>
+  <title>更新xcode5.1后要注意的两点 - 大钟威武</title>
   <meta name="author" content="Xiang LI">
 
   
-  <meta name="description" content="哪些bug是要修复的？
-哪些功能是很需要的？ 1. 提醒声音可设置 有位同学建议提醒声音长一些或是可以循环提醒。 “有些老人或工作过于忙碌的人，有时候响一下，他们可能并不敏感或以为是条普通短信或手头有事直接就忘记了。” 这位同学说的对啊~ 预计在2.0版本实现。 2. 隐私保护 &hellip;">
+  <meta name="description" content="这几天手机更新了iOS7.1，xcode也更新到了5.1，之后就跳进了两个坑…… 1.UITableviewCell在Xcode5.1中默认未勾选Clip Subviews 结果会导致靠改变Cell的高度，隐藏一些内容的时候，无法隐藏成功： 当switch turn off的时候，想得到： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://Seanli2013.github.io/blog/2013/09/18/product-support-sreminder">
+  <link rel="canonical" href="http://Seanli2013.github.io/blog/2014/03/13/xcode5-dot-1-and-ios7-dot-1-be-aware">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="大钟威武" type="application/atom+xml">
@@ -90,7 +89,7 @@
   
   <header>
     
-      <h1 class="entry-title">“药提醒你”接下来需要什么功能？</h1>
+      <h1 class="entry-title">更新xcode5.1后要注意的两点</h1>
     
     
       <p class="meta">
@@ -106,7 +105,7 @@
   
 
 
-<time datetime="2013-09-18T14:13:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+<time datetime="2014-03-13T21:52:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
         
       
 
@@ -118,30 +117,41 @@
   </header>
 
 
-<div class="entry-content"><p>哪些bug是要修复的？
-哪些功能是很需要的？</p>
+<div class="entry-content"><p>这几天手机更新了iOS7.1，xcode也更新到了5.1，之后就跳进了两个坑……</p>
 
-<h3>1. 提醒声音可设置</h3>
+<h4>1.UITableviewCell在Xcode5.1中默认未勾选Clip Subviews</h4>
 
-<h5>有位同学建议提醒声音长一些或是可以循环提醒。</h5>
+<p><strong>结果会导致靠改变Cell的高度，隐藏一些内容的时候，无法隐藏成功：</strong></p>
 
-<p>“有些老人或工作过于忙碌的人，有时候响一下，他们可能并不敏感或以为是条普通短信或手头有事直接就忘记了。”</p>
+<p><img src="http://bigbelldev.com/images/blogs/X-CellTallHeight.png" alt="X-CellTallHeight" /></p>
 
-<p>这位同学说的对啊~</p>
+<p>当switch turn off的时候，想得到：</p>
 
-<p>预计在2.0版本实现。</p>
+<p><img src="http://bigbelldev.com/images/blogs/X-CellShortHeight.png" alt="X-CellShortHeight" /></p>
 
-<h3>2. 隐私保护</h3>
+<p>结果得到：</p>
 
-<h5>有位同学建议增加个app密码功能。</h5>
+<p><img src="http://bigbelldev.com/images/blogs/X-CellShortHeightUnexpected.png" alt="X-CellShortHeightUnexpected" /></p>
 
-<p>恩，听了一下她的解释，我也觉得挺有必要的。</p>
+<p><strong>解决办法，就是勾选上Cell的Clip Subviews。code实现这个功能的时候也需要注意：set clipsToBounds = YES</strong></p>
 
-<p>预计在2.0版本实现。</p>
+<p>为什么Xcode5.1中默认改为未勾选呢？在<a href="https://developer.apple.com/LIBRARY/ios/releasenotes/DeveloperTools/RN-Xcode/Introduction/Introduction.html">Xcode 5.1 Release Notes</a>中没提，所以，是为什么呢？</p>
+
+<p>在《Xcode 5.1 Release Notes》中倒是提了下面这个“坑”：</p>
+
+<h4>2.默认Arm64编译</h4>
+
+<p><strong>结果会导致不支持64位的部分都报错啦。</strong></p>
+
+<p>因为Xcode5.1把Arm64加入到了Standard architectures中，所以<strong>解决办法就是别使用“Standard architectures”。</strong></p>
+
+<p>可以在Targets—>Build Settings—>Architectures中，选择Other，然后增加armv7和armv7s，删除$(ARCH_STANDARD)，如下图：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/X-ModifyArch.png" alt="X-ModifyArch" /></p>
 
 <hr />
 
-<p>感谢热心反馈的同学们，希望这款用药提醒的工具能够越做越好！</p>
+<p>看起来修改了这两个，就和原来没啥差别了，看来我还没用到《Xcode 5.1 Release Notes》中提到的那些更新点。</p>
 </div>
 
 
@@ -164,12 +174,12 @@
   
 
 
-<time datetime="2013-09-18T14:13:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2013</time>
+<time datetime="2014-03-13T21:52:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/chan-pin-zhi-chi/'>产品支持</a>
+    <a class='category' href='/blog/categories/iosru-men/'>iOS入门</a>
   
 </span>
 
@@ -178,7 +188,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2013/09/18/product-support-sreminder/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2013/09/18/product-support-sreminder/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2014/03/13/xcode5-dot-1-and-ios7-dot-1-be-aware/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2014/03/13/xcode5-dot-1-and-ios7-dot-1-be-aware/" >Tweet</a>
   
   
   
@@ -187,10 +197,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/08/27/to-learn-to-explore/" title="Previous Post: 在实践中快速成长">&laquo; 在实践中快速成长</a>
+        <a class="basic-alignment left" href="/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/" title="Previous Post: iOS播放gif最棒的库，简单高效">&laquo; iOS播放gif最棒的库，简单高效</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/10/03/product-support-reminder-feedback-1-dot-0/" title="Next Post: “BB提醒/药提醒你” V1.0/V1.0.1/V1.1/V2.0 反馈">“BB提醒/药提醒你” V1.0/V1.0.1/V1.1/V2.0 反馈 &raquo;</a>
       
     </p>
   </footer>
