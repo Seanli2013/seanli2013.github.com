@@ -140,7 +140,7 @@ body     { pointer-events: none; }
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 200px;
+    bottom: 100px;
     
     background: rgba(0,0,0,0.5);
     color: #EEE;
@@ -166,7 +166,7 @@ body     { pointer-events: none; }
     transition:         opacity 1s,         transform 0.5s 1s;
 }
 
-.impress-on-bored .hint {
+.impress-on-intro .hint {
     opacity: 1;
     
     -webkit-transition: opacity 1s 5s, -webkit-transform 0.5s;
