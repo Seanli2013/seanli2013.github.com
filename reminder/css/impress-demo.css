@@ -191,8 +191,8 @@ body     { pointer-events: none; }
 #title .try {
     font-size: 64px;
     position: absolute;
-    top: -1.5em;
-    left: 1.5em;
+    top: 0em;
+    left: 0em;
     
     -webkit-transform: translateZ(20px);
     -moz-transform:    translateZ(20px);
