@@ -1,0 +1,1865 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[大钟威武]]></title>
+  <link href="http://lixiang02thu.github.io/atom.xml" rel="self"/>
+  <link href="http://lixiang02thu.github.io/"/>
+  <updated>2021-03-31T11:21:56+08:00</updated>
+  <id>http://lixiang02thu.github.io/</id>
+  <author>
+    <name><![CDATA[大钟威武]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello Again]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2021/03/31/hello-again/"/>
+    <updated>2021-03-31T10:13:21+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2021/03/31/hello-again</id>
+    <content type="html"><![CDATA[<p>时间过得快，距离上次更新文章已有7年。弹指一挥间。中断并非本意，而是7年前吃了一堑，想继续更新费点儿劲儿，又忙于其他，于是搁置了。</p>
+
+<p>7年前，电脑丢了，很多资料、code，都没有push到远端，找不回来了。这个博客是用当时较为流行的Octopress搭建的。静态网站放在Github Pages。静态网站部分都还在，但文章markdown原始版本也遭遇丢失。吃一堑长一智，从那之后我倒是记住了，<strong>code不隔夜，都上云。此外电脑也经常用Time Machine备份。</strong></p>
+
+<p>这次得以重新开始更新，经历了4步：</p>
+
+<ul>
+<li>Step 1，有想分享的东西，也有点时间，决定重新上路。</li>
+<li>Step 2，选平台工具。可选的有微信公众号，简书，或者还是自己搭建。选自己搭建吧，因为目标也不是要触达多少人，还是满足自己乐趣为主。Octopress已经过时很久了，几年前就不再维护了，但有这么个蛋碴子在，给它续上，也是乐趣。所以没有选择用新的工具。</li>
+<li>Step 3，恢复文章原始markdown版本。用了pandoc的ruby版，把文章从静态网站的html转为markdown。gist：<a href="https://gist.github.com/Seanli2013/f1e5608fd6f3591d4ddf57bc945ded87">https://gist.github.com/Seanli2013/f1e5608fd6f3591d4ddf57bc945ded87</a></li>
+<li>Step 4，重建Octopress+Github Pages。换了个Theme，换一换心情。<a href="http://octopress.org/docs/">http://octopress.org/docs/</a></li>
+</ul>
+
+
+<p>读7年前的东西，真会感觉后背发凉。非常初级和稚嫩。可惜没办法，那就是真实的自己。这7年，非常忙碌，经历颇多，但也在忙碌中忙得碌碌无为。小人物，不甘平庸，追求卓越，保重身体，人生还长，将来还是会做出成绩的。到时候回顾这一路从不堪中摸爬滚打出来，也许会增加些幸福感吧。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS播放gif最棒的库，简单高效]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/"/>
+    <updated>2013-11-25T07:15:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios</id>
+    <content type="html"><![CDATA[<p>iOS 播放 gif最棒的库，简单高效。</p>
+
+<p>Animated GIFs implemented the right way on iOS</p>
+
+<hr />
+
+<p>iOS上播放gif，没有自带的API，所以我找了现成的库，借过来使用。github上我对比了3个star数目较多的代码，最终选择了<a href="https://github.com/ondalabs/OLImageView">OLImageView</a>。</p>
+
+<p>参与对比的是OLImageView，<a href="https://github.com/scspijker/iOS_AnimatedGif">iOS_AnimatedGif</a>，<a href="https://github.com/arturogutierrez/Animated-GIF-iPhone">Animated-GIF-iPhone</a>。</p>
+
+<h3>选择合适的库</h3>
+
+<p>对比的指标，我选择</p>
+
+<h5>1. 效率高，占用内存小</h5>
+
+<p>只播放同样一个Gif，OLImageView占用内存是后两者的4/5。</p>
+
+<p>（这个测试可能不完备，没有测试同时播放多个gif，或者播放不同类型gif的对比。但对我使用来讲，只播放这个Gif，就可以说明问题了。）</p>
+
+<h5>2. 代码维护活跃</h5>
+
+<p>OLImageView近来都有更新。</p>
+
+<p>后两个中，Animated-GIF-iPhone是从iOS_AnimatedGif分出来的，两个都已经分别3年多、1年多没有更新了，虽然去年iOS_AnimatedGif的作者在blog上说要做对ARC的支持，但也没看更新。</p>
+
+<h3>OLImageView用法</h3>
+
+<p>大家可以在github上，看到<a href="https://github.com/ondalabs/OLImageView">OLImageView</a>的用法，用法是描述如何从code中创建和使用，非常简单直白。</p>
+
+<p>我在这里介绍一下实际在Storyboard中使用的方式。</p>
+
+<h5>1. 文件拖入工程</h5>
+
+<p>下载的OLImageView文件共有6个，但只要把下面四个文件拖进你的工程即可：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/OLImageViewFilesInProject.png" alt="OLImageViewFilesInProject" /></p>
+
+<h5>2. Storyboard中设置UIImageView为OLImageView</h5>
+
+<p>正常拖入一个UIImageView，在这个view的CustomClass中设定为OLImageView：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/CustomClass.png" alt="CustomClass" /></p>
+
+<p>在Outlet中，设定为OLImageView类型</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/Outlet.png" alt="Outlet" /></p>
+
+<h5>3. code中操作</h5>
+
+<p>在合适的地方，把gif设定进去，注意这里的UIImage要换成OLImage：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>    [self.guideImageGif1 setImage:[OLImage imageNamed:@&quot;peaceful.gif&quot;]];//注意这里的image要使用OLImage</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>我的gif是在scrolllView中播放，所以我还需要设定frame：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>    [self.guideImageGif1 setFrame:self.myScrollView.frame];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>效果</h3>
+
+<p>我在“药提醒你”的帮助VC中，背景是个gif，具体效果，你可以下载个下来看看^_^——右侧侧边栏“我的产品”。</p>
+
+<h3>最后</h3>
+
+<p>要是有时间，你尽量阅读一下库的代码。知其然也知其所以然。</p>
+
+<p>我在这里也就写写用法，比较浅显。目的是能让有同样需求的同学，减少一点儿时间开销，哪怕只减少了几分钟，也值得了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[点击button实现Storyboard中TabBar Controller的tab切换]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/11/24/change-tab-on-button-click/"/>
+    <updated>2013-11-24T18:10:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/11/24/change-tab-on-button-click</id>
+    <content type="html"><![CDATA[<h3>环境和想要实现的功能</h3>
+
+<p>在Storyboard上，TabBarController作为rootViewController，此时想要在某个tab的VC中，点击个button，跳转到另外的tab上。如下图所示：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/change_tab_vc_on_button.png" alt="" /></p>
+
+<p>上图中，在第一个Tab上，点击“点击此处，去新建和管理提醒”，会跳转到第二个Tab，显示全部提醒的列表，来新建和管理提醒。</p>
+
+<h3>实现代码：</h3>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2</code></pre></td>
+<td class="code"><pre><code>    AppDelegate *thisAppDelegate = [[UIApplication sharedApplication] delegate];
+    [(UITabBarController *)thisAppDelegate.window.rootViewController setSelectedIndex:1];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>分析：
+我们在用代码创建app的时候，要在appDelegate中，去指定rootViewController。【不熟悉代码创建app的同学可以阅读这篇<a href="http://bigbelldev.com/blog/2013/07/25/ios-gui-implementation-discuss/">学习使用code实现iOS界面</a>，在这篇blog中，推荐的<a href="http://www.cocoachina.com/bbs/read.php?tid=131516">IOS开发之纯代码界面—基本控件使用篇</a>，非常适合新手学习code实现界面】在用Storyboard创建app的时候，虽然不用我们自己去指定rootViewController，但原理是一样的。</p>
+
+<p>Storyboard中，app的入口箭头指向的VC，通常就是rootViewController。在这个例子中，就是UITabBarController。</p>
+
+<p>通过</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>[[UIApplication sharedApplication] delegate]</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>得到自己这个appDelegate，通过调用</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>(UITabBarController *)thisAppDelegate.window.rootViewController</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>就得到了这个UITabBarController（的实例）。再使用UITabBarController（的实例）方法setSelectedIndex，去设定，要跳转到哪个Tab。</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>[(UITabBarController *)thisAppDelegate.window.rootViewController setSelectedIndex:1]</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>就是跳转到index为1的Tab，也就是第二个Tab了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[通过代码调用Storyboard中的scene —— Call Storyboard Scene Programmatically]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/11/21/call-storyboard-scene-programmatically/"/>
+    <updated>2013-11-21T20:26:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/11/21/call-storyboard-scene-programmatically</id>
+    <content type="html"><![CDATA[<p>通过Storyboard搭建app框架，以及设计和实现一些view
+controller和view，是非常方便和高效的。</p>
+
+<p>有时，同样一个scene(i.e. view
+controller)，除了在Storyboard上通过segue达到以外，还需要在代码的某个地方，让它展现出来。</p>
+
+<p>如何在代码中，调用一个已经在storyboard中设计好的scene呢？代码如下：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5</code></pre></td>
+<td class="code"><pre><code>NSString * storyboardName = @&quot;MainStoryboard_iPhone&quot;;
+NSString * viewControllerID = @&quot;ViewID&quot;;
+UIStoryboard * storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+MyViewController * controller = (MyViewController *)[storyboard instantiateViewControllerWithIdentifier:viewControllerID];
+[self presentViewController:controller animated:YES completion:nil];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>注：代码段来自<a href="http://stackoverflow.com/questions/10522957/call-storyboard-scene-programmatically-without-needing-segue">Call storyboard scene programmatically (without needing
+segue)?</a></p>
+
+<h5>有两个注意的地方：</h5>
+
+<ol>
+<li>上面代码中的storyboardName不要包括”.storyboard”后缀。即，如果你的Storyboard文档叫做“Main.storyboard”，那么storyboardName应该叫@“Main”</li>
+<li>注意：在Storyboard中，先给你的viewController加上ID，添加的地方如下图所示：在Indentity中的Storyboard
+ID。通过这个viewControllerID（图中的例子就是@“UserGuide”），在代码中找到这个vc。</li>
+</ol>
+
+
+<p><img src="http://bigbelldev.com/images/blogs/storyboardID.png" alt="storyboardID" /></p>
+
+<hr />
+
+<p>关键字：代码中调用storyboard中的vc，代码中present storyboard scene</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NSUserDefault 常用功能 检测应用（或app的某个版本）第一次运行 或 记录用户设定的属性”]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings/"/>
+    <updated>2013-11-20T16:36:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings</id>
+    <content type="html"><![CDATA[<p>NSUserDefault，从名称也可看出，一般用来记录用户的设置的。这里介绍两种常用场景：<strong>检测应用（或app的某个版本）第一次运行</strong>
+和 <strong>记录用户设定的属性</strong>。</p>
+
+<h3>原理</h3>
+
+<p>几句话说下我的理解：</p>
+
+<ol>
+<li>NSUserDefault使用方法standardUserDefaults得到全局的一个<a href="http://bigbelldev.com/blog/2013/07/25/singleton/">单例</a></li>
+<li>在这个单例是个dictionary，即通过key-object来存、取信息</li>
+<li>信息会存在plist文件中，你不删它，它就一直存在</li>
+</ol>
+
+
+<h3>检测app第一次运行</h3>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6
+7
+8
+9</code></pre></td>
+<td class="code"><pre><code>    // 以下这段代码，检查是否app的这个版本是否是第一次运行
+    NSString *bundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
+    NSString *appFirstStartOfVersionKey = [NSString stringWithFormat:@&quot;first_start_%@&quot;, bundleVersion];
+    NSNumber *alreadyStartedOnVersion = [[NSUserDefaults standardUserDefaults] objectForKey:appFirstStartOfVersionKey];
+    if(!alreadyStartedOnVersion || [alreadyStartedOnVersion boolValue] == NO) {
+        [self versionFirstStart];// app的bundleVersion这个版本第一次运行，你希望这时做点儿什么
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:appFirstStartOfVersionKey];
+    }
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>每次启动app时候，调用这段代码。检查一个叫做first_start_加版本号这么个key，对应的NSNumber类型Object，是否存在，或是否是0（NO），如果不存在，或者是0（NO），那么是这个版本的第一次运行，这时做你想在app第一次运行时做的事儿，比如[self
+versionFirstStart]，之后在plist中添加这个key对应的NSNumber类型object，设置成1（YES）。这样，以后app只要未改变版本，启动时就再也不会执行[self
+versionFirstStart]了。</p>
+
+<p><a href="http://stackoverflow.com/questions/7758775/detecting-the-first-ever-run-of-an-app/7758850#7758850">参见stackoverflow</a></p>
+
+<p>P.S.
+虽然我并未更改这段代码进行更多尝试，但肯定不一定非要NSNumber这个类型，只要plist能存储和读取的类型就可以。</p>
+
+<h3>记录用户设定的属性</h3>
+
+<p>想设定一个属性，你给这个属性起个独有的key，比如叫做@“your property
+key”。</p>
+
+<p>设置属性：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>[[NSUserDefaults standardUserDefaults] setObject:@&quot;off&quot; forKey:@&quot;your property key&quot;];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>读取和判断属性：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3</code></pre></td>
+<td class="code"><pre><code>if([[[NSUserDefaults standardUserDefaults] objectForKey:@&quot;your property key&quot;] isEqualToString:@&quot;off&quot;])
+{
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>更多你要了解的NSUserDefault</h3>
+
+<h5>1. 可存储的类型</h5>
+
+<p>NSUserDefault中存储的object的格式只能是以下列表中的类型，这是plist存储方式决定的。</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6
+7</code></pre></td>
+<td class="code"><pre><code>array
+dictionary
+data
+date
+number - integer
+number - floating point
+Boolean</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>了解更多，可查阅<a href="https://developer.apple.com/library/mac/documentation/cocoa/Conceptual/PropertyLists/Introduction/Introduction.html#//apple_ref/doc/uid/10000048i">Property List Programming
+Guide</a></p>
+
+<h5>2. 自动存储</h5>
+
+<p>使用NSUserDefault，默认是自动存储的，即你修改完之后，ios自动找个时候，同步（synchronize）一下内存和plist。</p>
+
+<p>手动存储可直接调用synchronize方法：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>[[NSUserDefaults standardUserDefaults] synchronize];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<h5>3. 查看目前NSUserDefaults standardUserDefaults中的内容</h5>
+
+<p>查看全部dict内容</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>NSLog(@&quot;%@&quot;, [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>当然，也可以查看全部的key</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>NSLog(@&quot;%@&quot;, [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys]);</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Outlook 转移OST数据文件 IMAP账户]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/11/13/outlook-move-ost-location/"/>
+    <updated>2013-11-13T10:17:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/11/13/outlook-move-ost-location</id>
+    <content type="html"><![CDATA[<h3>问题</h3>
+
+<p>windows8系统，装了Outlook2013，占用了C盘大约10G空间，主要都是数据文件（OST文件）占用的。希望能够把数据文件从C盘移至其他盘。并且账户是IMAP账户，不是Exchange。</p>
+
+<p>google一下，绝大多数解决方案是针对以下两种情况：</p>
+
+<ul>
+<li>使用Exchange的账户，如何做到移动ost文件</li>
+<li>移动pst文件，而不是移动ost文件</li>
+</ul>
+
+
+<p>都不适用。后来发现了这个解决方案，尝试后，成功！分享给大家：</p>
+
+<h3>解决方案</h3>
+
+<p>把ost文件移动到其他盘，在原来C盘的ost文件位置建立一个链接，链接到移动后的那个文件，大功告成。引用原作者的描述：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</code></pre></td>
+<td class="code"><pre><code>在Outlook2013 IMAP账户中
+
+假设你目前的demo.pst文件在路径C:\Users\%username%\AppData\Local\Microsoft\Outlook下(已创建)
+
+1. 关闭Outlook，移动此文件到D:\Outlook Files下。
+
+2. 打开CMD，键入 mklink &quot;C:\Users\%username%\AppData\Local\Microsoft\Outlook\XXXX.com.ost&quot; &quot;E:\Profile\Outlook\XXXX.com.ost&quot;
+
+3. 此时C:\Users\%username%\AppData\Local\Microsoft\Outlook下会有一个类似于快捷方式的同步文件demo.ost存在（0KB）。
+
+4. 打开Outlook，IMAP账户仍然会挂接到C:\Users\%username%\AppData\Local\Microsoft\Outlook\demo.ost上，但该文件只是D盘下数据文件的映射，实际不消耗任何磁盘空间。</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>原文地址：<a href="http://beijing-zhanglei.blog.sohu.com/272769443.html">Outlook2013
+迁移OST存储位置</a></p>
+
+<h3>注意事项</h3>
+
+<p>使用的过程中有需要注意的地方：</p>
+
+<h5>1~ 需要使用管理员身份运行cmd</h5>
+
+<p>windows8的应用程序那儿，搜素cmd，出来“命令提示符”，右键点击，这时屏幕下方会出现几个选项，选择“”以管理员身份运行”</p>
+
+<h5>2~ 建立符号链接的位置的磁盘应该是NTFS格式</h5>
+
+<p>建立符号链接的位置，就是mklink后紧跟的参数的位置，如果不是NTFS格式的盘，恐怕就建立不了了。</p>
+
+<h3>P.S. 我更喜欢Mac</h3>
+
+<p>虽然windows是个很伟大的系统，并且其中的很多软件也异常优秀，但我已经很久不用windows了。日常使用，我觉得Mac系统是胜过windows的，尤其是对编程写代码的人。</p>
+
+<p>但windows你也得熟悉，一方面由于别人的或公共的电脑windows占比很高，另一方面老婆向你求助的时候，你得帮忙解决问题啊，就像今天这个分享写的这事儿。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS ARC入门]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/10/28/ios-arc/"/>
+    <updated>2013-10-28T20:04:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/10/28/ios-arc</id>
+    <content type="html"><![CDATA[<p>现在，iOS系统已经发展到iOS7，而iOS5时引入的ARC技术早已成为主流了。所以iOS新手们对ARC技术已经习以为常了吧，对之前的手工内存管理可能完全不了解，因为基本用不到。ARC又是如此简单，貌似也没有什么必须学习的。但了解一下ARC的原理原则还是必须的——因为了解技术的原理可以更好地对技术进行应用嘛。</p>
+
+<p>本文算是阅读 <a href="http://www.raywenderlich.com/5677/beginning-arc-in-ios-5-part-1">Beginning ARC in iOS 5 Tutorial Part
+1</a>
+（翻译在 <a href="http://www.raywenderlich.com/zh-hans/20855/ios-5-arc-%E5%85%A5%E9%97%A8-13">iOS 5 ARC 入门
+(1/3)</a>
+翻译的同学很有爱也很辛苦，但有些地方有错误，所以读原文会比较好。）</p>
+
+<h2>ARC简介</h2>
+
+<p>ARC，Automatic Reference Counting，在iOS5引入。</p>
+
+<h3>原理</h3>
+
+<p>简单说是代码在编译阶段，由编译器（LLVM
+3.0）自动生成实例的引用计数管理的一些代码（插入retain/release等），起到内存管理的作用。</p>
+
+<h3>在ARC之前</h3>
+
+<p>在ARC之前，需要手工管理内存，原则是：</p>
+
+<ul>
+<li>如果你想保持一个对象可用，除非它已经被retain了，否则就需要retain它</li>
+<li>如果不再需要一个对象，就需要release它，除非它已经被release了（通过autorelease）</li>
+</ul>
+
+
+<h3>用ARC，程序会变慢吗？</h3>
+
+<p>不会！</p>
+
+<p>ARC就是在需要retain和release的地方为你插入它们——这就是ARC和手工管理内存一样快的原因，当然有时ARC还会更快，因为它在后端还进行了一些优化操作。</p>
+
+<h2>ARC使用</h2>
+
+<p>这里只介绍个ARC使用方法的小子集，即仅记录了我觉得有意思的几个概念原则。ARC使用全集请看<a href="http://www.raywenderlich.com/5677/beginning-arc-in-ios-5-part-1">Beginning
+ARC in iOS 5 Tutorial Part
+1</a><sup><a href="#fn:1">1</a></sup>。</p>
+
+<h3>strong、weak</h3>
+
+<ul>
+<li>有strong指针指向那个对象，那个对象就一直存在在内存中。这个原则对实例变量、属性、局部变量都使用</li>
+<li>默认所有实例变量局部变量等都是strong的指针，strong表示指针是变量的所有者</li>
+<li>weak也可以指向一个对象，但不能是所有者</li>
+<li>zeroing
+weak指针，是指weak指向的对象被释放了，weak指向的变量的值自动变为nil，这个特性防止了指向一个被释放的内存（例如悬空指针、僵尸等这样的说法这种问题就没有啦）</li>
+<li>weak不常用，经常使用在父子对象上，因为父有strong指向子，子指向父的时候就只能用weak，常见的datasource、delegate都是这样</li>
+</ul>
+
+
+<h3>ARC特殊注意的地方</h3>
+
+<ul>
+<li>ARC不适用于Core Foundation 或 malloc() 和
+free()，后者还是要手工管理内存</li>
+<li>ARC
+有效的时候，由于编译器帮我们做了内存管理的工作，所以我们不需要太担心。但是当与
+ARC
+管理以外的对象类型交互的时候，就需要特殊的转型关键字，来决定所有权的归属问题。比如“__bridge”。进一步了解可阅读参考文件<sup><a href="#fn:2">2</a></sup></li>
+<li>使用ARC，仍然要想着谁持有谁，后者的生命周期是怎么样的等，因为如果不释放指针，被持有者就一直在内存中</li>
+</ul>
+
+
+<h2>结语</h2>
+
+<p>易飞扬对ARC的7篇博文很值得推荐，大家想深入了解ARC原理可以去阅读：
+<a href="http://www.yifeiyang.net/development-of-the-iphone-simply-7/">iPhone开发之深入浅出</a>，注：要跳墙。</p>
+
+<p>参考文献<a href="http://www.raywenderlich.com/5677/beginning-arc-in-ios-5-part-1">Beginning ARC in iOS 5 Tutorial Part
+1</a>中说：ARC是代表着OC的未来（大概因为ARC之前的内存管理是开发者们曾经的噩梦吧）。A
+smart developer tries to automate as much of his job as possible, and
+that’s exactly what ARC offers: automation of menial programming work
+that you had to do by hand previously. To me, switching is a no-brainer.</p>
+
+<p>技术在不断飞速演进，做工程开发的我们，紧盯技术发展趋势，勇于接受新的东西。</p>
+
+<hr />
+
+<ol>
+<li><p><a href="http://www.raywenderlich.com/5677/beginning-arc-in-ios-5-part-1">Beginning ARC in iOS 5 Tutorial Part
+1</a><a href="#fnref:1">↩</a></p></li>
+<li><p><a href="http://www.yifeiyang.net/development-of-the-iphone-simply-7/">iPhone开发之深入浅出</a>
+注：该文需要跳墙<a href="#fnref:2">↩</a></p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[老旧Mac如何免费获得iWork]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/10/24/iwork-free/"/>
+    <updated>2013-10-24T18:24:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/10/24/iwork-free</id>
+    <content type="html"><![CDATA[<p>iWork免费了！以前仰望着的128元的产品，现在终于可以免费使用了！不过，据说需要买最新的硬件才能享受免费。于是就有了下面：老旧mac得到免费iWork的方式。</p>
+
+<p>注：<strong>第二步中可能需要你有美国账号</strong>（其他国家的账号没试过，中国的不行），如果没有美国账号，据说更改系统的语言为英文也行。</p>
+
+<h1>第一步，装个09年的trial版</h1>
+
+<p>下载地址可以去<a href="http://pan.baidu.com/s/1cLWWT">这里</a></p>
+
+<h2>安装可能遇到的问题</h2>
+
+<h3>无法open安装包</h3>
+
+<p>双击安装时，出现下面的对话框：</p>
+
+<p><img src="http://bigbelldev.com/images/tools/iWorkFree/CannotOpen.png" alt="CannotOpen" /></p>
+
+<h3>解决方式</h3>
+
+<p>不双击，而是按住Control键，单击。此时在出现的菜单中选择open。</p>
+
+<p><img src="http://bigbelldev.com/images/tools/iWorkFree/ControlClick.png" alt="ControlClick" /></p>
+
+<p>此时再选择open，就可以啦！</p>
+
+<p><img src="http://bigbelldev.com/images/tools/iWorkFree/ChooseOpenAgain.png" alt="ChooseOpenAgain" /></p>
+
+<p>安装完成后进入第二步。</p>
+
+<h1>第二步，在App Store进行免费更新</h1>
+
+<h2>1. 打开App Store切换国家</h2>
+
+<p>在AppStore页面右下角，有当前国家的标志，点击这里进行切换。点击选择美国后，App
+Store市场切换到美国：</p>
+
+<p><img src="http://bigbelldev.com/images/tools/iWorkFree/ChangeCountry.png" alt="ChangeCountry" /></p>
+
+<p>“128元”的标志不见了，取而代之的是“update”。这时需要你的美国账号了。（没有美国账号的同学试试把系统语言改为英文，据说也行）
+<img src="http://bigbelldev.com/images/tools/iWorkFree/CanUpdateNow.png" alt="CanUpdateNow" /></p>
+
+<p>选择update，输入美国账号，搞定！</p>
+
+<hr />
+
+<p>苹果公司让这些产品免费，真挺好，赞一个！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS7 Autolayout 瞬间入门！]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/10/23/ios7-auto-layout/"/>
+    <updated>2013-10-23T20:05:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/10/23/ios7-auto-layout</id>
+    <content type="html"><![CDATA[<p>Autolayout是非常先进的一个技术。使用这种技术，适应不同设备屏幕大小差异或设备翻转时对界面的要求，变得很容易。这种技术提供了一种灵活的机制来描述界面上各控件的位置关系。</p>
+
+<p>Xcode5使Autolayout技术更容易使用了。
+之前，我对Autolayout只是听说有这种机制，但不知原理、用法。于是阅读了下面的两篇文章（作者：
+Matthijs Hollemans。目前貌似还没有翻译），算是在Storyboard/Xib上会用了。</p>
+
+<ul>
+<li><a href="http://www.raywenderlich.com/50317/beginning-auto-layout-tutorial-in-ios-7-part-1">Beginning Auto Layout Tutorial in iOS 7: Part
+1</a></li>
+<li><a href="http://www.raywenderlich.com/50319/beginning-auto-layout-tutorial-in-ios-7-part-2">Beginning Auto Layout Tutorial in iOS 7: Part
+2</a></li>
+</ul>
+
+
+<p>以下作为阅读笔记，记录应该了解的使用Autolayout的要点(环境是Xcode5，iOS7SDK，Storyboard/Xib)。</p>
+
+<h1>原理要点</h1>
+
+<ul>
+<li>Autolayout基本是靠constraints来描述两个view之间的位置关系</li>
+<li>Autolayout与以往的frame、bound、center包括autosizing
+mask等方式都不同，这是一个新的技术，使用Autolayout时候就不用考虑以上那些方式啦，不用再纠结这个view的位置是(x,y,width,height)了！</li>
+<li>Autolayout描述位置关系的这两个view，或者是上下层关系，或者是同一层关系。即父子关系或都是父的子（兄弟关系^_^）</li>
+<li>Constraints都是NSLayoutConstraint的对象，有一些属性可以在Attributes
+inspector中修改。当然也可以通过code的方式来实现Storyboard/Xib上的操作</li>
+</ul>
+
+
+<h1>使用方式</h1>
+
+<p>这里只介绍Storyboard/Xib使用方式，如果想了解code实现，还要继续阅读其他资料。</p>
+
+<h3>设计及实现方法：</h3>
+
+<p>理清view想要摆放的位置逻辑（设计），根据这个逻辑来设置Constraints（实现）。比如这个Button要距离那个Button固定20个点的距离，并且两个Button要顶端对齐等。把这些逻辑条件变成constraints，当constraints完备到可以确定view的位置时，就完成了设计和实现。</p>
+
+<h3>在Storyboard/Xib上使用</h3>
+
+<ul>
+<li><p>Autolayout的checkbox默认是check上的，这个配置是对整个Storyboard或整个Xib生效的</p></li>
+<li><p>可以设置Constraints的地方</p>
+
+<p>1 Editor菜单下的Pin以上的4个菜单</p>
+
+<p><img src="http://cdn2.raywenderlich.com/wp-content/uploads/2013/09/StrutsProblem-pin-widths-equally.png" alt="Editor" /></p>
+
+<p>2 在View层次列表中选中Constraints后，在Attributes Inspector中设置</p>
+
+<p><img src="http://cdn2.raywenderlich.com/wp-content/uploads/2013/09/Equal-widths-in-document-outline.png" alt="viewhierachy" />
+<img src="http://cdn2.raywenderlich.com/wp-content/uploads/2013/09/Tango-vertical-space-attributes.png" alt="Inspector" /></p>
+
+<p>3 最方面快捷的方式是在悬浮在界面编辑右下角的几个图标</p>
+
+<p><img src="http://cdn2.raywenderlich.com/wp-content/uploads/2013/09/Auto-Layout-buttons.png" alt="quick
+menu" /></p></li>
+<li><p>蓝色的辅助线：表明Constraints已经足以说明这个view的位置了</p></li>
+</ul>
+
+
+<p><img src="http://cdn5.raywenderlich.com/wp-content/uploads/2013/09/Tango-left-align-constraint.png" alt="blue" /></p>
+
+<ul>
+<li>橙色的辅助线：表示constraints没有完备到可以说明这个view的位置</li>
+</ul>
+
+
+<p><img src="http://cdn5.raywenderlich.com/wp-content/uploads/2013/09/Tango-badge-on-V-space.png" alt="orange" /></p>
+
+<ul>
+<li><p>橙色的辅助线上的数字：有时是正数，有时是负数。当你设定或更改了Constraints的时候，可能Constraints与界面上你放置的view的位置是不同的。系统会以Constraints为准，界面上提示你橙色辅助线，线上的数字是这个view的位置与Constraints的差距。这时可以在“Resolve
+Auto Layout Issues”中选择update
+frame，这样这个view会自动移动到Constraints所指示的地方；也可以update
+constraints，这时view的位置不变，constraints变为与界面上的view位置一致的数值</p></li>
+<li><p>对没有提供Constraints的view，系统会自动加上constraints，这些constraints是界面上不可见的。这一点是Xcode5与Xcode4在Autolayout技术升级上最大的改进！Xcode4是系统强加constraints，往往会对开发者进行了干扰，因为强加的Constraints往往不是你想要的。Xcode5的这个改进方便了开发者按照自己的意图去设计和实施：首先不用去修改系统强加的constraints；其次有些view的位置你不需要增加Constraints，就可以不用理会。注：这种自动给View加Constraints的方式只适用于你一个Constraints都没加的情况，如果你加了x方向的，y方向的也需要手动添加。</p></li>
+<li><p>preview：preview可真方便，你一边在左侧（Portrait、4寸屏）设计实施，一边在preview中看到lanscape的样子或者在3.5寸屏中的样子</p></li>
+</ul>
+
+
+<p><img src="http://cdn2.raywenderlich.com/wp-content/uploads/2013/09/Storyboard-preview.png" alt="preview" /></p>
+
+<ul>
+<li>可设置的constraints的类别：
+
+<ol>
+<li>几个View之间对齐
+
+<ul>
+<li>边缘对齐、中心对齐等</li>
+<li>这几个view宽、高相等等</li>
+</ul>
+</li>
+<li>相对距离。
+
+<ul>
+<li>距离最近的一个view的距离</li>
+<li>两个view之间的距离</li>
+<li>距离顶端、底端、左边缘、右边缘的距离</li>
+<li>自己的宽、高</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+
+<h1>接下来</h1>
+
+<p>以上是一些基础要点，当你用Storyboard/Xib做设计的时候，基本就够用啦。如果觉得这些要点不够，可以参照Matthijs
+Hollemans在这两篇文章中举的例子，这个例子将带你进行一步步操作。</p>
+
+<p>有些特殊的场景，使用Storyboard/Xib的autolayout是无法实现，需要代码方式的autolayout来实现。代码实现主要围绕着对NSLayoutConstraint对象的操作。具体如何实现，等需要的时候再找时间研究了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[UITableViewCell在iOS7之后superview的问题]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/"/>
+    <updated>2013-10-12T22:36:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk</id>
+    <content type="html"><![CDATA[<h3>在UITableView中针对某个Cell的操作</h3>
+
+<p>要针对某个UITableView中的Cell做些操作，比如对这个Cell的内容进行查看详细、编辑、删除、或者触发其他功能比如发短信、打电话等，删除、和点击这个Cell在UITableView的Delegate方法中提供，其他的操作就需要识别Cell上的控件（比如Button）对应的action是针对这个Cell的。</p>
+
+<p>一种常用的方式是使用view的层次，在action中找到这个Cell：在</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>方法中，把这个Cell的Button加入到Cell的contentView的subView，并且为这个button添加Target。</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3</code></pre></td>
+<td class="code"><pre><code>// Button 操作
+[cell.contentView addSubview:cell.button];
+[cell.button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>之后在对应的</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>- (void)buttonAction:(id)sender</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>action中，通过view的层次，去找到对应的Cell：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6
+7
+8</code></pre></td>
+<td class="code"><pre><code>// iOS7 之前
+- (void)editRemindAction:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    UITableViewCell *cell = (UITableViewCell *)[[button superview] superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+  // 继续其他的处理
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>iOS7之后出的问题</h3>
+
+<p>在iOS7之后，这样的办法会报错，错误在通过</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。</p>
+
+<p>原因是在iOS7中，在 UITableViewCell 和
+UITableViewCell的ContentView之间，还有一个UITableViewCellScrollView，所以通过两次superview往上“爬”，是爬不到UITableViewCell的。</p>
+
+<h3>解决方式</h3>
+
+<p>直观地看，就是向上爬三次superview就行了。为了更好地处理这个问题，应该建立一个UIView的Category（因为这里使用的view的层次superview是UIView的方法），写个Category方法来区分不同情况来得到Cell：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</code></pre></td>
+<td class="code"><pre><code>@implementation UIView (GetCellFromContentviewSubview)
+- (UITableViewCell *)getCellFromContentviewSubview
+{
+    if ([[[self superview] superview] isKindOfClass:[UITableViewCell class]]) {
+        return (UITableViewCell *)[[self superview] superview];
+    }
+    else if ([[[[self superview] superview] superview] isKindOfClass:[UITableViewCell class]]) {
+        return (UITableViewCell *)[[[self superview] superview] superview];
+    }
+    else{
+         NSLog(@&quot;Something Panic Happens&quot;);
+    }
+    return nil;
+}
+@end</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>之后，把</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>UITableViewCell *cell = (UITableViewCell *)[[button superview] superview];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>替换成</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
+<td class="code"><pre><code>UITableViewCell *cell = (UITableViewCell *)[button getCellFromContentviewSubview];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>就可以了。</p>
+
+<h3>讨论</h3>
+
+<p>另外一种办法是给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
+
+<p>但我所提供的这个办法，在stackoverflow上有1人给vote
+down，不知道为什么被vote down。这种办法有什么问题吗？</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[药提醒你从2.0版本开始更名为“BB提醒”！]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/10/08/product-support-sreminder-main-page/"/>
+    <updated>2013-10-08T23:50:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/10/08/product-support-sreminder-main-page</id>
+    <content type="html"><![CDATA[<p><a href="https://itunes.apple.com/app/id722613216"><img src="http://bigbelldev.com/images/products/Reminder/BBIcon.png" alt="药提醒你" /></a></p>
+
+<p><a href="https://itunes.apple.com/app/id722613216"><img src="http://bigbelldev.com/images/products/Reminder/app_store_badge200.png" alt="app_store_badge" /></a></p>
+
+<hr />
+
+<p><strong>BB提醒， 做最好的用药提醒工具！</strong></p>
+
+<hr />
+
+<h2>BB提醒，为您提供以下十大功能：</h2>
+
+<h4>1. 重复周期灵活多变</h4>
+
+<pre><code>* 可以设置多种重复周期的提醒，例如每3天1次、每1天3次等
+</code></pre>
+
+<h4>2. 方便快捷地通知ta</h4>
+
+<pre><code>* 总有那么几个人，是您在乎的，您很关心他们的健康，不管是治病的药还是保健品，您都希望ta能按时按量想着吃，BB可以让您非常方便地通过微信、短信、电话等多种方式提醒ta！
+</code></pre>
+
+<h4>3. 掌控过去、现在和将来</h4>
+
+<pre><code>* 近期提醒列表和历史提醒列表，让您一目了然过去、现在和将来在发生什么。有的时候被动地等待提醒，不如主动地了解情况，不知您是否也有同感？
+</code></pre>
+
+<h4>4. 标记状态不怕忘</h4>
+
+<pre><code>* 吃了，点一下就标记上了绿色；不打算吃了，想跳过这次，再点一下就标记上黄色；该吃没吃的，会显示红色。有时候知道今天要吃药，但想不起来那会儿到底是吃了还是没吃，这回不必纠结了，BB帮您记着！
+</code></pre>
+
+<h4>5. 自动更新剩余药量</h4>
+
+<pre><code>* 如果您填写了总药量，BB根据每次用药的情况，自动更新剩余的药量，当剩余药量不足3次时，给出提示
+</code></pre>
+
+<h4>6. 怕忘模式</h4>
+
+<pre><code>* 开启怕忘模式，BB会按照您设定的时间间隔不停地提醒您，直到打开app才停止。有时候您怕没听见而错过提醒，那就开启怕忘模式吧↖(^ω^)↗
+</code></pre>
+
+<h4>7. 隐秘模式</h4>
+
+<pre><code>* 开启隐秘模式，提醒您的消息中，不含药品信息。这样不管多个性的铃声都不怕其他人凑上来看了↖(^ω^)↗
+</code></pre>
+
+<h4>8. 个性铃声</h4>
+
+<pre><code>* 收录了不少个性铃声，大多数都是我用iTunes剪辑出来的，如果您觉得不好，那就是我的品位太差了，不好意思啊！如果您觉得好，那咱们就是所见略同了↖(^ω^)↗
+</code></pre>
+
+<h4>9. 背景图片</h4>
+
+<pre><code>* 自定义背景图片，可以让BB更温暖、更亲切、更有爱！↖(^ω^)↗
+</code></pre>
+
+<h4>10. 持续改进</h4>
+
+<pre><code>* 这个是在说我啦~我是个上进、充满阳光和正能量的人，熟悉我的朋友都知道，我最擅长的两个字叫“加油”！BB提醒接下来还有很多要改进和升级的地方，也请您提出改进意见，怕忘模式、隐秘模式、个性铃声，都是以前使用“药提醒你”的小伙伴们提出的有爱意见，在这也顺道感谢你们啦！所以，我们一起加油，让BB提醒能够持续改进！ 
+</code></pre>
+
+<hr />
+
+<p><a href="http://bigbelldev.com/blog/2013/10/03/product-support-reminder-feedback-1-dot-0">反馈：“BB提醒/药提醒你”
+V1.0/V1.0.1/V1.1/V2.0</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[“BB提醒/药提醒你” V1.0/V1.0.1/V1.1/V2.0/V2.1/V2.1.1 反馈]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/10/03/product-support-reminder-feedback-1-dot-0/"/>
+    <updated>2013-10-03T12:08:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/10/03/product-support-reminder-feedback-1-dot-0</id>
+    <content type="html"><![CDATA[<h4>BB提醒，<a href="http://bigbelldev.com/reminder/index.html">产品介绍</a></h4>
+
+<h4>反馈bug、意见和建议，欢迎发邮件到：<a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#x3a;&#98;&#x69;&#103;&#98;&#x65;&#108;&#108;&#x64;&#x65;&#118;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;">&#98;&#x69;&#103;&#98;&#101;&#108;&#108;&#100;&#x65;&#x76;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#109;</a></h4>
+
+<h4>如果您不方便写邮件，也可以在这留言~</h4>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[“药提醒你”接下来需要什么功能？]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/09/18/product-support-sreminder/"/>
+    <updated>2013-09-18T14:13:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/09/18/product-support-sreminder</id>
+    <content type="html"><![CDATA[<p>哪些bug是要修复的？ 哪些功能是很需要的？</p>
+
+<h3>1. 提醒声音可设置</h3>
+
+<h5>有位同学建议提醒声音长一些或是可以循环提醒。</h5>
+
+<p>“有些老人或工作过于忙碌的人，有时候响一下，他们可能并不敏感或以为是条普通短信或手头有事直接就忘记了。”</p>
+
+<p>这位同学说的对啊~</p>
+
+<p>预计在2.0版本实现。</p>
+
+<h3>2. 隐私保护</h3>
+
+<h5>有位同学建议增加个app密码功能。</h5>
+
+<p>恩，听了一下她的解释，我也觉得挺有必要的。</p>
+
+<p>预计在2.0版本实现。</p>
+
+<hr />
+
+<p>感谢热心反馈的同学们，希望这款用药提醒的工具能够越做越好！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在实践中快速成长]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/08/27/to-learn-to-explore/"/>
+    <updated>2013-08-27T13:49:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/08/27/to-learn-to-explore</id>
+    <content type="html"><![CDATA[<p>我的这个博客的副标题叫从白痴到大师的点滴积累，不知道有多少小伙伴和我是一样的想法？</p>
+
+<p>我们刚生下来时，都是白痴，懵懂地看着这个世界。随着一步步地成长，你有了一点一滴的积累，逐渐地，你在某些方面不再是白痴，甚至你成为了那方面的大师。
+我们在接触一门新技术的时候，刚开始都是白痴，然后你开始成长，成长可能快、可能慢。最后你可能成为了大师，也可能成为了炮灰。每个人的精力有限，他最多也只能在有限的几个方面成为大师，选好方向很重要，别在每个方向上都成了炮灰。</p>
+
+<p>我现在开始学习iOS开发技术，也就是开始做起了白痴。我想我会比其他人学得慢些，因为我基础相当差，我不是计算机科班出身，而且我只会纯C。没接触过C++、Java这两个打面向对象基础的语言。我还有2年的时间没有接触代码，这两年去做产品经理了。所以这次学习iOS开发技术的起点，算是和一个上过C语言课程的大二同学，差不多。</p>
+
+<p>我想初学iOS开发技术的孩纸们，像我这种水平的还是很多的吧，不然不会有那么多培训公司的做广告了。</p>
+
+<p>当然，培训公司做广告的另外一个原因是这技术简单，入门快，可以速成。这也是我选择这门技术入手的一个原因。我希望用最短的时间，学好一门工程技术，并且能学精通。我猴急，因为自己老大不小，自己还想做个高产的开发者，时间不等我，必须让自己快速成长起来。</p>
+
+<p>我还对自己有个要求，就是要靠自学。这个要求有些过分是不是？又要自己成长得快，又要靠自己学，而且自己还没啥基础，这不是又让马儿跑又不给马儿吃草么？恩，是有难度。对我来讲，从产品转技术，是做了很大的决定，就像原来使用刀，现在决定使用剑，我能不能用好剑，还不是百分百的确定，怎么来确定？就是给我一把剑，舞一舞，上战场砍砍人，看看是胜是败。如果这个过程有人一直帮你拿着剑，你怎么能看出自己用剑的潜力呢？选个自己能做得好的方向很重要，不然小心成为炮灰。</p>
+
+<p>在之前的学习中，我学习了几个控件的使用，也学习了几个OC概念，都做了demo，但觉得这样没法说自己啥时候就算是入了iOS技术的门。咋样能算入门呢？得系统地理解iOS的技术；能娴熟应用；能紧跟趋势。这就入门了。</p>
+
+<p>想入门，首先还是得做一个完整的app，这个完整的app需要是个值得上架的产品。在做这么个产品的过程中，会涉及到iOS技术的方方面面，希望这些方面能较为系统地覆盖iOS技术的体系。</p>
+
+<p>我的这个计划从8月上旬开始，在8月9日完成了产品的设计，8月10~18日对产品可能涉及到的技术点进行了预研，做了些测试，8月19日开始开始开发。在过去的这9天的开发工作中，收获实在是大！每天都要解决很多问题，很多问题的解决方法会让自己加深对iOS相关技术的理解。</p>
+
+<p>这会儿正有个烦心的问题需要找原因和解决方案，我打算take a
+break，换换脑子，回头想想这几天的收获，会心一笑，于是打算唠叨几句写下来^_^。</p>
+
+<p>想让自己快速进步，就是压迫自己亮亮剑。实际做个产品，对学习iOS技术来讲，非常有帮助。学习其他技术是不是也是一样？我猜可能是，这个等我学习其他技术的时候，再做体会。忽然觉得白眉大侠是挺酷的哈，这左手屠龙刀，右手倚天剑的。希望自己别熬到眉毛都白了，才成为大师……</p>
+
+<p>从现在开始，大师之路，走起~</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[学习iOS传感器的使用]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/08/05/ios-accelerometer/"/>
+    <updated>2013-08-05T18:17:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/08/05/ios-accelerometer</id>
+    <content type="html"><![CDATA[<h3>iOS涉及到的传感器</h3>
+
+<p>不用查资料，用过iPhone的同学都知道。iphone中有加速度传感器，可以感知手机在哪个方向上有加速度，比如屏幕的翻转、飞行控制游戏等都是利用这个特征做的；有指南针（貌似叫陀螺仪？），可以知道你的方向；还有定位装置，可以知道你现在的位置在哪里。</p>
+
+<p>加速度传感器相关功能是由CoreMotion提供；指南针、定位信息相关功能由CoreLocation提供。</p>
+
+<h3>CoreMotion</h3>
+
+<p>在CoreMotion.framework中，有下面这些类：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6
+7</code></pre></td>
+<td class="code"><pre><code>CMAccelerometerData
+CMAttitude
+CMDeviceMotion
+CMGyroData
+CMLogItem
+CMMagnetometerData
+CMMotionManager</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>每个是做什么的，可以在官方文档中阅读，就不在这翻译了。其中实现对设备加速度的识别，主要是使用CMMotionManager。</p>
+
+<h3>CMMotionManager</h3>
+
+<p>如何使用CMMotionManager？</p>
+
+<p>Step1：产生一个CMMotionManager的实例mManager。</p>
+
+<p>Step2：实例使用方法isAccelerometerAvailable判断加速度传感器是否可用。</p>
+
+<p>Step3：如果可用，则通过方法setAccelerometerUpdateInterval设定采样频率。</p>
+
+<p>Step4：最后使用startAccelerometerUpdatesToQueue:withHandler开始采样及对采样进行处理。</p>
+
+<h3>示例代码</h3>
+
+<p>我在下面的代码中，实现了一个小球在一个框中运动，运动的轨迹是根据手机的倾斜角度计算，运动的方向同倾斜的角度一致，并且倾斜角度越大运动速度越快。
+<a href="http://bigbelldev.com/codes/testGravity.zip">代码下载</a>
+在代码的实现过程中，对view的层次有了更深的体会。此外，在给label供数的时候，发现刚好使用代理的方式，算是也对代理做了联系。</p>
+
+<h3>编码过程中遇到七七八八问题的记录</h3>
+
+<h4>Code Sign error:</h4>
+
+<p>着手时，借鉴了<a href="http://code4app.com/ios/Gravity-View/4fb086d96803fa1b5e000000">这个代码</a>，在编译时遇到了这个问题：</p>
+
+<pre><code>Code Sign error: The identity 'iPhone Developer: Haomian Wang (33P29785DD)' doesn't match any valid certificate/private key pair in the default keychain
+</code></pre>
+
+<p><strong>原因：</strong></p>
+
+<p>CodeSigning签署的不是你的provisioning，没法在真机上使用。</p>
+
+<p><strong>解决办法：</strong></p>
+
+<p>在TARGETS中的Build Settings里，找Code Signing
+Identity，里面把不是自己的developer改成自己的provisioning。</p>
+
+<p><img src="http://bigbelldev.com/images/codeSignErr.png" alt="" /></p>
+
+<p><strong>注：</strong></p>
+
+<p>借鉴的这份代码是使用acceleroImeter:didAccelerate方法来处理扑捉到的加速度信息，但这个方法已经在iOS5废弃了，现在都使用CoreMotion框架来实现。</p>
+
+<h4>未添加CoreMotion.framework</h4>
+
+<p>编译自己代码时，首先出现了如下错误：</p>
+
+<p><img src="http://bigbelldev.com/images/frameworkErr.png" alt="" /></p>
+
+<p><strong>原因：</strong></p>
+
+<p>原因是代码中使用了CoreMotion，但工程中没有添加CoreMotion.framework。这很常见：在使用CoreLocation等framework时，也要想着在工程中添加framework。</p>
+
+<p><strong>解决办法：</strong> 在下图处添加CoreMotion.framework</p>
+
+<p><img src="http://bigbelldev.com/images/addFramework.png" alt="" /></p>
+
+<h4>给工程改名字导致编译不过</h4>
+
+<p>这是个题外话，当时想给工程改个名字，结果改了之后，编译不过。 <strong>原因：</strong></p>
+
+<p>原因都是名字、路径更改导致的找不到文件。</p>
+
+<p><strong>解决办法：</strong></p>
+
+<p>改名字注意三点：</p>
+
+<ol>
+<li>修改了Project的名字后，Xcode会提示你一些其他地方也需要修改，你就按着提示修改；</li>
+<li>也修改本地文件夹的名字后，注意xcode工程中的文件列表文件名是否会变为红色，如果是红色，需要你再想办法重新加一下路径；</li>
+<li>工程中的BuildSettings，这里最好搜一下你原来的名字，进行更改。我遇到的编译不过都是这里的路径还保留着原来的名字，未作更改。</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[学习iOS手势开发 iOS Gestures 开发]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/08/04/ios-gestures/"/>
+    <updated>2013-08-04T17:36:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/08/04/ios-gestures</id>
+    <content type="html"><![CDATA[<h3>iOS手势简介</h3>
+
+<p>iOS的手势，就是程序识别到你在屏幕上做的一些手势动作，做出反应。常见的手势有</p>
+
+<ul>
+<li>UITapGestureRecognizer</li>
+<li>UISwipeGestureRecognizer</li>
+<li>UIRotationGestureRecognizer</li>
+<li>UIPanGestureRecognizer</li>
+<li>UIPinchGestureRecognizer</li>
+<li>UILongPressGestureRecognizer</li>
+</ul>
+
+
+<p>其中tap还有单击、双击，Swipe还有向上、下、左、右等区分。</p>
+
+<p>识别这些手势，对每种手势做个反应，没啥难度。下面总结了5个步骤，和几个特殊的地方。</p>
+
+<h3>使用过程分5步</h3>
+
+<p>step1: 声明和初始化一个手势识别器</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6
+7
+8
+9</code></pre></td>
+<td class="code"><pre><code>    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotation:)];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>step2：对手势识别器进行属性设定</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6</code></pre></td>
+<td class="code"><pre><code> [doubleTap setNumberOfTapsRequired:2];
+    [twoFingerTap setNumberOfTouchesRequired:2];
+    [swipeLeft setNumberOfTouchesRequired:1];
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [swipeRight setNumberOfTouchesRequired:1];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>step3：把手势识别器加到view中去</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6
+7
+8
+9</code></pre></td>
+<td class="code"><pre><code>    [self.view addGestureRecognizer:singleTap];
+    [self.view addGestureRecognizer:doubleTap];
+    [self.view addGestureRecognizer:twoFingerTap];
+    [self.view addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeRight];
+    [self.view addGestureRecognizer:rotation];
+    [self.view addGestureRecognizer:pan];
+    [self.view addGestureRecognizer:pinch];
+    [self.view addGestureRecognizer:longPress];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>step4：出现冲突时，要设定优先识别顺序</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4</code></pre></td>
+<td class="code"><pre><code>    [singleTap requireGestureRecognizerToFail:doubleTap];
+    [singleTap requireGestureRecognizerToFail:twoFingerTap];
+    [pan requireGestureRecognizerToFail:swipeRight];
+    [pan requireGestureRecognizerToFail:swipeLeft];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>step5：去实现处理扑捉到手势之后的动作 填写各个处理函数，如：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6
+7
+8</code></pre></td>
+<td class="code"><pre><code>- (void)handleSingleTap:(UITapGestureRecognizer *)gestureRecognizer
+- (void)handleDoubleTap:(UITapGestureRecognizer *)gestureRecognizer
+- (void)handleTwoFingerTap:(UITapGestureRecognizer *)gestureRecognizer
+- (void)handleSwipe:(UISwipeGestureRecognizer *)gestureRecognizer
+- (void)handleRotation:(UIRotationGestureRecognizer *)gestureRecognizer
+- (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer
+- (void)handlePinch:(UIPinchGestureRecognizer *)gestureRecognizer
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>测试代码</h3>
+
+<p>在下面测试代码中，实现了六个手势的处理。
+<a href="http://bigbelldev.com/codes/testGestures.zip">代码下载</a></p>
+
+<p>在实现的时候，有几个需要注意的地方：</p>
+
+<h3>注意几个小地方</h3>
+
+<h4>区分单击双击、滑动（Swipe）和拖拽（Pan）</h4>
+
+<p>在识别单击双击时，逻辑上应该只有判断非双击时，才判定为单击，否则永远都只会判断为单击；在识别滑动和拖拽时也是一样，应该先判断是否是swipe，不是则才是拖拽，否则都只会识别拖拽。实现方式见上面Step4，使用requireGestureRecognizerToFail方法。</p>
+
+<h4>向每个方向滑动（Swipe）都是一个独立的手势</h4>
+
+<p>如果你想接受向多个方向的滑动，对每个方向都要声明一个手势，专门代表这个方向的滑动。向左向右就是两个，加上向上向下就是4个。</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2</code></pre></td>
+<td class="code"><pre><code> UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<p>然后，你在扑捉到滑动手势之后的处理函数中，去判断<code>UISwipeGestureRecognizer *</code>类型的<code>recognizer.direction</code>是属于：</p>
+
+<ul>
+<li>UISwipeGestureRecognizerDirectionLeft</li>
+<li>UISwipeGestureRecognizerDirectionUp</li>
+<li>UISwipeGestureRecognizerDirectionDown</li>
+<li>UISwipeGestureRecognizerDirectionRight</li>
+</ul>
+
+
+<p>中的哪个，然后再进一步去处理。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[学习Apple的编码规范]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/07/29/coding-guidelines-for-cocoa/"/>
+    <updated>2013-07-29T14:19:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/07/29/coding-guidelines-for-cocoa</id>
+    <content type="html"><![CDATA[<p>编码规范很重要，毕竟你的代码除了你，还有很多人可能需要阅读。遵守一个编码规范，可以使你的代码易于理解和维护。</p>
+
+<p>使用编码规范是个基础技能，采用谁家的编码规范比较好呢？看你给谁工作了。对OC，苹果、google都有自己的一套编码规范，估计其他公司也都有自己成行的编码规范。</p>
+
+<p>google家写过一个被广泛接受的C++编码规范，他家的oc编码规范是结合了苹果家的oc规范和他自家的c++规范。所以对于iOS新手，我觉得先了解一下苹果家的编码规范比较好。</p>
+
+<p>苹果家的编码规范<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html#//apple_ref/doc/uid/10000146-SW1">Coding Guidelines for
+Cocoa</a>。</p>
+
+<p>简单翻译了下：</p>
+
+<h2>代码名称基础</h2>
+
+<h3>基本原则</h3>
+
+<h4>清晰</h4>
+
+<ol>
+<li>又清晰又简洁是最好的了，但简洁不如清晰重要</li>
+<li>总的讲不要使用单词的简写，除了非常非常常用的简写以外（<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/APIAbbreviations.html#//apple_ref/doc/uid/20001285-BCIHCGAE">Acceptable
+Abbreviations and
+Acronyms</a>），尽量使用单词全称，长点儿不要紧</li>
+<li>API的名称不要有歧义，一看你的API就知道是以什么方式做了什么事情，不要让人有疑问</li>
+</ol>
+
+
+<h4>一致性</h4>
+
+<p>做某个事情代码通常都叫这个名字，比如tag、setStringValue，那么你也这么叫。你在不确定怎么起名字的时候，可以参考一些常用的名字：<a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingMethods.html#//apple_ref/doc/uid/20001282-1001865">Method
+Arguments</a></p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</code></pre></td>
+<td class="code"><pre><code>...action:(SEL)aSelector
+...alignment:(int)mode
+...atIndex:(int)index
+...content:(NSRect)aRect
+...doubleValue:(double)aDouble
+...floatValue:(float)aFloat
+...font:(NSFont *)fontObj
+...frame:(NSRect)frameRect
+...intValue:(int)anInt
+...keyEquivalent:(NSString *)charCode
+...length:(int)numBytes
+...point:(NSPoint)aPoint
+...stringValue:(NSString *)aString
+...tag:(int)anInt
+...target:(id)anObject
+...title:(NSString *)aString</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>前缀</h3>
+
+<p>前缀一般是2到3个大写之母，可以用来给类、协议、函数、常量、typedef结构起名字时用。但不要给方法用，方法存在的命名空间是类定义的。也不要给结构体的字段使用（the
+fields of a structure）//没明白是啥意思？</p>
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Prefix</th>
+<th style="text-align: left;">Cocoa Framework</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Application Kit</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NS</td>
+<td style="text-align: left;">Foundation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AB</td>
+<td style="text-align: left;">Address Book</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IB</td>
+<td style="text-align: left;">Interface Builder</td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>字体排版规范</h3>
+
+<p>1
+多个词在一起时，不要使用标点符号（包括下划线、斜杠等），一般词首字母大写即可。</p>
+
+<ul>
+<li><p>具体到方法名，第一个词首字母小些，后面的词首字母大写，不要用前缀；
+<code>  fileExistsAtPath:isDirectory: </code></p></li>
+<li><p>函数名、常量名使用相关联的类的同样的前缀，后面跟着的词首字母大写。
+<code>  NSRunAlertPanel   NSCellDisabled </code></p></li>
+</ul>
+
+
+<p>2
+避免使用下划线来命名私有方法名（要是命名一个实例变量名是可以的），这算是Apple的保留写法，如果使用了可能会和已存在的函数重名。</p>
+
+<h3>类和协议名</h3>
+
+<p>类名中应该包含一个名词来说明这个类（或者类的对象）是做什么的。并且这个雷鸣应该有个合适的前缀。例如NSString、NSDate、NSButton、UIApplication等等。</p>
+
+<p>协议应该按照他们的行为命名</p>
+
+<p>1
+多数协议是一组方法的集合，并不是专门为了某个类服务的。这类协议的命名要区别于类的命名样子，一般都是加个ing</p>
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">NSLocking</th>
+<th style="text-align: left;">Good</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NSLock</td>
+<td style="text-align: left;">Poor (seems like a name for a class)</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>2
+还有一些协议是把一些没啥关系的方法放在一起，这种协议一般是协助一个类。这种情况下，这种协议可以和类名一样。例子就是NSObject。</p>
+
+<h3>头文件</h3>
+
+<p>1 定义一个独立的类或协议，这时类名和h文件名一样</p>
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Header file</th>
+<th style="text-align: left;">Declares</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NSLocale.h</td>
+<td style="text-align: left;">The NSLocale class.</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>2 定义关联的一些类或协议，一般使用最初最基本的那个类的名字</p>
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Header file</th>
+<th style="text-align: left;">Declares</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NSString.h</td>
+<td style="text-align: left;">NSString and NSMutableString classes.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NSLock.h</td>
+<td style="text-align: left;">NSLocking protocol and NSLock, NSConditionLock, and NSRecursiveLock classes.</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>3
+包含Framework的头文件，使用framework的名字+.h，包含这个framework的公共头文件。</p>
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Header file</th>
+<th style="text-align: left;">Framework</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Foundation.h</td>
+<td style="text-align: left;">Foundation.framework.</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>4
+给另外一个framwork中的类增加API时，应该延用原始类的名字。例如NSBundleAdditions.h
+header file of the Application Kit</p>
+
+<p>5
+相关联的函数和数据类型在一起时，使用一个最贴切的名字做头文件。例如NSGraphics.h
+(Application Kit)，包含了相关的函数、常量、结构体、数据类型等。</p>
+
+<p>以上是基础的明明规则，在苹果家的代码规范中，接下来分别介绍了方法命名、函数命名、属性和数据类型命名。新手都应该好好阅读下。</p>
+
+<p>最后还专门为framework开发者提供了一些Tips和Techniques。有兴趣的童鞋也可好好阅读下。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac下的RSS阅读器]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/07/26/rss-read-on-mac/"/>
+    <updated>2013-07-26T21:40:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/07/26/rss-read-on-mac</id>
+    <content type="html"><![CDATA[<p>学一门新技术，需要有多个条件放在一起，才能学好。都需要哪些条件，仁者见仁，淫者见淫……但至少有一条，就是你需要跟前辈们学。</p>
+
+<p>很多前辈有技术博客，及时地阅读他们的著作是个不错的提升自己的方式。此外，很多网站资源也不错，订阅来看很方便。google
+reader不在了，在mac下，使用什么不花钱的工具阅读RSS呢？</p>
+
+<p>尝试一番后我最后选择了使用免费版的<a href="https://itunes.apple.com/cn/app/fresh-feed-rss-news-notifier/id420896063?l=en&amp;mt=12&amp;ls=1">fresh
+feed</a>。
+先后尝试过：</p>
+
+<ol>
+<li>此外尝试了mac下的应用RSS
+Bot，这个也还成，不过预览的时候，不够方便，只能看到标题，之后就得点击链接在网页里看。</li>
+<li>还尝试了Instant RSS Notifier（free版），这个免费版太烂了。</li>
+<li>mail里原来是支持RSS阅读的，和看邮件一样看RSS，多好啊，可现在也不支持了。RSS就这么不受待见么？</li>
+</ol>
+
+
+<p>综合来看还是fresh feed好用些。</p>
+
+<p>P.S. 在尝试过程中，安装了获取RSS
+feed的Safari插件<a href="http://www.red-sweater.com/blog/2681/subscribe-to-feed-1-0b4">subscribe-to-feed-1-0b4</a>，安装插件后，会出现RSS图标<img src="http://seanli2013.github.io/images/rss.png" alt="RSS" />，点击图标后，会在地址栏得到当前safari页面的feed。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[学习iOS的delegation的实现]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/07/26/ios-delegation-and-protocol/"/>
+    <updated>2013-07-26T14:11:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/07/26/ios-delegation-and-protocol</id>
+    <content type="html"><![CDATA[<h2>什么是delegation</h2>
+
+<p>delegation<em>[ˌdelɪ’ɡeɪʃn]</em>，中文叫委托，是两个类之间传递信息的一种方式。也是一种设计模式。</p>
+
+<p>其作用和实现过程可以这么理解：</p>
+
+<p>A类：A正在工作中发现，有的工作自己做不方便，需要委托别人帮忙做。A要制定个协议，委托的人要遵守这个协议，按照协议中的方法把工作给做了。A的属性有遵守这个协议的delegate，A知道这个delegate会帮助完成协议中的工作。</p>
+
+<p>B类：B会受A委托，B类需要接受这个协议，把协议中的必须执行的方法给执行了。B有个属性是A的对象，在B类中把A的对象的delegate设置成B。</p>
+
+<p>这里提到的协议，即protocol，不熟的孩纸可以仔细阅读<a href="http://www.cocoachina.com/newbie/basic/2010/0917/2106.html">协议（Protocol）的用法和代码例子</a></p>
+
+<h2>什么时候使用delegation</h2>
+
+<p>类之间传递信息可以有多种机制，除了delegation还有notification、observer等方式。一般两个类之间有点儿关系（比如view和subview，view和controller之间，使用delegate）的时候，经常使用delegation；两个模块之间没有啥关系，可能使用notification会更好。有兴趣的孩纸推荐阅读一下<a href="http://blog.shinetech.com/2011/06/14/delegation-notification-and-observation/">When
+to use Delegation, Notification, or Observation in
+iOS</a>。</p>
+
+<p>在我们使用控件如textField、textView等时，都会碰到他们的delegation，这是非常好的delegation的例子，要好好去理解delegation的功效。</p>
+
+<h2>delegation实践</h2>
+
+<h3>模拟场景</h3>
+
+<p>张老师在外地开会，她会发短信告诉学生代表什么时候让学生们放假，学生代表承诺老师会准确传达。张老师发了短信给学生代表，说7月26日周五大家放假。</p>
+
+<h3>设计</h3>
+
+<p>张老师是委托人，学生代表是受委托人，她和学生代表定的协议中的方法：由学生代表告诉学生们什么时候放假。
+张老师发短信给学生代表这个时候会触发他们之间协议的方法。</p>
+
+<h3>测试代码</h3>
+
+<p>测试代码中有老师和学生代表两个类，输出的结果见NSLog。<a href="http://seanli2013.github.io/codes/textDelegationAndProtocol.zip">代码下载</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[学习iOS的单例模式实现]]></title>
+    <link href="http://lixiang02thu.github.io/blog/2013/07/25/singleton/"/>
+    <updated>2013-07-25T20:42:00+08:00</updated>
+    <id>http://lixiang02thu.github.io/blog/2013/07/25/singleton</id>
+    <content type="html"><![CDATA[<h2>为什么学习iOS的单例模式实现</h2>
+
+<p>从设计模式开始说起。<a href="http://baike.baidu.com/view/66964.htm">设计模式（Design
+pattern）</a>是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。
+毫无疑问，设计模式于己于他人于系统都是多赢的，设计模式使代码编制真正工程化，设计模式是软件工程的基石，如同大厦的一块块砖石一样。</p>
+
+<p>单例模式是设计模式中的一种，并且比较简单，在iOS开发中会常用到，所以新手可以先学习使用单例模式。</p>
+
+<p>新手想了解更多设计模式，可以先了解一下<a href="http://blog.csdn.net/zhengzhb/article/details/7187278">类之间的关系</a>，然后看看<a href="http://blog.csdn.net/zhengzhb/article/details/7278174">设计模式一般遵循的6个原则</a>，之后可以了解下<a href="http://blog.csdn.net/zhengzhb/article/details/7331369">23个设计模式</a>。这里23个设计模式，作者是针对java讲的，但对ios程序设计也一样非常有意义。设计模式本身就是最佳实践的一些总结，新手不必一口气把每个设计模式的奥义都搞清楚，只要了解有这种设计模式，在实践中逐步研究和理解，会更有效率。</p>
+
+<p>对于iOS常用的设计模式，<strong>推荐阅读</strong><a href="http://beyondvincent.com">破船之家</a>写的<a href="http://beyondvincent.com/2013/05/05/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%A7%82%E5%AF%9F%E8%80%85/">三篇iOS设计模式</a>文章，此外，可以参考<a href="http://marshal.easymorse.com/archives/3296">iOS的一些基本设计模式</a>。</p>
+
+<h2>什么是单例模式</h2>
+
+<p>单例模式，英文名叫Singleton。规定这个类只能同时存在一个实例，这个实例可以全局调用。</p>
+
+<h3>什么情况下使用</h3>
+
+<p>有个事你只想让一个人去做，这个人把这个事儿做怎么样，你又希望大家都知道，这种时候可以使用单例模式。这个模式可以用来做一些比较“专注”的任务，同时方便的把资源共享出来。</p>
+
+<h3>什么情况下不使用</h3>
+
+<p>有人说当这个单例类非常频繁会扩展时，单例模式不适用<sup><a href="#fn:1">1</a></sup>。</p>
+
+<p>还有违反了单一职责的设计原则，使代码之间耦合度变强，无法进行有效的单元测试<sup><a href="#fn:2">2</a></sup>。
+所以使用的时候要避免这些情况，尽量让单例不存在过于复杂的依赖性和继承，保证其松耦合等<sup><a href="#fn:3">3</a></sup>。</p>
+
+<h2>单例模式实现</h2>
+
+<p>在<a href="http://beyondvincent.com">破船之家</a>的<a href="http://beyondvincent.com/2013/05/09/ios%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F02%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">iOS设计模式(02):单例模式</a>文章中写得很清楚，分为使用ARC情况和非ARC情况。我尝试了其中ARC+GCD的方法，it
+works fine。</p>
+
+<h3>测试代码</h3>
+
+<p>在下面测试代码中，实现了2个viewController都从单例类实例中拿数据，第1个viewController的按钮更改了单例类实例的内容，在第2个viewController中可以看到更改。
+<a href="http://seanli2013.github.io/codes/testSingleton.zip">代码下载</a></p>
+
+<hr />
+
+<ol>
+<li><p><a href="http://www.nowamagic.net/librarys/veda/detail/1776">使用单例模式需要注意的几个问题</a>——这篇文章我看得一头雾水，应该怎么理解？<a href="#fnref:1">↩</a></p></li>
+<li><p><a href="http://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons">What is so bad about
+Singletons?</a>，这个问题的被采纳答案<a href="#fnref:2">↩</a></p></li>
+<li><p><a href="http://gracelancy.com/?p=386">Singletons in Cocoa, are they
+evil?</a>推荐大家看这个，这个里面援引了stackflow中有人提到的单例的4个缺点。<a href="#fnref:3">↩</a></p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

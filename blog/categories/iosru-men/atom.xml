@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iOS入门 | 大钟威武]]></title>
+  <link href="http://Seanli2013.github.io/blog/categories/iosru-men/atom.xml" rel="self"/>
+  <link href="http://Seanli2013.github.io/"/>
+  <updated>2014-04-03T22:51:11+08:00</updated>
+  <id>http://Seanli2013.github.io/</id>
+  <author>
+    <name><![CDATA[Xiang LI]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[更新xcode5.1后要注意的两点]]></title>
+    <link href="http://Seanli2013.github.io/blog/2014/03/13/xcode5-dot-1-and-ios7-dot-1-be-aware/"/>
+    <updated>2014-03-13T21:52:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2014/03/13/xcode5-dot-1-and-ios7-dot-1-be-aware</id>
+    <content type="html"><![CDATA[<p>这几天手机更新了iOS7.1，xcode也更新到了5.1，之后就跳进了两个坑……</p>
+
+<h4>1.UITableviewCell在Xcode5.1中默认未勾选Clip Subviews</h4>
+
+<p><strong>结果会导致靠改变Cell的高度，隐藏一些内容的时候，无法隐藏成功：</strong></p>
+
+<p><img src="http://bigbelldev.com/images/blogs/X-CellTallHeight.png" alt="X-CellTallHeight" /></p>
+
+<p>当switch turn off的时候，想得到：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/X-CellShortHeight.png" alt="X-CellShortHeight" /></p>
+
+<p>结果得到：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/X-CellShortHeightUnexpected.png" alt="X-CellShortHeightUnexpected" /></p>
+
+<p><strong>解决办法，就是勾选上Cell的Clip Subviews。code实现这个功能的时候也需要注意：set clipsToBounds = YES</strong></p>
+
+<p>为什么Xcode5.1中默认改为未勾选呢？在<a href="https://developer.apple.com/LIBRARY/ios/releasenotes/DeveloperTools/RN-Xcode/Introduction/Introduction.html">Xcode 5.1 Release Notes</a>中没提，所以，是为什么呢？欢迎指点</p>
+
+<p>在《Xcode 5.1 Release Notes》中倒是提了下面这个“坑”：</p>
+
+<h4>2.默认Arm64编译</h4>
+
+<p><strong>结果会导致不支持64位的部分都报错啦。</strong></p>
+
+<p>因为Xcode5.1把Arm64加入到了Standard architectures中，所以<strong>解决办法就是别使用“Standard architectures”。</strong></p>
+
+<p>可以在Targets—>Build Settings—>Architectures中，选择Other，然后增加“+”，录入进去armv7，再添加上armv7s，删除$(ARCH_STANDARD)，如下图：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/X-ModifyArch.png" alt="X-ModifyArch" /></p>
+
+<hr />
+
+<p>看起来修改了这两个，就和原来没啥差别了。我的项目还没用到《Xcode 5.1 Release Notes》中提到的其他更新点。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS播放gif最棒的库，简单高效]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/"/>
+    <updated>2013-11-25T07:15:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios</id>
+    <content type="html"><![CDATA[<p>iOS 播放 gif最棒的库，简单高效。</p>
+
+<p>Animated GIFs implemented the right way on iOS</p>
+
+<hr />
+
+<p>iOS上播放gif，没有自带的API，所以我找了现成的库，借过来使用。github上我对比了3个star数目较多的代码，最终选择了<a href="https://github.com/ondalabs/OLImageView">OLImageView</a>。</p>
+
+<p>参与对比的是OLImageView，<a href="https://github.com/scspijker/iOS_AnimatedGif">iOS_AnimatedGif</a>，<a href="https://github.com/arturogutierrez/Animated-GIF-iPhone">Animated-GIF-iPhone</a>。</p>
+
+<h3>选择合适的库</h3>
+
+<p>对比的指标，我选择</p>
+
+<h5>1. 效率高，占用内存小</h5>
+
+<p>只播放同样一个Gif，OLImageView占用内存是后两者的4/5。</p>
+
+<p>（这个测试可能不完备，没有测试同时播放多个gif，或者播放不同类型gif的对比。但对我使用来讲，只播放这个Gif，就可以说明问题了。）</p>
+
+<h5>2. 代码维护活跃</h5>
+
+<p>OLImageView近来都有更新。</p>
+
+<p>后两个中，Animated-GIF-iPhone是从iOS_AnimatedGif分出来的，两个都已经分别3年多、1年多没有更新了，虽然去年iOS_AnimatedGif的作者在blog上说要做对ARC的支持，但也没看更新。</p>
+
+<h3>OLImageView用法</h3>
+
+<p>大家可以在github上，看到<a href="https://github.com/ondalabs/OLImageView">OLImageView</a>的用法，用法是描述如何从code中创建和使用，非常简单直白。</p>
+
+<p>我在这里介绍一下实际在Storyboard中使用的方式。</p>
+
+<h5>1. 文件拖入工程</h5>
+
+<p>下载的OLImageView文件共有6个，但只要把下面四个文件拖进你的工程即可：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/OLImageViewFilesInProject.png" alt="OLImageViewFilesInProject" /></p>
+
+<h5>2. Storyboard中设置UIImageView为OLImageView</h5>
+
+<p>正常拖入一个UIImageView，在这个view的CustomClass中设定为OLImageView：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/CustomClass.png" alt="CustomClass" /></p>
+
+<p>在Outlet中，设定为OLImageView类型</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/Outlet.png" alt="Outlet" /></p>
+
+<h5>3. code中操作</h5>
+
+<p>在合适的地方，把gif设定进去，注意这里的UIImage要换成OLImage：
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">guideImageGif1</span> <span class="nl">setImage:</span><span class="p">[</span><span class="n">OLImage</span> <span class="nl">imageNamed:</span><span class="s">@&quot;peaceful.gif&quot;</span><span class="p">]];</span><span class="c1">//注意这里的image要使用OLImage</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>我的gif是在scrolllView中播放，所以我还需要设定frame：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">guideImageGif1</span> <span class="nl">setFrame:</span><span class="n">self</span><span class="p">.</span><span class="n">myScrollView</span><span class="p">.</span><span class="n">frame</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>效果</h3>
+
+<p>我在“药提醒你”的帮助VC中，背景是个gif，具体效果，你可以下载个下来看看^_^——右侧侧边栏“我的产品”。</p>
+
+<h3>最后</h3>
+
+<p>要是有时间，你尽量阅读一下库的代码。知其然也知其所以然。</p>
+
+<p>我在这里也就写写用法，比较浅显。目的是能让有同样需求的同学，减少一点儿时间开销，哪怕只减少了几分钟，也值得了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[点击button实现Storyboard中TabBar Controller的tab切换]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/11/24/change-tab-on-button-click/"/>
+    <updated>2013-11-24T18:10:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/11/24/change-tab-on-button-click</id>
+    <content type="html"><![CDATA[<h3>环境和想要实现的功能</h3>
+
+<p>在Storyboard上，TabBarController作为rootViewController，此时想要在某个tab的VC中，点击个button，跳转到另外的tab上。如下图所示：</p>
+
+<p><img src="http://bigbelldev.com/images/blogs/change_tab_vc_on_button.png" alt="" /></p>
+
+<p>上图中，在第一个Tab上，点击“点击此处，去新建和管理提醒”，会跳转到第二个Tab，显示全部提醒的列表，来新建和管理提醒。</p>
+
+<h3>实现代码：</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">AppDelegate</span> <span class="o">*</span><span class="n">thisAppDelegate</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">delegate</span><span class="p">];</span>
+</span><span class='line'><span class="p">[(</span><span class="n">UITabBarController</span> <span class="o">*</span><span class="p">)</span><span class="n">thisAppDelegate</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">rootViewController</span> <span class="nl">setSelectedIndex:</span><span class="mi">1</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>分析：
+我们在用代码创建app的时候，要在appDelegate中，去指定rootViewController。【不熟悉代码创建app的同学可以阅读这篇<a href="http://bigbelldev.com/blog/2013/07/25/ios-gui-implementation-discuss/">学习使用code实现iOS界面</a>，在这篇blog中，推荐的<a href="http://www.cocoachina.com/bbs/read.php?tid=131516">IOS开发之纯代码界面—基本控件使用篇</a>，非常适合新手学习code实现界面】在用Storyboard创建app的时候，虽然不用我们自己去指定rootViewController，但原理是一样的。</p>
+
+<p>Storyboard中，app的入口箭头指向的VC，通常就是rootViewController。在这个例子中，就是UITabBarController。</p>
+
+<p>通过
+<code>
+[[UIApplication sharedApplication] delegate]
+</code>
+得到自己这个appDelegate，通过调用
+<code>
+(UITabBarController *)thisAppDelegate.window.rootViewController
+</code>
+就得到了这个UITabBarController（的实例）。再使用UITabBarController（的实例）方法setSelectedIndex，去设定，要跳转到哪个Tab。
+<code>
+[(UITabBarController *)thisAppDelegate.window.rootViewController setSelectedIndex:1]
+</code>
+就是跳转到index为1的Tab，也就是第二个Tab了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[通过代码调用Storyboard中的scene —— Call storyboard scene programmatically]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/11/21/call-storyboard-scene-programmatically/"/>
+    <updated>2013-11-21T20:26:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/11/21/call-storyboard-scene-programmatically</id>
+    <content type="html"><![CDATA[<p>通过Storyboard搭建app框架，以及设计和实现一些view controller和view，是非常方便和高效的。</p>
+
+<p>有时，同样一个scene(i.e. view controller)，除了在Storyboard上通过segue达到以外，还需要在代码的某个地方，让它展现出来。</p>
+
+<p>如何在代码中，调用一个已经在storyboard中设计好的scene呢？代码如下：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSString</span> <span class="o">*</span> <span class="n">storyboardName</span> <span class="o">=</span> <span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">MainStoryboard_iPhone</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;;</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span> <span class="n">viewControllerID</span> <span class="o">=</span> <span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">ViewID</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;;</span>
+</span><span class='line'><span class="n">UIStoryboard</span> <span class="o">*</span> <span class="n">storyboard</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIStoryboard</span> <span class="nl">storyboardWithName:</span><span class="n">storyboardName</span> <span class="nl">bundle:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="n">MyViewController</span> <span class="o">*</span> <span class="n">controller</span> <span class="o">=</span> <span class="p">(</span><span class="n">MyViewController</span> <span class="o">*</span><span class="p">)[</span><span class="n">storyboard</span> <span class="nl">instantiateViewControllerWithIdentifier:</span><span class="n">viewControllerID</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span> <span class="nl">presentViewController:</span><span class="n">controller</span> <span class="nl">animated:</span><span class="n">YES</span> <span class="nl">completion:</span><span class="nb">nil</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>注：代码段来自<a href="http://stackoverflow.com/questions/10522957/call-storyboard-scene-programmatically-without-needing-segue">Call storyboard scene programmatically (without needing segue)?</a></p>
+
+<h5>有两个注意的地方：</h5>
+
+<ol>
+<li>上面代码中的storyboardName不要包括".storyboard"后缀。即，如果你的Storyboard文档叫做“Main.storyboard”，那么storyboardName应该叫@&ldquo;Main&rdquo;</li>
+<li>注意：在Storyboard中，先给你的viewController加上ID，添加的地方如下图所示：在Indentity中的Storyboard ID。通过这个viewControllerID（图中的例子就是@&ldquo;UserGuide"），在代码中找到这个vc。</li>
+</ol>
+
+
+<p><img src="http://bigbelldev.com/images/blogs/storyboardID.png" alt="storyboardID" /></p>
+
+<hr />
+
+<p>关键字：代码中调用storyboard中的vc，代码中present storyboard scene</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NSUserDefault 常用功能 检测应用（或app的某个版本）第一次运行 或 记录用户设定的属性”]]></title>
+    <link href="http://Seanli2013.github.io/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings/"/>
+    <updated>2013-11-20T16:36:00+08:00</updated>
+    <id>http://Seanli2013.github.io/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings</id>
+    <content type="html"><![CDATA[<p>NSUserDefault，从名称也可看出，一般用来记录用户的设置的。这里介绍两种常用场景：<strong>检测应用（或app的某个版本）第一次运行</strong> 和 <strong>记录用户设定的属性</strong>。</p>
+
+<h3>原理</h3>
+
+<p>几句话说下我的理解：</p>
+
+<ol>
+<li>NSUserDefault使用方法standardUserDefaults得到全局的一个<a href="http://bigbelldev.com/blog/2013/07/25/singleton/">单例</a></li>
+<li>在这个单例是个dictionary，即通过key-object来存、取信息</li>
+<li>信息会存在plist文件中，你不删它，它就一直存在</li>
+</ol>
+
+
+<h3>检测app第一次运行</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1">// 以下这段代码，检查是否app的这个版本是否是第一次运行</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">bundleVersion</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="nl">objectForInfoDictionaryKey:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">kCFBundleVersionKey</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSString</span> <span class="o">*</span><span class="n">appFirstStartOfVersionKey</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;first_start_%@&quot;</span><span class="p">,</span> <span class="n">bundleVersion</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSNumber</span> <span class="o">*</span><span class="n">alreadyStartedOnVersion</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="n">appFirstStartOfVersionKey</span><span class="p">];</span>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">alreadyStartedOnVersion</span> <span class="o">||</span> <span class="p">[</span><span class="n">alreadyStartedOnVersion</span> <span class="n">boolValue</span><span class="p">]</span> <span class="o">==</span> <span class="n">NO</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="n">versionFirstStart</span><span class="p">];</span><span class="c1">// app的bundleVersion这个版本第一次运行，你希望这时做点儿什么</span>
+</span><span class='line'>    <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">setObject:</span><span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithBool:</span><span class="n">YES</span><span class="p">]</span> <span class="nl">forKey:</span><span class="n">appFirstStartOfVersionKey</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>每次启动app时候，调用这段代码。检查一个叫做first_start_加版本号这么个key，对应的NSNumber类型Object，是否存在，或是否是0（NO），如果不存在，或者是0（NO），那么是这个版本的第一次运行，这时做你想在app第一次运行时做的事儿，比如[self versionFirstStart]，之后在plist中添加这个key对应的NSNumber类型object，设置成1（YES）。这样，以后app只要未改变版本，启动时就再也不会执行[self versionFirstStart]了。</p>
+
+<p><a href="http://stackoverflow.com/questions/7758775/detecting-the-first-ever-run-of-an-app/7758850#7758850">参见stackoverflow</a></p>
+
+<p>P.S. 虽然我并未更改这段代码进行更多尝试，但肯定不一定非要NSNumber这个类型，只要plist能存储和读取的类型就可以。</p>
+
+<h3>记录用户设定的属性</h3>
+
+<p>想设定一个属性，你给这个属性起个独有的key，比如叫做@&ldquo;your property key"。</p>
+
+<p>设置属性：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">setObject:</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">off</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="nl">forKey:</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">your</span> <span class="n">property</span> <span class="n">key</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;];</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>读取和判断属性：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">if</span><span class="p">([[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">your</span> <span class="n">property</span> <span class="n">key</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;]</span> <span class="nl">isEqualToString:</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">off</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;])</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>更多你要了解的NSUserDefault</h3>
+
+<h5>1. 可存储的类型</h5>
+
+<p>NSUserDefault中存储的object的格式只能是以下列表中的类型，这是plist存储方式决定的。</p>
+
+<p><code>
+array
+dictionary
+data
+date
+number - integer
+number - floating point
+Boolean
+</code>
+了解更多，可查阅<a href="https://developer.apple.com/library/mac/documentation/cocoa/Conceptual/PropertyLists/Introduction/Introduction.html#//apple_ref/doc/uid/10000048i">Property List Programming Guide</a></p>
+
+<h5>2. 自动存储</h5>
+
+<p>使用NSUserDefault，默认是自动存储的，即你修改完之后，ios自动找个时候，同步（synchronize）一下内存和plist。</p>
+
+<p>手动存储可直接调用synchronize方法：</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="n">synchronize</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h5>3. 查看目前NSUserDefaults standardUserDefaults中的内容</h5>
+
+<p>查看全部dict内容</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">%</span><span class="err">@</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="n">dictionaryRepresentation</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>当然，也可以查看全部的key</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">%</span><span class="err">@</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="p">[[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="n">dictionaryRepresentation</span><span class="p">]</span> <span class="n">allKeys</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

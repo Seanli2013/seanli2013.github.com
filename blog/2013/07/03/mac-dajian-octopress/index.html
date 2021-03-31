@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<head>
+
+
+<meta charset="utf-8">
+<meta http-equiv="cleartype" content="on">
+
+<title>Mac下搭建octopress大钟威武</title>
+
+<meta name="author" content="大钟威武">
+
+
+
+
+<meta name="description" content="准备工作 安装Ruby（1.9.3） mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见Mac安装Ruby on
+Rails，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。 你的系统还应该装有git，rvm 开始搭建 &hellip;">
+
+<meta name="keywords" content="tools ">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Twitter Cards -->
+
+
+<!-- Open Graph -->
+<meta property="og:local" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://lixiang02thu.github.io/blog/2013/07/03/mac-dajian-octopress">
+<meta property="og:title" content="Mac下搭建octopress">
+<meta property="og:description" content="准备工作 安装Ruby（1.9.3） mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见Mac安装Ruby on
+Rails，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。 你的系统还应该装有git，rvm 开始搭建 &hellip;">
+
+  <meta property="og:image" content="">
+
+<meta property="og:site_name" content="大钟威武">
+
+<link rel="canonical" href="http://lixiang02thu.github.io/blog/2013/07/03/mac-dajian-octopress">
+<link href="/favicon.png" rel="icon">
+<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/atom.xml" rel="alternate" title="大钟威武" type="application/atom+xml">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+<script>Modernizr || document.write('<script src="/javascripts/vendor/modernizr-2.6.2.custom.min.js"><\/script>') </script>
+
+
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="" alt="大钟威武 photo" class="author-photo">
+					<h4>大钟威武</h4>
+					<p></p>
+				</li>
+				
+				
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">All Posts</a></li>
+				<li><a href="/categories/">All Categories</a></li>
+			</ul>
+		</li>
+		
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/blog/2013/07/03/mac-dajian-octopress/" rel="bookmark" title="Mac下搭建octopress">Mac下搭建octopress</a></h1>
+        
+        <h2>July 03, 2013</h2>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <h2>准备工作</h2>
+
+<h3>安装Ruby（1.9.3）</h3>
+
+<p>mac自带的Ruby版本低，不能适用。mac安装Ruby1.9.3的过程参见<a href="http://www.hoowolf.net/2012/03/29/installing-ruby-on-rails-on-mac-os-x-lion/">Mac安装Ruby on
+Rails</a>，讲的非常清楚。现在有Ruby2.0.0，具体安装方式请google。</p>
+
+<h3>你的系统还应该装有git，rvm</h3>
+
+<h2>开始搭建</h2>
+
+<p>搭建过程参考<a href="http://ishalou.com/blog/2012/10/15/how-to-use-octopress/">使用Octopress +
+Github管理blog</a>和<a href="http://www.yangzhiping.com/tech/octopress.html">Ruby开源项目介绍(1)：octopress——像黑客一样写博客</a>，这第二篇有些标题党哈。这两篇都可参考。</p>
+
+<p><strong>注意:</strong>参考这两篇文章前，需要<strong><em>先安装Ruby1.9.3</em></strong>，否则按照他们说的步骤来，你可能遇到很多个步骤无法执行完全成功。</p>
+
+<h2>安装过程中可能遇到的问题</h2>
+
+<h3>1. 如何在mac系统中root权限？</h3>
+
+<p>用sudo su，像这样：</p>
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td class="gutter"><pre class="line-numbers"><code>1
+2
+3
+4
+5
+6</code></pre></td>
+<td class="code"><pre><code>shawntekiMacBook-Pro:~ shawnli$ su
+Password:
+su: Sorry
+shawntekiMacBook-Pro:~ shawnli$ sudo su
+Password:
+sh-3.2#</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>2. bundle update不成功。</h3>
+
+<h4>如果遇到的是bundle，command not found</h4>
+
+<p>这时你需要安装bundle</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+</code></pre>
+
+<p>这时你可能遇到不成功</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+WARNING:  RubyGems 1.2+ index not found for:
+
+
+RubyGems will revert to legacy indexes degrading performance.
+ERROR:  could not find gem bundler locally or in a repository
+</code></pre>
+
+<p>很可能是网络的问题，你可以尝试使用代理或者从公网换成教育网什么的……成功后显示</p>
+
+<pre><code>shawntekiMacBook-Pro:~ shawnli$ gem install bundler
+Successfully installed bundler-1.3.5
+1 gem installed
+Installing ri documentation for bundler-1.3.5...
+Installing RDoc documentation for bundler-1.3.5...
+</code></pre>
+
+<p>使用下面命令可以查看bundle安装情况</p>
+
+<pre><code>gem list --local
+</code></pre>
+
+<p>如果bundle
+update报找不到Gemfile，只要你切换到gemfile那个目录再运行bundle
+update即可。</p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/categories/#tools" title="Pages tagged tools" class="tag">tools</a></span>
+        <span><a href="/blog/2013/07/03/mac-dajian-octopress/" rel="bookmark" title="Mac下搭建octopress">Mac下搭建octopress</a> was published on <span class="entry-date date published updated"><time datetime="2013-07-03T05:59:00+08:00">July 03, 2013</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="" title="About 大钟威武">大钟威武</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    
+      <div class="read-more">
+        
+          <div class="read-more-header">
+            <a href="/blog/2021/03/31/hello-again/" class="btn">Read More</a>
+          </div><!-- /.read-more-header -->
+          <div class="read-more-content">
+            <h3><a href="/blog/2021/03/31/hello-again/" title="hello again">hello again</a></h3>
+            <p>时间过得快，距离上次更新文章已有7年。弹指一挥间。中断并非本意，而是7年前吃了一堑，想继续更新费点儿劲儿，又忙于其他，于是搁置了。7年前，电脑丢了，很多资料、code，都没有push到远端，找不回来了。这个博客是用当时较为流行的Octopress搭建的。静态网站放在Github &hellip;&hellip; <a href="/blog/2021/03/31/hello-again/"> Continue reading</a></p>
+          </div><!-- /.read-more-content -->
+        
+        <div class="read-more-list">
+          
+            <div class="list-item">
+              <h4><a href="/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/" title="iOS播放gif最棒的库，简单高效">iOS播放gif最棒的库，简单高效</a></h4>
+              <span>Published on November 25, 2013</span>
+            </div><!-- /.list-item -->
+          
+            <div class="list-item">
+              <h4><a href="/blog/2013/11/24/change-tab-on-button-click/" title="点击button实现Storyboard中TabBar Controller的tab切换">点击button实现Storyboard中TabBar Controller的tab切换</a></h4>
+              <span>Published on November 24, 2013</span>
+            </div><!-- /.list-item -->
+          
+        </div><!-- /.read-more-list -->
+      </div><!-- /.read-more -->
+    
+    
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2021 大钟威武. Powered by <a href="http://octopress.org">Octopress</a> using the <a href="https://github.com/jez/hpstr-theme/">HPSTR Theme for Octopress</a>.</span>
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+
+	        
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/octopress.js" type="text/javascript"></script>
+<script src="/javascripts/scripts.min.js"></script>
+
+
+
+
+
+
+	        
+
+</body>
+</html>

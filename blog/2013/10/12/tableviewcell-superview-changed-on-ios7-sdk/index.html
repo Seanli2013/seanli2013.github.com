@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>UITableViewCell在iOS7之后superview的问题 - 大钟威武</title>
+  <meta name="author" content="Xiang LI">
+
+  
+  <meta name="description" content="在UITableView中针对某个Cell的操作 要针对某个UITableView中的Cell做些操作，比如对这个Cell的内容进行查看详细、编辑、删除、或者触发其他功能比如发短信、打电话等，删除、和点击这个Cell在UITableView的Delegate方法中提供， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://Seanli2013.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="大钟威武" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+
+
+
+//<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+//<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+//<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+
+<link href='http://fonts.googleapis.com/css?family=Delius' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-42372886-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+<link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">大钟威武</a></h1>
+  
+    <h2>从白痴到大师的点滴积累</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:Seanli2013.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">博文</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+  <li><a href="/blog/categories/chan-pin-zhi-chi">产品支持</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">UITableViewCell在iOS7之后superview的问题</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-12T22:36:00+08:00" pubdate data-updated="true">Oct 12<span>th</span>, 2013</time>
+        
+      
+
+          | <a href="#comments">Comments</a>
+         
+
+	</p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>在UITableView中针对某个Cell的操作</h3>
+
+<p>要针对某个UITableView中的Cell做些操作，比如对这个Cell的内容进行查看详细、编辑、删除、或者触发其他功能比如发短信、打电话等，删除、和点击这个Cell在UITableView的Delegate方法中提供，其他的操作就需要识别Cell上的控件（比如Button）对应的action是针对这个Cell的。</p>
+
+<p>一种常用的方式是使用view的层次，在action中找到这个Cell：在</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="nf">tableView:</span><span class="p">(</span><span class="n">UITableView</span> <span class="o">*</span><span class="p">)</span><span class="nv">tableView</span> <span class="nf">cellForRowAtIndexPath:</span><span class="p">(</span><span class="n">NSIndexPath</span> <span class="o">*</span><span class="p">)</span><span class="nv">indexPath</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>方法中，把这个Cell的Button加入到Cell的contentView的subView，并且为这个button添加Target。</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// Button 操作</span>
+</span><span class='line'><span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">contentView</span> <span class="nl">addSubview:</span><span class="n">cell</span><span class="p">.</span><span class="n">button</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">button</span> <span class="nl">addTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="nl">buttonAction:</span><span class="p">)</span> <span class="nl">forControlEvents:</span><span class="n">UIControlEventTouchUpInside</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之后在对应的</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">buttonAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>action中，通过view的层次，去找到对应的Cell：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="c1">// iOS7 之前</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">editRemindAction:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">sender</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">UIButton</span> <span class="o">*</span><span class="n">button</span> <span class="o">=</span> <span class="p">(</span><span class="n">UIButton</span> <span class="o">*</span><span class="p">)</span><span class="n">sender</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSIndexPath</span> <span class="o">*</span><span class="n">indexPath</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">tableView</span> <span class="nl">indexPathForCell:</span><span class="n">cell</span><span class="p">];</span>
+</span><span class='line'>  <span class="c1">// 继续其他的处理</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>iOS7之后出的问题</h3>
+
+<p>在iOS7之后，这样的办法会报错，错误在通过</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[]</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。</p>
+
+<p>原因是在iOS7中，在 UITableViewCell 和 UITableViewCell的ContentView之间，还有一个UITableViewCellScrollView，所以通过两次superview往上“爬”，是爬不到UITableViewCell的。</p>
+
+<h3>解决方式</h3>
+
+<p>直观地看，就是向上爬三次superview就行了。为了更好地处理这个问题，应该建立一个UIView的Category（因为这里使用的view的层次superview是UIView的方法），写个Category方法来区分不同情况来得到Cell：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@implementation</span> <span class="nc">UIView</span> <span class="nl">(GetCellFromContentviewSubview)</span>
+</span><span class='line'><span class="k">-</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="nf">getCellFromContentviewSubview</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">([[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="nl">isKindOfClass:</span><span class="p">[</span><span class="n">UITableViewCell</span> <span class="n">class</span><span class="p">]])</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span> <span class="k">if</span> <span class="p">([[[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="nl">isKindOfClass:</span><span class="p">[</span><span class="n">UITableViewCell</span> <span class="n">class</span><span class="p">]])</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[[</span><span class="n">self</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">else</span><span class="p">{</span>
+</span><span class='line'>         <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Something Panic Happens&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之后，把</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[[</span><span class="n">button</span> <span class="n">superview</span><span class="p">]</span> <span class="n">superview</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>替换成</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">UITableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">UITableViewCell</span> <span class="o">*</span><span class="p">)[</span><span class="n">button</span> <span class="n">getCellFromContentviewSubview</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>就可以了。</p>
+
+<h3>讨论</h3>
+
+<p>另外一种办法是给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
+
+<p>但我所提供的这个办法，在stackoverflow上有1人给vote down，不知道为什么被vote down。这种办法有什么问题吗？</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Xiang LI</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-12T22:36:00+08:00" pubdate data-updated="true">Oct 12<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/iosru-men/'>iOS入门</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://Seanli2013.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/" data-via="" data-counturl="http://Seanli2013.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/08/product-support-sreminder-main-page/" title="Previous Post: 药提醒你从2.0版本开始更名为“BB提醒”！">&laquo; 药提醒你从2.0版本开始更名为“BB提醒”！</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/10/23/ios7-auto-layout/" title="Next Post: iOS7 Autolayout 瞬间入门！">iOS7 Autolayout 瞬间入门！ &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"bigbell"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>分类列表</h1>
+    <ul id="category-list"><li><a href='/blog/categories/iosru-men/'>iOS入门 (14)</a></li><li><a href='/blog/categories/tools/'>Tools (5)</a></li><li><a href='/blog/categories/chan-pin-zhi-chi/'>产品支持 (3)</a></li><li><a href='/blog/categories/ji-zhu-yi-wai/'>技术以外 (1)</a></li></ul>
+</section>
+<section>
+<h1>我的产品</h1>
+<ul>
+<li>
+<a href="http://bigbelldev.com/reminder/index.html">******* BB提醒/药提醒你 *******</a>
+<p><a href="https://itunes.apple.com/app/id722613216"><img src="http://bigbelldev.com/images/products/Reminder/BBIcon.png" alt="BB提醒/药提醒你" /></a>
+  <a href="https://itunes.apple.com/app/id722613216"><img src="http://bigbelldev.com/images/products/Reminder/app_store_badge200.png" alt="app_store_badge" /></a></p>
+</li>
+</ul>
+</section>
+<section>
+  <h1>最新文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/13/xcode5-dot-1-and-ios7-dot-1-be-aware/">更新xcode5.1后要注意的两点</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/">iOS播放gif最棒的库，简单高效</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/24/change-tab-on-button-click/">点击button实现Storyboard中TabBar Controller的tab切换</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/21/call-storyboard-scene-programmatically/">通过代码调用Storyboard中的scene —— Call Storyboard Scene Programmatically</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings/">NSUserDefault 常用功能 检测应用（或app的某个版本）第一次运行 或 记录用户设定的属性”</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/13/outlook-move-ost-location/">Outlook 转移OST数据文件 IMAP账户</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/28/ios-arc/">iOS ARC入门</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/24/iwork-free/">老旧Mac如何免费获得iWork</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/23/ios7-auto-layout/">iOS7 Autolayout 瞬间入门！</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/">UITableViewCell在iOS7之后superview的问题</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+<h1>最新评论</h1>
+<ul class="ds-recent-comments" data-num-items="10" data-show-avatars="0" data-show-time="0" data-show-title="0" data-show-admin="0" data-excerpt-length="18"></ul>
+
+</section>
+<section>
+<h1>备忘链接</h1>
+<ul>
+<li>
+<a href="http://octopress.org/docs">octopress配置</a>
+</li>
+</ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Xiang LI -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
