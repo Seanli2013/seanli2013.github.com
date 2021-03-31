@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Mac下搭建octopress"
-date: 2011-07-03 05:59
+date: 2013-07-03 05:59
 comments: true
 published: true
 categories: ["Tools"]
