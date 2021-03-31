@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://Seanli2013.github.io/sitemap.xml 
+Sitemap: http://bigbelldev.com/sitemap.xml 
