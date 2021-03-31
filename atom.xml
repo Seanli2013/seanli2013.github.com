@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[大钟威武]]></title>
-  <link href="http://lixiang02thu.github.io/atom.xml" rel="self"/>
-  <link href="http://lixiang02thu.github.io/"/>
-  <updated>2021-03-31T11:21:56+08:00</updated>
-  <id>http://lixiang02thu.github.io/</id>
+  <link href="http://bigbelldev.com/atom.xml" rel="self"/>
+  <link href="http://bigbelldev.com/"/>
+  <updated>2021-03-31T17:15:08+08:00</updated>
+  <id>http://bigbelldev.com/</id>
   <author>
     <name><![CDATA[大钟威武]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hello Again]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2021/03/31/hello-again/"/>
+    <link href="http://bigbelldev.com/blog/2021/03/31/hello-again/"/>
     <updated>2021-03-31T10:13:21+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2021/03/31/hello-again</id>
+    <id>http://bigbelldev.com/blog/2021/03/31/hello-again</id>
     <content type="html"><![CDATA[<p>时间过得快，距离上次更新文章已有7年。弹指一挥间。中断并非本意，而是7年前吃了一堑，想继续更新费点儿劲儿，又忙于其他，于是搁置了。</p>
 
 <p>7年前，电脑丢了，很多资料、code，都没有push到远端，找不回来了。这个博客是用当时较为流行的Octopress搭建的。静态网站放在Github Pages。静态网站部分都还在，但文章markdown原始版本也遭遇丢失。吃一堑长一智，从那之后我倒是记住了，<strong>code不隔夜，都上云。此外电脑也经常用Time Machine备份。</strong></p>
@@ -38,9 +38,9 @@
   
   <entry>
     <title type="html"><![CDATA[iOS播放gif最棒的库，简单高效]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/"/>
+    <link href="http://bigbelldev.com/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios/"/>
     <updated>2013-11-25T07:15:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios</id>
+    <id>http://bigbelldev.com/blog/2013/11/25/animated-gifs-implemented-the-right-way-on-ios</id>
     <content type="html"><![CDATA[<p>iOS 播放 gif最棒的库，简单高效。</p>
 
 <p>Animated GIFs implemented the right way on iOS</p>
@@ -137,9 +137,9 @@
   
   <entry>
     <title type="html"><![CDATA[点击button实现Storyboard中TabBar Controller的tab切换]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/11/24/change-tab-on-button-click/"/>
+    <link href="http://bigbelldev.com/blog/2013/11/24/change-tab-on-button-click/"/>
     <updated>2013-11-24T18:10:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/11/24/change-tab-on-button-click</id>
+    <id>http://bigbelldev.com/blog/2013/11/24/change-tab-on-button-click</id>
     <content type="html"><![CDATA[<h3>环境和想要实现的功能</h3>
 
 <p>在Storyboard上，TabBarController作为rootViewController，此时想要在某个tab的VC中，点击个button，跳转到另外的tab上。如下图所示：</p>
@@ -225,9 +225,9 @@
   
   <entry>
     <title type="html"><![CDATA[通过代码调用Storyboard中的scene —— Call Storyboard Scene Programmatically]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/11/21/call-storyboard-scene-programmatically/"/>
+    <link href="http://bigbelldev.com/blog/2013/11/21/call-storyboard-scene-programmatically/"/>
     <updated>2013-11-21T20:26:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/11/21/call-storyboard-scene-programmatically</id>
+    <id>http://bigbelldev.com/blog/2013/11/21/call-storyboard-scene-programmatically</id>
     <content type="html"><![CDATA[<p>通过Storyboard搭建app框架，以及设计和实现一些view
 controller和view，是非常方便和高效的。</p>
 
@@ -280,9 +280,9 @@ ID。通过这个viewControllerID（图中的例子就是@“UserGuide”），�
   
   <entry>
     <title type="html"><![CDATA[NSUserDefault 常用功能 检测应用（或app的某个版本）第一次运行 或 记录用户设定的属性”]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings/"/>
+    <link href="http://bigbelldev.com/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings/"/>
     <updated>2013-11-20T16:36:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings</id>
+    <id>http://bigbelldev.com/blog/2013/11/20/nsuserdefault-detect-app-first-run-and-propty-settings</id>
     <content type="html"><![CDATA[<p>NSUserDefault，从名称也可看出，一般用来记录用户的设置的。这里介绍两种常用场景：<strong>检测应用（或app的某个版本）第一次运行</strong>
 和 <strong>记录用户设定的属性</strong>。</p>
 
@@ -474,9 +474,9 @@ Guide</a></p>
   
   <entry>
     <title type="html"><![CDATA[Outlook 转移OST数据文件 IMAP账户]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/11/13/outlook-move-ost-location/"/>
+    <link href="http://bigbelldev.com/blog/2013/11/13/outlook-move-ost-location/"/>
     <updated>2013-11-13T10:17:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/11/13/outlook-move-ost-location</id>
+    <id>http://bigbelldev.com/blog/2013/11/13/outlook-move-ost-location</id>
     <content type="html"><![CDATA[<h3>问题</h3>
 
 <p>windows8系统，装了Outlook2013，占用了C盘大约10G空间，主要都是数据文件（OST文件）占用的。希望能够把数据文件从C盘移至其他盘。并且账户是IMAP账户，不是Exchange。</p>
@@ -554,9 +554,9 @@ Guide</a></p>
   
   <entry>
     <title type="html"><![CDATA[iOS ARC入门]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/10/28/ios-arc/"/>
+    <link href="http://bigbelldev.com/blog/2013/10/28/ios-arc/"/>
     <updated>2013-10-28T20:04:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/10/28/ios-arc</id>
+    <id>http://bigbelldev.com/blog/2013/10/28/ios-arc</id>
     <content type="html"><![CDATA[<p>现在，iOS系统已经发展到iOS7，而iOS5时引入的ARC技术早已成为主流了。所以iOS新手们对ARC技术已经习以为常了吧，对之前的手工内存管理可能完全不了解，因为基本用不到。ARC又是如此简单，貌似也没有什么必须学习的。但了解一下ARC的原理原则还是必须的——因为了解技术的原理可以更好地对技术进行应用嘛。</p>
 
 <p>本文算是阅读 <a href="http://www.raywenderlich.com/5677/beginning-arc-in-ios-5-part-1">Beginning ARC in iOS 5 Tutorial Part
@@ -648,9 +648,9 @@ that you had to do by hand previously. To me, switching is a no-brainer.</p>
   
   <entry>
     <title type="html"><![CDATA[老旧Mac如何免费获得iWork]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/10/24/iwork-free/"/>
+    <link href="http://bigbelldev.com/blog/2013/10/24/iwork-free/"/>
     <updated>2013-10-24T18:24:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/10/24/iwork-free</id>
+    <id>http://bigbelldev.com/blog/2013/10/24/iwork-free</id>
     <content type="html"><![CDATA[<p>iWork免费了！以前仰望着的128元的产品，现在终于可以免费使用了！不过，据说需要买最新的硬件才能享受免费。于是就有了下面：老旧mac得到免费iWork的方式。</p>
 
 <p>注：<strong>第二步中可能需要你有美国账号</strong>（其他国家的账号没试过，中国的不行），如果没有美国账号，据说更改系统的语言为英文也行。</p>
@@ -701,9 +701,9 @@ Store市场切换到美国：</p>
   
   <entry>
     <title type="html"><![CDATA[iOS7 Autolayout 瞬间入门！]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/10/23/ios7-auto-layout/"/>
+    <link href="http://bigbelldev.com/blog/2013/10/23/ios7-auto-layout/"/>
     <updated>2013-10-23T20:05:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/10/23/ios7-auto-layout</id>
+    <id>http://bigbelldev.com/blog/2013/10/23/ios7-auto-layout</id>
     <content type="html"><![CDATA[<p>Autolayout是非常先进的一个技术。使用这种技术，适应不同设备屏幕大小差异或设备翻转时对界面的要求，变得很容易。这种技术提供了一种灵活的机制来描述界面上各控件的位置关系。</p>
 
 <p>Xcode5使Autolayout技术更容易使用了。
@@ -820,9 +820,9 @@ Hollemans在这两篇文章中举的例子，这个例子将带你进行一步�
   
   <entry>
     <title type="html"><![CDATA[UITableViewCell在iOS7之后superview的问题]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/"/>
+    <link href="http://bigbelldev.com/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/"/>
     <updated>2013-10-12T22:36:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk</id>
+    <id>http://bigbelldev.com/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk</id>
     <content type="html"><![CDATA[<h3>在UITableView中针对某个Cell的操作</h3>
 
 <p>要针对某个UITableView中的Cell做些操作，比如对这个Cell的内容进行查看详细、编辑、删除、或者触发其他功能比如发短信、打电话等，删除、和点击这个Cell在UITableView的Delegate方法中提供，其他的操作就需要识别Cell上的控件（比如Button）对应的action是针对这个Cell的。</p>
@@ -1023,9 +1023,9 @@ down，不知道为什么被vote down。这种办法有什么问题吗？</p>
   
   <entry>
     <title type="html"><![CDATA[药提醒你从2.0版本开始更名为“BB提醒”！]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/10/08/product-support-sreminder-main-page/"/>
+    <link href="http://bigbelldev.com/blog/2013/10/08/product-support-sreminder-main-page/"/>
     <updated>2013-10-08T23:50:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/10/08/product-support-sreminder-main-page</id>
+    <id>http://bigbelldev.com/blog/2013/10/08/product-support-sreminder-main-page</id>
     <content type="html"><![CDATA[<p><a href="https://itunes.apple.com/app/id722613216"><img src="http://bigbelldev.com/images/products/Reminder/BBIcon.png" alt="药提醒你" /></a></p>
 
 <p><a href="https://itunes.apple.com/app/id722613216"><img src="http://bigbelldev.com/images/products/Reminder/app_store_badge200.png" alt="app_store_badge" /></a></p>
@@ -1097,12 +1097,12 @@ V1.0/V1.0.1/V1.1/V2.0</a></p>
   
   <entry>
     <title type="html"><![CDATA[“BB提醒/药提醒你” V1.0/V1.0.1/V1.1/V2.0/V2.1/V2.1.1 反馈]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/10/03/product-support-reminder-feedback-1-dot-0/"/>
+    <link href="http://bigbelldev.com/blog/2013/10/03/product-support-reminder-feedback-1-dot-0/"/>
     <updated>2013-10-03T12:08:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/10/03/product-support-reminder-feedback-1-dot-0</id>
+    <id>http://bigbelldev.com/blog/2013/10/03/product-support-reminder-feedback-1-dot-0</id>
     <content type="html"><![CDATA[<h4>BB提醒，<a href="http://bigbelldev.com/reminder/index.html">产品介绍</a></h4>
 
-<h4>反馈bug、意见和建议，欢迎发邮件到：<a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#x3a;&#98;&#x69;&#103;&#98;&#x65;&#108;&#108;&#x64;&#x65;&#118;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#x6d;">&#98;&#x69;&#103;&#98;&#101;&#108;&#108;&#100;&#x65;&#x76;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#111;&#109;</a></h4>
+<h4>反馈bug、意见和建议，欢迎发邮件到：<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x62;&#x69;&#103;&#98;&#x65;&#108;&#x6c;&#100;&#101;&#118;&#64;&#x67;&#x6d;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;">&#x62;&#x69;&#x67;&#98;&#x65;&#108;&#x6c;&#100;&#101;&#118;&#x40;&#x67;&#x6d;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;</a></h4>
 
 <h4>如果您不方便写邮件，也可以在这留言~</h4>
 ]]></content>
@@ -1110,9 +1110,9 @@ V1.0/V1.0.1/V1.1/V2.0</a></p>
   
   <entry>
     <title type="html"><![CDATA[“药提醒你”接下来需要什么功能？]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/09/18/product-support-sreminder/"/>
+    <link href="http://bigbelldev.com/blog/2013/09/18/product-support-sreminder/"/>
     <updated>2013-09-18T14:13:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/09/18/product-support-sreminder</id>
+    <id>http://bigbelldev.com/blog/2013/09/18/product-support-sreminder</id>
     <content type="html"><![CDATA[<p>哪些bug是要修复的？ 哪些功能是很需要的？</p>
 
 <h3>1. 提醒声音可设置</h3>
@@ -1141,9 +1141,9 @@ V1.0/V1.0.1/V1.1/V2.0</a></p>
   
   <entry>
     <title type="html"><![CDATA[在实践中快速成长]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/08/27/to-learn-to-explore/"/>
+    <link href="http://bigbelldev.com/blog/2013/08/27/to-learn-to-explore/"/>
     <updated>2013-08-27T13:49:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/08/27/to-learn-to-explore</id>
+    <id>http://bigbelldev.com/blog/2013/08/27/to-learn-to-explore</id>
     <content type="html"><![CDATA[<p>我的这个博客的副标题叫从白痴到大师的点滴积累，不知道有多少小伙伴和我是一样的想法？</p>
 
 <p>我们刚生下来时，都是白痴，懵懂地看着这个世界。随着一步步地成长，你有了一点一滴的积累，逐渐地，你在某些方面不再是白痴，甚至你成为了那方面的大师。
@@ -1174,9 +1174,9 @@ break，换换脑子，回头想想这几天的收获，会心一笑，于是打
   
   <entry>
     <title type="html"><![CDATA[学习iOS传感器的使用]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/08/05/ios-accelerometer/"/>
+    <link href="http://bigbelldev.com/blog/2013/08/05/ios-accelerometer/"/>
     <updated>2013-08-05T18:17:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/08/05/ios-accelerometer</id>
+    <id>http://bigbelldev.com/blog/2013/08/05/ios-accelerometer</id>
     <content type="html"><![CDATA[<h3>iOS涉及到的传感器</h3>
 
 <p>不用查资料，用过iPhone的同学都知道。iphone中有加速度传感器，可以感知手机在哪个方向上有加速度，比如屏幕的翻转、飞行控制游戏等都是利用这个特征做的；有指南针（貌似叫陀螺仪？），可以知道你的方向；还有定位装置，可以知道你现在的位置在哪里。</p>
@@ -1292,9 +1292,9 @@ Identity，里面把不是自己的developer改成自己的provisioning。</p>
   
   <entry>
     <title type="html"><![CDATA[学习iOS手势开发 iOS Gestures 开发]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/08/04/ios-gestures/"/>
+    <link href="http://bigbelldev.com/blog/2013/08/04/ios-gestures/"/>
     <updated>2013-08-04T17:36:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/08/04/ios-gestures</id>
+    <id>http://bigbelldev.com/blog/2013/08/04/ios-gestures</id>
     <content type="html"><![CDATA[<h3>iOS手势简介</h3>
 
 <p>iOS的手势，就是程序识别到你在屏幕上做的一些手势动作，做出反应。常见的手势有</p>
@@ -1506,9 +1506,9 @@ Identity，里面把不是自己的developer改成自己的provisioning。</p>
   
   <entry>
     <title type="html"><![CDATA[学习Apple的编码规范]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/07/29/coding-guidelines-for-cocoa/"/>
+    <link href="http://bigbelldev.com/blog/2013/07/29/coding-guidelines-for-cocoa/"/>
     <updated>2013-07-29T14:19:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/07/29/coding-guidelines-for-cocoa</id>
+    <id>http://bigbelldev.com/blog/2013/07/29/coding-guidelines-for-cocoa</id>
     <content type="html"><![CDATA[<p>编码规范很重要，毕竟你的代码除了你，还有很多人可能需要阅读。遵守一个编码规范，可以使你的代码易于理解和维护。</p>
 
 <p>使用编码规范是个基础技能，采用谁家的编码规范比较好呢？看你给谁工作了。对OC，苹果、google都有自己的一套编码规范，估计其他公司也都有自己成行的编码规范。</p>
@@ -1738,9 +1738,9 @@ header file of the Application Kit</p>
   
   <entry>
     <title type="html"><![CDATA[Mac下的RSS阅读器]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/07/26/rss-read-on-mac/"/>
+    <link href="http://bigbelldev.com/blog/2013/07/26/rss-read-on-mac/"/>
     <updated>2013-07-26T21:40:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/07/26/rss-read-on-mac</id>
+    <id>http://bigbelldev.com/blog/2013/07/26/rss-read-on-mac</id>
     <content type="html"><![CDATA[<p>学一门新技术，需要有多个条件放在一起，才能学好。都需要哪些条件，仁者见仁，淫者见淫……但至少有一条，就是你需要跟前辈们学。</p>
 
 <p>很多前辈有技术博客，及时地阅读他们的著作是个不错的提升自己的方式。此外，很多网站资源也不错，订阅来看很方便。google
@@ -1767,9 +1767,9 @@ feed的Safari插件<a href="http://www.red-sweater.com/blog/2681/subscribe-to-fe
   
   <entry>
     <title type="html"><![CDATA[学习iOS的delegation的实现]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/07/26/ios-delegation-and-protocol/"/>
+    <link href="http://bigbelldev.com/blog/2013/07/26/ios-delegation-and-protocol/"/>
     <updated>2013-07-26T14:11:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/07/26/ios-delegation-and-protocol</id>
+    <id>http://bigbelldev.com/blog/2013/07/26/ios-delegation-and-protocol</id>
     <content type="html"><![CDATA[<h2>什么是delegation</h2>
 
 <p>delegation<em>[ˌdelɪ’ɡeɪʃn]</em>，中文叫委托，是两个类之间传递信息的一种方式。也是一种设计模式。</p>
@@ -1809,9 +1809,9 @@ iOS</a>。</p>
   
   <entry>
     <title type="html"><![CDATA[学习iOS的单例模式实现]]></title>
-    <link href="http://lixiang02thu.github.io/blog/2013/07/25/singleton/"/>
+    <link href="http://bigbelldev.com/blog/2013/07/25/singleton/"/>
     <updated>2013-07-25T20:42:00+08:00</updated>
-    <id>http://lixiang02thu.github.io/blog/2013/07/25/singleton</id>
+    <id>http://bigbelldev.com/blog/2013/07/25/singleton</id>
     <content type="html"><![CDATA[<h2>为什么学习iOS的单例模式实现</h2>
 
 <p>从设计模式开始说起。<a href="http://baike.baidu.com/view/66964.htm">设计模式（Design
