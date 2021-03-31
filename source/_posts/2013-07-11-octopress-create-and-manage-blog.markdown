@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Octopress发表blog文章和管理blog"
-date: 2011-07-13 05:59
+date: 2013-07-13 05:59
 comments: true
 published: true
 categories: ["Tools"]

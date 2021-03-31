@@ -1,0 +1,86 @@
+---
+layout: post
+title: "iOS ARC入门"
+date: 2013-10-28 20:04
+comments: true
+published: true
+categories: ["iOS入门"]
+tags: ["iOS入门"]
+---
+现在，iOS系统已经发展到iOS7，而iOS5时引入的ARC技术早已成为主流了。所以iOS新手们对ARC技术已经习以为常了吧，对之前的手工内存管理可能完全不了解，因为基本用不到。ARC又是如此简单，貌似也没有什么必须学习的。但了解一下ARC的原理原则还是必须的——因为了解技术的原理可以更好地对技术进行应用嘛。
+
+本文算是阅读 [Beginning ARC in iOS 5 Tutorial Part
+1](http://www.raywenderlich.com/5677/beginning-arc-in-ios-5-part-1)
+（翻译在 [iOS 5 ARC 入门
+(1/3)](http://www.raywenderlich.com/zh-hans/20855/ios-5-arc-%E5%85%A5%E9%97%A8-13)
+翻译的同学很有爱也很辛苦，但有些地方有错误，所以读原文会比较好。）
+
+## ARC简介
+
+ARC，Automatic Reference Counting，在iOS5引入。
+
+### 原理
+
+简单说是代码在编译阶段，由编译器（LLVM
+3.0）自动生成实例的引用计数管理的一些代码（插入retain/release等），起到内存管理的作用。
+
+### 在ARC之前
+
+在ARC之前，需要手工管理内存，原则是：
+
+-   如果你想保持一个对象可用，除非它已经被retain了，否则就需要retain它
+-   如果不再需要一个对象，就需要release它，除非它已经被release了（通过autorelease）
+
+### 用ARC，程序会变慢吗？
+
+不会！
+
+ARC就是在需要retain和release的地方为你插入它们——这就是ARC和手工管理内存一样快的原因，当然有时ARC还会更快，因为它在后端还进行了一些优化操作。
+
+## ARC使用
+
+这里只介绍个ARC使用方法的小子集，即仅记录了我觉得有意思的几个概念原则。ARC使用全集请看[Beginning
+ARC in iOS 5 Tutorial Part
+1](http://www.raywenderlich.com/5677/beginning-arc-in-ios-5-part-1)<sup>[1](#fn:1)</sup>。
+
+### strong、weak
+
+-   有strong指针指向那个对象，那个对象就一直存在在内存中。这个原则对实例变量、属性、局部变量都使用
+-   默认所有实例变量局部变量等都是strong的指针，strong表示指针是变量的所有者
+-   weak也可以指向一个对象，但不能是所有者
+-   zeroing
+    weak指针，是指weak指向的对象被释放了，weak指向的变量的值自动变为nil，这个特性防止了指向一个被释放的内存（例如悬空指针、僵尸等这样的说法这种问题就没有啦）
+-   weak不常用，经常使用在父子对象上，因为父有strong指向子，子指向父的时候就只能用weak，常见的datasource、delegate都是这样
+
+### ARC特殊注意的地方
+
+-   ARC不适用于Core Foundation 或 malloc() 和
+    free()，后者还是要手工管理内存
+-   ARC
+    有效的时候，由于编译器帮我们做了内存管理的工作，所以我们不需要太担心。但是当与
+    ARC
+    管理以外的对象类型交互的时候，就需要特殊的转型关键字，来决定所有权的归属问题。比如“\_\_bridge”。进一步了解可阅读参考文件<sup>[2](#fn:2)</sup>
+-   使用ARC，仍然要想着谁持有谁，后者的生命周期是怎么样的等，因为如果不释放指针，被持有者就一直在内存中
+
+## 结语
+
+易飞扬对ARC的7篇博文很值得推荐，大家想深入了解ARC原理可以去阅读：
+[iPhone开发之深入浅出](http://www.yifeiyang.net/development-of-the-iphone-simply-7/)，注：要跳墙。
+
+参考文献[Beginning ARC in iOS 5 Tutorial Part
+1](http://www.raywenderlich.com/5677/beginning-arc-in-ios-5-part-1)中说：ARC是代表着OC的未来（大概因为ARC之前的内存管理是开发者们曾经的噩梦吧）。A
+smart developer tries to automate as much of his job as possible, and
+that’s exactly what ARC offers: automation of menial programming work
+that you had to do by hand previously. To me, switching is a no-brainer.
+
+技术在不断飞速演进，做工程开发的我们，紧盯技术发展趋势，勇于接受新的东西。
+
+------------------------------------------------------------------------
+
+1.  [Beginning ARC in iOS 5 Tutorial Part
+    1](http://www.raywenderlich.com/5677/beginning-arc-in-ios-5-part-1)[↩](#fnref:1)
+
+2.  [iPhone开发之深入浅出](http://www.yifeiyang.net/development-of-the-iphone-simply-7/)
+    注：该文需要跳墙[↩](#fnref:2)
+
+
