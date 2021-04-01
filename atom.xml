@@ -4,7 +4,7 @@
   <title><![CDATA[大钟威武]]></title>
   <link href="http://bigbelldev.com/atom.xml" rel="self"/>
   <link href="http://bigbelldev.com/"/>
-  <updated>2021-04-01T09:12:20+08:00</updated>
+  <updated>2021-04-01T10:37:07+08:00</updated>
   <id>http://bigbelldev.com/</id>
   <author>
     <name><![CDATA[大钟威武]]></name>
@@ -27,12 +27,19 @@
 <ul>
 <li>Step 1，有想分享的东西，也有点时间，决定重新上路。</li>
 <li>Step 2，选平台工具。可选的有微信公众号，简书，或者还是自己搭建。选自己搭建吧，因为目标也不是要触达多少人，还是满足自己乐趣为主。Octopress已经过时很久了，几年前就不再维护了，但有这么个蛋碴子在，给它续上，也是乐趣。所以没有选择用新的工具。</li>
-<li>Step 3，恢复文章原始markdown版本。用了pandoc的ruby版，把文章从静态网站的html转为markdown。gist：<a href="https://gist.github.com/Seanli2013/f1e5608fd6f3591d4ddf57bc945ded87">https://gist.github.com/Seanli2013/f1e5608fd6f3591d4ddf57bc945ded87</a></li>
+<li>Step 3，恢复文章原始markdown版本。用了pandoc的ruby版，把文章从静态网站的html转为markdown。gist：<a href="https://gist.github.com/Seanli2013/f1e5608fd6f3591d4ddf57bc945ded87">https://gist.github.com/Seanli2013/f1e5608fd6f3591d4ddf57bc945ded87</a>。
+这一步耗费了不少时间，不过令人开心的是，最终it works，于是耗费的时间就变成了幸福的时间。</li>
 <li>Step 4，重建Octopress+Github Pages。换了个Theme，换一换心情。<a href="http://octopress.org/docs/">http://octopress.org/docs/</a></li>
 </ul>
 
 
-<p>读7年前的东西，真会感觉后背发凉。非常初级和稚嫩。可惜没办法，那就是真实的自己。这7年，非常忙碌，经历颇多，但也在忙碌中忙得碌碌无为。小人物，不甘平庸，追求卓越，保重身体，人生还长，将来还是会做出成绩的。到时候回顾这一路从不堪中摸爬滚打出来，也许会增加些幸福感吧。</p>
+<p>读7年前的东西，真会感觉后背发凉。非常初级和稚嫩。可惜没办法，那就是真实的自己。</p>
+
+<p>这7年，非常忙碌，经历虽多，也在忙碌中忙得碌碌无为。</p>
+
+<p>或许这辈子一直都是个小人物，这我坦然接受。只不过不甘平庸的心一直在，到老了也一样会不停地在追求卓越。</p>
+
+<p>总之，保重身体，人生还长，将来还是会做出成绩的。到时候回顾这一路的摸爬滚打，也许越不容易就会越增加幸福感吧。</p>
 ]]></content>
   </entry>
   
@@ -1102,7 +1109,7 @@ V1.0/V1.0.1/V1.1/V2.0</a></p>
     <id>http://bigbelldev.com/blog/2013/10/03/product-support-reminder-feedback-1-dot-0</id>
     <content type="html"><![CDATA[<h4>BB提醒，<a href="http://bigbelldev.com/reminder/index.html">产品介绍</a></h4>
 
-<h4>反馈bug、意见和建议，欢迎发邮件到：<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#98;&#105;&#103;&#98;&#x65;&#108;&#x6c;&#x64;&#101;&#118;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#98;&#105;&#103;&#x62;&#x65;&#108;&#x6c;&#100;&#101;&#x76;&#64;&#x67;&#x6d;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#x6d;</a></h4>
+<h4>反馈bug、意见和建议，欢迎发邮件到：<a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#98;&#105;&#103;&#98;&#101;&#x6c;&#x6c;&#100;&#101;&#x76;&#64;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#x6d;">&#98;&#105;&#103;&#98;&#101;&#108;&#108;&#100;&#101;&#x76;&#64;&#103;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;</a></h4>
 
 <h4>如果您不方便写邮件，也可以在这留言~</h4>
 ]]></content>
