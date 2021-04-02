@@ -114,6 +114,64 @@
 <header>
   <div class="entry-meta">
     <span class="entry-date date published updated">
+      <time datetime="2021-04-02T17:46:18+08:00">
+        <a href="/blog/2021/04/02/three-mac-tools-recommendation/">April 02, 2021</a>
+      </time>
+    </span>
+    <span class="author vcard">
+      <span class="fn">
+        <a href="" title="About 大钟威武">大钟威武</a>
+      </span>
+    </span>
+    
+  </div><!-- /.entry-meta -->
+  
+    <h1 class="entry-title">
+      <a href="/blog/2021/04/02/three-mac-tools-recommendation/" rel="bookmark" title="分享3个Mac上的工具，提升效率心情好" itemprop="url">分享3个Mac上的工具，提升效率心情好</a>
+    </h1>
+  
+</header>
+
+<div class="entry-content">
+  <h3>1 效率工具ShiftIt</h3>
+
+<p>可使用快捷键，快速便捷归置当前窗口。比如：</p>
+
+<ul>
+<li>当前窗口放到另一个显示器去</li>
+<li>当前窗口占用显示器左半边、右半边、上半边、下半边、正中间</li>
+<li>当前窗口变大、变小</li>
+</ul>
+
+
+<p><a href="https://www.youtube.com/watch?v=yFse0EFDpnM">ShiftItの使用の様子，https://www.youtube.com/watch?v=yFse0EFDpnM</a></p>
+
+<h3>2 方便学习的工具</h3>
+
+<p>用了几年了，较为科学，较为稳定，拿走不谢：<a href="https://shadowflys.us/">链接</a>。</p>
+
+<h3>3 代码协作工具SourceTree</h3>
+
+<p>以SourceTree为主，结合command line和Github Desktop。不管Git的使用是否有鄙视链，我是挺喜欢用SourceTree的，推荐。当SourceTree搞不定的时候，也会直接用command line（iTerm，zsh）。有时SourceTree从Github上clone也会不顺，比如gist。Github Desktop在这方面就好得多。</p>
+
+  
+  
+</div><!-- /.entry-content -->
+
+
+
+
+
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  
+
+
+
+<header>
+  <div class="entry-meta">
+    <span class="entry-date date published updated">
       <time datetime="2021-03-31T10:13:21+08:00">
         <a href="/blog/2021/03/31/hello-again/">March 31, 2021</a>
       </time>
@@ -1177,239 +1235,6 @@ constraints，这时view的位置不变，constraints变为与界面上的view�
 Hollemans在这两篇文章中举的例子，这个例子将带你进行一步步操作。</p>
 
 <p>有些特殊的场景，使用Storyboard/Xib的autolayout是无法实现，需要代码方式的autolayout来实现。代码实现主要围绕着对NSLayoutConstraint对象的操作。具体如何实现，等需要的时候再找时间研究了。</p>
-
-  
-  
-</div><!-- /.entry-content -->
-
-
-
-
-
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  
-
-
-
-<header>
-  <div class="entry-meta">
-    <span class="entry-date date published updated">
-      <time datetime="2013-10-12T22:36:00+08:00">
-        <a href="/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/">October 12, 2013</a>
-      </time>
-    </span>
-    <span class="author vcard">
-      <span class="fn">
-        <a href="" title="About 大钟威武">大钟威武</a>
-      </span>
-    </span>
-    
-  </div><!-- /.entry-meta -->
-  
-    <h1 class="entry-title">
-      <a href="/blog/2013/10/12/tableviewcell-superview-changed-on-ios7-sdk/" rel="bookmark" title="UITableViewCell在iOS7之后superview的问题" itemprop="url">UITableViewCell在iOS7之后superview的问题</a>
-    </h1>
-  
-</header>
-
-<div class="entry-content">
-  <h3>在UITableView中针对某个Cell的操作</h3>
-
-<p>要针对某个UITableView中的Cell做些操作，比如对这个Cell的内容进行查看详细、编辑、删除、或者触发其他功能比如发短信、打电话等，删除、和点击这个Cell在UITableView的Delegate方法中提供，其他的操作就需要识别Cell上的控件（比如Button）对应的action是针对这个Cell的。</p>
-
-<p>一种常用的方式是使用view的层次，在action中找到这个Cell：在</p>
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
-<td class="code"><pre><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</code></pre></td>
-</tr>
-</tbody>
-</table>
-
-
-<p>方法中，把这个Cell的Button加入到Cell的contentView的subView，并且为这个button添加Target。</p>
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="gutter"><pre class="line-numbers"><code>1
-2
-3</code></pre></td>
-<td class="code"><pre><code>// Button 操作
-[cell.contentView addSubview:cell.button];
-[cell.button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];</code></pre></td>
-</tr>
-</tbody>
-</table>
-
-
-<p>之后在对应的</p>
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
-<td class="code"><pre><code>- (void)buttonAction:(id)sender</code></pre></td>
-</tr>
-</tbody>
-</table>
-
-
-<p>action中，通过view的层次，去找到对应的Cell：</p>
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="gutter"><pre class="line-numbers"><code>1
-2
-3
-4
-5
-6
-7
-8</code></pre></td>
-<td class="code"><pre><code>// iOS7 之前
-- (void)editRemindAction:(id)sender
-{
-    UIButton *button = (UIButton *)sender;
-    UITableViewCell *cell = (UITableViewCell *)[[button superview] superview];
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-  // 继续其他的处理
-}</code></pre></td>
-</tr>
-</tbody>
-</table>
-
-
-<h3>iOS7之后出的问题</h3>
-
-<p>在iOS7之后，这样的办法会报错，错误在通过</p>
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
-<td class="code"><pre><code>UITableViewCell *cell = (UITableViewCell *)[[]button superview] superview];</code></pre></td>
-</tr>
-</tbody>
-</table>
-
-
-<p>的方式，得到的不是cell，所以在这行以下用到cell的地方，就会抛出异常。</p>
-
-<p>原因是在iOS7中，在 UITableViewCell 和
-UITableViewCell的ContentView之间，还有一个UITableViewCellScrollView，所以通过两次superview往上“爬”，是爬不到UITableViewCell的。</p>
-
-<h3>解决方式</h3>
-
-<p>直观地看，就是向上爬三次superview就行了。为了更好地处理这个问题，应该建立一个UIView的Category（因为这里使用的view的层次superview是UIView的方法），写个Category方法来区分不同情况来得到Cell：</p>
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="gutter"><pre class="line-numbers"><code>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15</code></pre></td>
-<td class="code"><pre><code>@implementation UIView (GetCellFromContentviewSubview)
-- (UITableViewCell *)getCellFromContentviewSubview
-{
-    if ([[[self superview] superview] isKindOfClass:[UITableViewCell class]]) {
-        return (UITableViewCell *)[[self superview] superview];
-    }
-    else if ([[[[self superview] superview] superview] isKindOfClass:[UITableViewCell class]]) {
-        return (UITableViewCell *)[[[self superview] superview] superview];
-    }
-    else{
-         NSLog(@&quot;Something Panic Happens&quot;);
-    }
-    return nil;
-}
-@end</code></pre></td>
-</tr>
-</tbody>
-</table>
-
-
-<p>之后，把</p>
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
-<td class="code"><pre><code>UITableViewCell *cell = (UITableViewCell *)[[button superview] superview];</code></pre></td>
-</tr>
-</tbody>
-</table>
-
-
-<p>替换成</p>
-
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td class="gutter"><pre class="line-numbers"><code>1</code></pre></td>
-<td class="code"><pre><code>UITableViewCell *cell = (UITableViewCell *)[button getCellFromContentviewSubview];</code></pre></td>
-</tr>
-</tbody>
-</table>
-
-
-<p>就可以了。</p>
-
-<h3>讨论</h3>
-
-<p>另外一种办法是给控件的tag附上indexPath.row，之后在action中通过tag来得到对应的cell，但如果Cell不是静态的，indexPath.row是会变的。所以这不是一个好的办法。</p>
-
-<p>但我所提供的这个办法，在stackoverflow上有1人给vote
-down，不知道为什么被vote down。这种办法有什么问题吗？</p>
 
   
   
